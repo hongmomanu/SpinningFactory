@@ -34,14 +34,16 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js",
   "Ext.draw.engine.SvgContext.Gradient": "touch/src/draw/engine/SvgContext.js",
   "SpinningFactory": "app",
+  "SpinningFactory.controller.customer": "app/controller/Cutomer.js",
+  "SpinningFactory.controller.factory": "app/controller/Factory.js",
+  "SpinningFactory.model.customer.customer": "app/model/customer/Customer.js",
+  "SpinningFactory.model.customer.customerMessage": "app/model/customer/CustomerMessage.js",
   "SpinningFactory.model.factory.factory": "app/model/factory/Factory.js",
   "SpinningFactory.model.factory.factoryMessage": "app/model/factory/FactorMessage.js",
-  "SpinningFactory.model.customer.customer": "app/model/customer/customer.js",
-  "SpinningFactory.model.customer.customerMessage": "app/model/customer/customerMessage.js",
-  "SpinningFactory.view.factory.factorys": "app/view/factory/factorys.js",
-  "SpinningFactory.view.factory.factorysMessage": "app/view/factory/factorysMessage.js",
-  "SpinningFactory.view.customer.customers": "app/view/customer/customers.js",
-  "SpinningFactory.view.customer.customersMessage": "app/view/customer/customersMessage.js"
+  "SpinningFactory.view.customer.customers": "app/view/customer/Customers.js",
+  "SpinningFactory.view.customer.customersMessage": "app/view/customer/CustomersMessage.js",
+  "SpinningFactory.view.factory.factorys": "app/view/factory/Factorys.js",
+  "SpinningFactory.view.factory.factorysMessage": "app/view/factory/FactorysMessage.js"
 });
 
 Ext.ClassManager.addNameAlternateMappings({
@@ -769,22 +771,23 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.viewport.WindowsPhone": [
     "Ext.viewport.WP"
   ],
-  "SpinningFactory.controller.factory": [],
   "SpinningFactory.controller.Login": [],
-  "SpinningFactory.controller.customer": [],
   "SpinningFactory.controller.Register": [],
+  "SpinningFactory.controller.customer": [],
+  "SpinningFactory.controller.factory": [],
+  "SpinningFactory.model.customer.customer": [],
+  "SpinningFactory.model.customer.customerMessage": [],
   "SpinningFactory.model.factory.factory": [],
   "SpinningFactory.model.factory.factoryMessage": [],
   "SpinningFactory.model.login.Login": [],
-  "SpinningFactory.model.customer.customer": [],
-  "SpinningFactory.model.customer.customerMessage": [],
   "SpinningFactory.model.register.Register": [],
   "SpinningFactory.view.Main": [],
+  "SpinningFactory.view.boss.BossMain": [],
+  "SpinningFactory.view.customer.customers": [],
+  "SpinningFactory.view.customer.customersMessage": [],
   "SpinningFactory.view.factory.factorys": [],
   "SpinningFactory.view.factory.factorysMessage": [],
   "SpinningFactory.view.login.Login": [],
-  "SpinningFactory.view.customer.customers": [],
-  "SpinningFactory.view.customer.customersMessage": [],
   "SpinningFactory.view.register.Register": []
 });
 
@@ -1727,18 +1730,27 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.Ios": [],
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
-  "SpinningFactory.controller.factory": [],
   "SpinningFactory.controller.Login": [],
-  "SpinningFactory.controller.customer": [],
   "SpinningFactory.controller.Register": [],
+  "SpinningFactory.controller.customer": [],
+  "SpinningFactory.controller.factory": [],
+  "SpinningFactory.model.customer.customer": [],
+  "SpinningFactory.model.customer.customerMessage": [],
   "SpinningFactory.model.factory.factory": [],
   "SpinningFactory.model.factory.factoryMessage": [],
   "SpinningFactory.model.login.Login": [],
-  "SpinningFactory.model.customer.customer": [],
-  "SpinningFactory.model.customer.customerMessage": [],
   "SpinningFactory.model.register.Register": [],
   "SpinningFactory.view.Main": [
     "widget.main"
+  ],
+  "SpinningFactory.view.boss.BossMain": [
+    "widget.main"
+  ],
+  "SpinningFactory.view.customer.customers": [
+    "widget.customers"
+  ],
+  "SpinningFactory.view.customer.customersMessage": [
+    "widget.customermessagelist"
   ],
   "SpinningFactory.view.factory.factorys": [
     "widget.factorys"
@@ -1749,12 +1761,6 @@ Ext.ClassManager.addNameAliasMappings({
   "SpinningFactory.view.login.Login": [
     "widget.LoginPanel",
     "widget.loginform"
-  ],
-  "SpinningFactory.view.customer.customers": [
-    "widget.customers"
-  ],
-  "SpinningFactory.view.customer.customersMessage": [
-    "widget.customermessagelist"
   ],
   "SpinningFactory.view.register.Register": [
     "widget.RegisterPanel",
