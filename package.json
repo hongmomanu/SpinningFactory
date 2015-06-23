@@ -1,0 +1,8 @@
+{
+  "name": "nw-SpinningFactory",
+  "main": "index.html",
+  "window": {
+    "title": "SpinningFactory",
+    "toolbar": true
+  }
+}
