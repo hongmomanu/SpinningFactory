@@ -33,8 +33,6 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
                     iconCls:'fa fa-cog'
                 }
 
-
-
             ]
         },
 
