@@ -23,7 +23,8 @@ Ext.application({
     controllers: [
         /*'Main',*/
         'Login',
-        'Register'
+        'Register',
+        'Boss'
         /*'factory',
         'Village',
         'Settings',

@@ -23,7 +23,7 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
 
                 scope: this,
                 handler: function() {
-                    var mainview=Ext.Viewport.down('main');
+                    var mainview=Ext.Viewport.down('navigationview');
                     mainview.fireEvent('logoutmenu', mainview);
                 }
             },
@@ -42,7 +42,7 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
 
 
 
-                    var mainview=Ext.Viewport.down('main');
+                    var mainview=Ext.Viewport.down('navigationview');
                     mainview.fireEvent('returnhomemenu', mainview);
 
                 }
@@ -51,7 +51,7 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
                 iconCls: 'organize',
                 scope: this,
                 handler: function() {
-                    var mainview=Ext.Viewport.down('main');
+                    var mainview=Ext.Viewport.down('navigationview');
                     mainview.fireEvent('showqrcode', mainview);
                     //Ext.Viewport.hideMenu('right');
                     /*Ext.getCmp('searchBar').hide();
@@ -65,7 +65,7 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
                 iconCls: 'info',
                 scope: this,
                 handler: function() {
-                    var mainview=Ext.Viewport.down('main');
+                    var mainview=Ext.Viewport.down('navigationview');
                     mainview.fireEvent('showabout', mainview);
                     //Ext.Viewport.hideMenu('right');
                     /*Ext.getCmp('searchBar').hide();

@@ -2,17 +2,16 @@
  * Created by jack on 15-03-27.
  * main Controller used by Terminal app
  */
-Ext.define('SpinningFactory.controller.Login', {
+Ext.define('SpinningFactory.controller.Boss', {
     extend: 'Ext.app.Controller',
 
 
     config: {
 
         views: [
-         'login.Login'
+         'menu.MainMenu'
         ],
         models: [
-            'login.Login'
         ],
         stores: [
 
@@ -22,38 +21,57 @@ Ext.define('SpinningFactory.controller.Login', {
         ],
         control: {
 
-            customerloginbtn:{
 
-                tap:'docustomerLogin'
-            },
-            newcustomerbtn:{
+            bossmainview:{
+                initialize:'initFunc',
+                returnhomemenu:'returnhomemenuFunc',
+                showqrcode:'showqrcodeFunc',
+                logoutmenu:'logoutShow',
+                showabout:'showaboutFunc',
+                loginmenu:'loginShow'
 
-                tap:'doNewcustomer'
-            },
-            loginformview:{
-                initialize:'initFunc'
 
             }
 
         },
         refs: {
-
-            customerloginbtn: 'loginform #customerlogin',
-            newcustomerbtn: 'loginform #newcustomer',
-            loginformcontent:'loginform #loginformcontent',
-            loginformview: 'loginform'
+            bossmainview: 'bossmain'
         }
     },
     // app init func
 
     initFunc:function (item,e){
-        this.autoLogin();
-        this.makeLocationListener();
-        this.makeBackGroundListener();
-        this.pauseListener();
-        this.resumeListener();
-        this.backbuttonListener();
-        this.initNotificationClick(e);
+
+
+    },
+    returnhomemenuFunc:function(){
+        Ext.Viewport.hideMenu('right');
+        var nav=this.getBossmainview();
+        nav.pop(nav.getInnerItems().length - 1);
+
+    },
+    logoutShow:function(){
+
+
+        Ext.Msg.confirm( "提示", "是否确认退出", function(btn){
+            if(btn==='yes'){
+                Globle_Variable.user=null;
+                localStorage.user="";
+                var menu=Ext.Viewport.down('mainmenu');
+                menu.getMenuItems()[0].hidden=false;
+                menu.getMenuItems()[1].hidden=true;
+                Ext.Viewport.hideMenu('right');
+                Ext.Msg.alert("提示信息","退出成功!",function(){
+
+                    window.location.reload();
+
+                });
+            }else{
+
+            }
+        })
+
+
 
     },
 

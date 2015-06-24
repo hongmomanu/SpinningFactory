@@ -788,7 +788,9 @@ Ext.ClassManager.addNameAlternateMappings({
   "SpinningFactory.view.factory.factorys": [],
   "SpinningFactory.view.factory.factorysMessage": [],
   "SpinningFactory.view.login.Login": [],
-  "SpinningFactory.view.register.Register": []
+  "SpinningFactory.view.office.OfficeMain": [],
+  "SpinningFactory.view.register.Register": [],
+  "SpinningFactory.view.workshop.WorkShopMain": []
 });
 
 Ext.ClassManager.addNameAliasMappings({
@@ -1744,7 +1746,7 @@ Ext.ClassManager.addNameAliasMappings({
     "widget.main"
   ],
   "SpinningFactory.view.boss.BossMain": [
-    "widget.main"
+    "widget.bossmain"
   ],
   "SpinningFactory.view.customer.customers": [
     "widget.customers"
@@ -1762,9 +1764,15 @@ Ext.ClassManager.addNameAliasMappings({
     "widget.LoginPanel",
     "widget.loginform"
   ],
+  "SpinningFactory.view.office.OfficeMain": [
+    "widget.officemain"
+  ],
   "SpinningFactory.view.register.Register": [
     "widget.RegisterPanel",
     "widget.registerform"
+  ],
+  "SpinningFactory.view.workshop.WorkShopMain": [
+    "widget.workshopmain"
   ]
 });
 
