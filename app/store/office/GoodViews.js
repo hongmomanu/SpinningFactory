@@ -11,7 +11,7 @@ Ext.define('SpinningFactory.store.office.GoodViews', {
         },*/
         proxy: {
             type: 'ajax',
-            url: Globle_Variable.serverurl+"user/getmenbers"
+            url: Globle_Variable.serverurl+"factory/getgoodsbyfid"
         }
     }
 });

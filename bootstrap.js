@@ -771,23 +771,28 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.viewport.WindowsPhone": [
     "Ext.viewport.WP"
   ],
+  "SpinningFactory.controller.Boss": [],
   "SpinningFactory.controller.Login": [],
   "SpinningFactory.controller.Register": [],
   "SpinningFactory.controller.customer": [],
   "SpinningFactory.controller.factory": [],
+  "SpinningFactory.model.boss.MemberView": [],
   "SpinningFactory.model.customer.customer": [],
   "SpinningFactory.model.customer.customerMessage": [],
   "SpinningFactory.model.factory.factory": [],
   "SpinningFactory.model.factory.factoryMessage": [],
   "SpinningFactory.model.login.Login": [],
   "SpinningFactory.model.register.Register": [],
+  "SpinningFactory.store.boss.MemberViews": [],
   "SpinningFactory.view.Main": [],
   "SpinningFactory.view.boss.BossMain": [],
+  "SpinningFactory.view.boss.MembersViewList": [],
   "SpinningFactory.view.customer.customers": [],
   "SpinningFactory.view.customer.customersMessage": [],
   "SpinningFactory.view.factory.factorys": [],
   "SpinningFactory.view.factory.factorysMessage": [],
   "SpinningFactory.view.login.Login": [],
+  "SpinningFactory.view.menu.MainMenu": [],
   "SpinningFactory.view.office.OfficeMain": [],
   "SpinningFactory.view.register.Register": [],
   "SpinningFactory.view.workshop.WorkShopMain": []
@@ -1732,21 +1737,27 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.Ios": [],
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
+  "SpinningFactory.controller.Boss": [],
   "SpinningFactory.controller.Login": [],
   "SpinningFactory.controller.Register": [],
   "SpinningFactory.controller.customer": [],
   "SpinningFactory.controller.factory": [],
+  "SpinningFactory.model.boss.MemberView": [],
   "SpinningFactory.model.customer.customer": [],
   "SpinningFactory.model.customer.customerMessage": [],
   "SpinningFactory.model.factory.factory": [],
   "SpinningFactory.model.factory.factoryMessage": [],
   "SpinningFactory.model.login.Login": [],
   "SpinningFactory.model.register.Register": [],
+  "SpinningFactory.store.boss.MemberViews": [],
   "SpinningFactory.view.Main": [
     "widget.main"
   ],
   "SpinningFactory.view.boss.BossMain": [
     "widget.bossmain"
+  ],
+  "SpinningFactory.view.boss.MembersViewList": [
+    "widget.membersviewlist"
   ],
   "SpinningFactory.view.customer.customers": [
     "widget.customers"
@@ -1763,6 +1774,10 @@ Ext.ClassManager.addNameAliasMappings({
   "SpinningFactory.view.login.Login": [
     "widget.LoginPanel",
     "widget.loginform"
+  ],
+  "SpinningFactory.view.menu.MainMenu": [
+    "widget.mainmenu",
+    "widget.mainmenus"
   ],
   "SpinningFactory.view.office.OfficeMain": [
     "widget.officemain"

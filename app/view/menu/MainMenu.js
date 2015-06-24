@@ -24,6 +24,8 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
                 scope: this,
                 handler: function() {
                     var mainview=Ext.Viewport.down('navigationview');
+                    mainview=mainview?mainview:Ext.Viewport.down('tabpanel');
+                    console.log(mainview);
                     mainview.fireEvent('logoutmenu', mainview);
                 }
             },
@@ -43,6 +45,7 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
 
 
                     var mainview=Ext.Viewport.down('navigationview');
+                    mainview=mainview?mainview:Ext.Viewport.down('tabpanel');
                     mainview.fireEvent('returnhomemenu', mainview);
 
                 }
@@ -52,6 +55,7 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
                 scope: this,
                 handler: function() {
                     var mainview=Ext.Viewport.down('navigationview');
+                    mainview=mainview?mainview:Ext.Viewport.down('tabpanel');
                     mainview.fireEvent('showqrcode', mainview);
                     //Ext.Viewport.hideMenu('right');
                     /*Ext.getCmp('searchBar').hide();
@@ -66,6 +70,7 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
                 scope: this,
                 handler: function() {
                     var mainview=Ext.Viewport.down('navigationview');
+                    mainview=mainview?mainview:Ext.Viewport.down('tabpanel');
                     mainview.fireEvent('showabout', mainview);
                     //Ext.Viewport.hideMenu('right');
                     /*Ext.getCmp('searchBar').hide();

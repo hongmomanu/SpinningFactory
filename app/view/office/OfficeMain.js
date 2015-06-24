@@ -8,6 +8,7 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
     config: {
         tabBarPosition: 'bottom',
 
+
         items: [
             {
                 title: '订单申请',
@@ -19,7 +20,14 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
                 items: {
                     docked: 'top',
                     xtype: 'titlebar',
-                    title: '订单申请'
+                    title: '订单申请',
+                    items:[
+
+                        {
+                            xtype:'mainmenu',
+                            iconCls:'fa fa-cog'
+                        }
+                    ]
                 },
 
                 html: [
@@ -36,7 +44,14 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
                     {
                         docked: 'top',
                         xtype: 'titlebar',
-                        title: '产品维护'
+                        title: '产品维护',
+                        items:[
+
+                            {
+                                xtype:'mainmenu',
+                                iconCls:'fa fa-cog'
+                            }
+                        ]
                     },
                     {
                         xtype: 'video',
@@ -53,7 +68,14 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
                     {
                         docked: 'top',
                         xtype: 'titlebar',
-                        title: '我的消息'
+                        title: '我的消息',
+                        items:[
+
+                            {
+                                xtype:'mainmenu',
+                                iconCls:'fa fa-cog'
+                            }
+                        ]
                     },
                     {
                         xtype: 'video',

@@ -24,7 +24,8 @@ Ext.application({
         /*'Main',*/
         'Login',
         'Register',
-        'Boss'
+        'Boss',
+        'Office'
         /*'factory',
         'Village',
         'Settings',
