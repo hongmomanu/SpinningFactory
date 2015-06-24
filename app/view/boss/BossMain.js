@@ -36,8 +36,6 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
             ]
         },
 
-
-
         items: [
 
             {
