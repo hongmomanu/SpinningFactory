@@ -1,6 +1,6 @@
 Ext.define('SpinningFactory.view.workshop.WorkShopMain.', {
     extend: 'Ext.tab.Panel',
-    xtype: 'workshopmain.js',
+    xtype: 'workshopmain',
     requires: [
         'Ext.TitleBar',
         'Ext.Video'

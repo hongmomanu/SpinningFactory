@@ -4,7 +4,7 @@
 Ext.define('SpinningFactory.view.boss.BossMain', {
     //extend: 'Ext.tab.Panel',
     extend: 'Ext.NavigationView',
-    xtype: 'main',
+    xtype: 'bossmain',
     requires: [
         'Ext.TitleBar',
         'Ext.Ajax',
@@ -29,19 +29,10 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
 
             {
 
-                //xtype:'panel',
-                //xtype:'tabpanel',
-                //tabBarPosition: 'bottom',
-                //title:'<img style="float:left;padding-top: 5px;"  width="30px" height="30px" src="resources/icons/title.jpg">绍兴文理学院附属医院',
-                //activeItem:0,
-                //fullscreen : true,
+
                 title:'<div >绍兴文理学院附属医院</div>',
-
-
                 layout : 'fit',
                 xtype: 'container',
-                //layout: 'fit',
-
                 items: [
 
 
