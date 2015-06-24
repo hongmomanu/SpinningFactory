@@ -37,12 +37,20 @@ Ext.define('SpinningFactory.controller.Office', {
             },
             newgoodsbtn:{
                 tap:'shownewgoodsform'
+            },
+            managerpicbtn:{
+                tap:'shownmanagerpicview'
+            },
+            uploadpicturebtn:{
+                tap:'doImgCLick'
             }
 
         },
         refs: {
             officemainview: 'officemain',
             newgoodsbtn: 'officemain #newgoods',
+            managerpicbtn: 'officemain #managerpic',
+            uploadpicturebtn: 'officemain #uploadpicture',
             goodsviewlistview: 'goodsviewlist',
             navView:'officemain #villagenavigationview'
         }
@@ -57,6 +65,167 @@ Ext.define('SpinningFactory.controller.Office', {
             iconCls:'fa fa-cog fa-color-blue'
 
         });
+
+    },
+
+    doImgCLick: function () {
+        var me = this;
+        var actionSheet = Ext.create('Ext.ActionSheet', {
+            items: [
+                {
+                    text: '相机拍照',
+                    handler: function () {
+                        //alert(1);
+
+                        imagfunc('camera');
+                    }
+                    //ui  : 'decline'
+                },
+                {
+                    text: '图片库',
+                    handler: function () {
+                        //alert(2);
+                        imagfunc('library');
+                    }
+                },
+                {
+                    text: '取消',
+                    handler: function () {
+                        actionSheet.hide();
+                    },
+                    ui: 'decline'
+                }
+            ]
+        });
+
+        Ext.Viewport.add(actionSheet);
+        actionSheet.show();
+
+        var imagfunc = function (type) {
+            actionSheet.hide();
+
+            //alert(1);
+            Ext.device.Camera.capture({
+                source: type,
+                destination: 'file',
+                //encoding:'png',
+                success: function (imgdata) {
+                    //show the newly captured image in a full screen Ext.Img component:
+                    //var a=Ext.getCmp('imagerc');
+                    //imgpanel.setSrc("data:image/png;base64,"+imgdata);
+
+
+                    var win = function (r) {
+                        //Ext.Msg.alert('seccess',r.response);
+                        var res=JSON.parse(r.response);
+                        var url=Globle_Variable.serverurl+'files/'+res.filename;
+
+                    }
+
+                    var fail = function (error) {
+
+                    };
+
+                    var options = new FileUploadOptions();
+                    options.fileKey = "file";
+                    options.fileName = imgdata.substr(imgdata.lastIndexOf('/') + 1);
+
+                    var ft = new FileTransfer();
+                    //Ext.Msg.alert('seccess',Globle_Variable.serverurl+'common/uploadfile');
+                    ft.upload(imgdata, encodeURI(Globle_Variable.serverurl+'common/uploadfile'), win, fail, options);
+
+
+                }
+            });
+        };
+
+
+    },
+
+    shownmanagerpicview:function(btn){
+
+        var me=this;
+        var panel= Ext.create('Ext.Container', {
+
+            //padding:4,
+            // Make it modal so you can click the mask to hide the overlay
+            modal: true,
+            hideOnMaskTap: false,
+
+            // Make it hidden by default
+            hidden: true,
+
+            // Set the width and height of the panel
+            width: '100%',
+            height: '100%',
+
+            contentEl: 'content',
+
+            // Style the content and make it scrollable
+            styleHtmlContent: true,
+            scrollable: true,
+            layout:'fit',
+
+            items: [
+                {
+                    xtype: 'carousel',
+                    defaults: {
+                        styleHtmlContent: true
+                    },
+
+                    items: [
+                        {
+                            xtype: 'toolbar',
+                            docked: 'bottom',
+                            align:'right',
+                            items: [
+
+                                {
+                                    text:'新增',
+                                    iconCls:'fa fa-plus-circle',
+                                    ui:'confirm',
+                                    itemId:'uploadpicture'
+                                },
+                                {
+                                    text:'取消',
+                                    iconCls:'fa fa-times',
+                                    ui:'decline',
+                                    handler:function(){
+                                        me.overlay.hide();
+                                    }
+                                    //itemId:'uploadpicture'
+                                }
+
+
+                            ]
+                        }
+                    ]
+
+                }
+            ]
+        });
+
+        this.overlay = Ext.Viewport.add(panel);
+        this.overlay.showBy(btn);
+
+        var carousel=panel.down('carousel');
+
+        carousel.add(
+           [
+
+
+               {
+                   xtype: 'image',
+                   src: Globle_Variable.serverurl+'files/14296004957076511'
+
+               },
+               {
+                   html : 'Item 2',
+                   style: 'background-color: #543333'
+               }
+           ]
+        );
+
 
     },
     shownewgoodsform:function(btn){

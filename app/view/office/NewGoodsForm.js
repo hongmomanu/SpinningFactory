@@ -96,8 +96,8 @@ Ext.define('SpinningFactory.view.office.NewGoodsForm', {
                 items:[
                     {
                         xtype:'button',
-                        text:'注册',
-                        itemId:'customerregister'
+                        text:'保存',
+                        itemId:'savegoodinfo'
                     }
                 ]
             }
