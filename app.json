@@ -133,6 +133,10 @@
         {
             "path": "resources/css/main.css",
             "update": "delta"
+        },
+        {
+            "path": "resources/css/fontawsome/css/font-awesome.min.css",
+            "update": "delta"
         }
     ],
 
@@ -163,6 +167,7 @@
      */
     "resources": [
         "resources/images",
+        "resources/css/fontawsome",
         "resources/icons",
         "resources/startup"
     ],
