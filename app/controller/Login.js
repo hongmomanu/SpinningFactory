@@ -204,6 +204,8 @@ Ext.define('SpinningFactory.controller.Login', {
                     Globle_Variable.user=res.user;
                     if(user.usertype===0){
                         Ext.Viewport.add(Ext.create('SpinningFactory.view.boss.BossMain'));
+                    }else if(user.usertype===1){
+                        Ext.Viewport.add(Ext.create('SpinningFactory.view.office.OfficeMain'));
                     }
                     /*Ext.Viewport.removeAt(0);
                     Ext.Viewport.add(Ext.create('SpinningFactory.view.Main'));

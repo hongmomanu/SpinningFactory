@@ -62,9 +62,7 @@ Ext.define('SpinningFactory.controller.Boss', {
                 menu.getMenuItems()[1].hidden=true;
                 Ext.Viewport.hideMenu('right');
                 Ext.Msg.alert("提示信息","退出成功!",function(){
-
                     window.location.reload();
-
                 });
             }else{
 
