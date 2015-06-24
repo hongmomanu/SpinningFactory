@@ -9,8 +9,9 @@ Ext.define('SpinningFactory.controller.Office', {
     config: {
 
         views: [
-         'menu.MainMenu',
-         'office.GoodsViewList'
+            'menu.MainMenu',
+            'office.GoodsViewList',
+            'office.NewGoodsForm'
         ],
         models: [
             'office.GoodView'
@@ -29,18 +30,52 @@ Ext.define('SpinningFactory.controller.Office', {
                 loginmenu:'loginShow'
 
 
+            },
+            goodsviewlistview:{
+
+                viewshow:'viewinit'
+            },
+            newgoodsbtn:{
+                tap:'shownewgoodsform'
             }
 
         },
         refs: {
-            officemainview: 'officemain'
+            officemainview: 'officemain',
+            newgoodsbtn: 'officemain #newgoods',
+            goodsviewlistview: 'goodsviewlist',
+            navView:'officemain #villagenavigationview'
         }
     },
     // app init func
 
     initFunc:function (item,e){
 
+        item.getTabBar().add({
+            //xtype: 'button',
+            xtype:'mainmenu',
+            iconCls:'fa fa-cog fa-color-blue'
 
+        });
+
+    },
+    shownewgoodsform:function(btn){
+
+        if(!this.goodsform)this.goodsform=Ext.create('SpinningFactory.view.office.NewGoodsForm');
+        this.getNavView().push(this.goodsform);
+
+    },
+    viewinit:function(view){
+        var store=view.getStore();
+        store.load({
+            //define the parameters of the store:
+            params:{
+                factoryid : Globle_Variable.user.factoryid
+            },
+            scope: this,
+            callback : function(records, operation, success) {
+
+            }});
     },
     returnhomemenuFunc:function(){
         Ext.Viewport.hideMenu('right');

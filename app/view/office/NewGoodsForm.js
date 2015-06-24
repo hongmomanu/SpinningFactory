@@ -2,7 +2,7 @@ Ext.define('SpinningFactory.view.office.NewGoodsForm', {
 
     extend: 'Ext.form.Panel',
     xtype: 'newgoodsform',
-    alias: 'widget.NewGoodsFormPanel',
+    //alias: 'widget.NewGoodsFormPanel',
     requires: [
         'Ext.form.Panel',
         'Ext.form.FieldSet',
@@ -11,7 +11,7 @@ Ext.define('SpinningFactory.view.office.NewGoodsForm', {
 
     config: {
 
-        title:'工厂注册',
+        title:'新商品',
 
         style:{
             'padding':'1px'
@@ -29,67 +29,58 @@ Ext.define('SpinningFactory.view.office.NewGoodsForm', {
                         instructions:'请填写信息',
                         centered: true,
                         defaults:{
-                            labelWidth:'150px'
+                            labelWidth:'100px'
                         },
                         items:[{
                             xtype:'textfield',
-                            name:'factoryname',
-                            label:'工厂名称',
-                            placeHolder:'请输入工厂名称',
-                            required:true,
-                            clearIcon:true,
-                            labelAlign:'left'
-                        },{
-                            xtype:'textfield',
-                            name:'factoryaddress',
-                            label:'工厂地址',
-                            placeHolder:'请输入工厂地址',
-                            required:true,
-                            clearIcon:true,
-                            labelAlign:'left'
-                        },
-                          {
-                            xtype:'textfield',
-                            name:'factoryinfo',
-                            label:'主营项目',
-                            placeHolder:'请输入主营项目',
+                            name:'goodsname',
+                            label:'商品名称',
+                            placeHolder:'请输入商品名称',
                             required:true,
                             clearIcon:true,
                             labelAlign:'left'
                         },
                             {
                                 xtype:'textfield',
-                                name:'username',
-                                label:'用户名',
+                                name:'price',
+                                flex:'1',
+                                label:'价格(元)',
+                                placeHolder:'请输入价格',
+                                required:true,
+                                clearIcon:true,
+                                labelAlign:'left'
+                            },
+                            {
+                                xtype:'textfield',
+                                name:'unit',
+                                flex:'1',
+                                label:'单位',
+                                placeHolder:'请输入单位',
+                                required:true,
+                                clearIcon:true,
+                                labelAlign:'left'
+                            },
+
+
+                            {
+                                xtype: 'textareafield',
+                                maxRows: 4,
+                                name:'colors',
+                                label:'颜色',
                                 placeHolder:'请输入用户名',
                                 required:true,
                                 clearIcon:true,
                                 labelAlign:'left'
-                            },{
-                                xtype:'textfield',
-                                name:'realname',
-                                label:'经营者姓名',
-                                placeHolder:'请输入经营者姓名',
-                                required:true,
-                                clearIcon:true,
-                                labelAlign:'left'
                             },
                             {
-                                xtype:'passwordfield',
-                                name:'password',
-                                label:'密码',
-                                placeHolder:'请输入密码',
-                                required:true,
-                                clearIcon:true
-                            },
-                            {
-                                xtype:'passwordfield',
-                                name:'passwordagain',
-                                label:'密码确认',
-                                placeHolder:'请重复输入密码',
-                                required:true,
-                                clearIcon:true
+                                xtype: 'button',
+                                itemId: 'managerpic',
+                                name:'managerpic',
+                                text:'图片管理',
+                                iconCls:'fa fa-picture-o',
+                                label:'图片管理'
                             }
+
                         ]
                     }
                 ]

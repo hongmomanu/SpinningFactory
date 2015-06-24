@@ -49,6 +49,8 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
                         xtype: 'navigationview',
                         autoDestroy: false,
 
+
+                        scrollable: 'vertical',
                         //fullscreen: true,
                         itemId: 'villagenavigationview',
                         //inside this first item we are going to add a button

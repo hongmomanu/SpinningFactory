@@ -7,6 +7,7 @@ Ext.define('SpinningFactory.view.office.GoodsViewList', {
         //cls: 'x-contacts',
         emptyText:'无相关内容',
         variableHeights: true,
+        scrollable: 'vertical',
         itemId:'goodsviewlist',
         onItemDisclosure : {//若配置该项，list每一项的右侧都会出现一个小图标。其他功能请查看api
             handler : function(record, btn, index) {
@@ -16,8 +17,7 @@ Ext.define('SpinningFactory.view.office.GoodsViewList', {
         },
         //refreshHeightOnUpdate :false,
         scrollToTopOnRefresh :true,
-        grouped:true,
-        indexBar:false,
+
         store: 'GoodViews',
 
         listeners: {
@@ -25,7 +25,21 @@ Ext.define('SpinningFactory.view.office.GoodsViewList', {
                 this.fireEvent('viewshow', this);
             }
         },
-        items: [],
+        items: [{
+            xtype: 'toolbar',
+            docked: 'bottom',
+            align:'right',
+            items: [
+
+                {
+                    text:'新增',
+                    iconCls:'fa fa-plus-circle',
+                    itemId:'newgoods'
+                }
+
+
+            ]
+        }],
         itemTpl: [
             '<div class="headshot">',
             '{name}({data.length})',
