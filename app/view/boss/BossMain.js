@@ -89,14 +89,14 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
 
                                         items : [{
                                             xtype : 'button',
-                                            text : '门诊预约',
+                                            text : '订单审核',
                                             iconAlign : 'top',
                                             //icon : "resources/icons/muru.png",
                                             iconCls:'fa fa-ambulance fa-color-blue',
                                             itemId:'outpatientreserve'
                                         }, {
                                             xtype : 'button',
-                                            text : '智能分诊',
+                                            text : '订单状态',
                                             itemId:'possibleill',
                                             iconAlign : 'top',
                                             iconCls : "fa fa-bed fa-color-blue"
@@ -110,7 +110,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
                                          }
                                          },*/ {
                                             xtype : 'button',
-                                            text : '预约查询',
+                                            text : '历史订单',
                                             iconAlign : 'top',
                                             itemId:'datequery',
                                             iconCls:'fa fa-search fa-5x fa-color-blue',
@@ -125,7 +125,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
                                         },
                                         items : [{
                                             xtype : 'button',
-                                            text : '消费记录',
+                                            text : '我的客户',
                                             iconAlign : 'top',
                                             //icon : "resources/icons/tiwen.png",
                                             iconCls : "fa fa-jpy fa-color-blue" ,
@@ -133,7 +133,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
                                             }
                                         }, {
                                             xtype : 'button',
-                                            text : '诊疗记录',
+                                            text : '成交额',
                                             iconAlign : 'top',
                                             //icon : "resources/icons/weinai.png",
                                             iconCls : "fa fa-hospital-o fa-color-blue",
@@ -141,7 +141,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
                                             }
                                         }, {
                                             xtype : 'button',
-                                            text : '健康百科',
+                                            text : '业务统计',
                                             itemId:'healthwiki',
                                             iconAlign : 'top',
                                             iconCls : "fa fa-book fa-color-blue"
@@ -155,21 +155,21 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
                                         },
                                         items : [{
                                             xtype : 'button',
-                                            text : '医院导航',
+                                            text : '合作工厂',
                                             iconAlign : 'top',
                                             itemId:'hospitalinfo',
                                             //icon : "resources/icons/muru.png",
                                             iconCls : "fa fa-car fa-color-blue"
                                         }, {
                                             xtype : 'button',
-                                            text : '医院动态',
+                                            text : '行业咨询',
                                             iconAlign : 'top',
                                             itemId:'hospitalnews',
                                             //icon : "resources/icons/shuijiao.png",
                                             iconCls : "fa fa-hacker-news fa-color-blue"
                                         }, {
                                             xtype : 'button',
-                                            text : '专家介绍',
+                                            text : '潜在客户',
                                             iconAlign : 'top',
                                             itemId:'expertinfo',
                                             //icon : "resources/icons/about.png",
