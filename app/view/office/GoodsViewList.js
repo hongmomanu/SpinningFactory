@@ -4,7 +4,6 @@ Ext.define('SpinningFactory.view.office.GoodsViewList', {
     xtype:'goodsviewlist',
     //cls: 'x-contacts',
     config: {
-        title: '成员管理',
         //cls: 'x-contacts',
         emptyText:'无相关内容',
         variableHeights: true,
@@ -17,8 +16,8 @@ Ext.define('SpinningFactory.view.office.GoodsViewList', {
         },
         //refreshHeightOnUpdate :false,
         scrollToTopOnRefresh :true,
-        //grouped:true,
-        //indexBar:true,
+        grouped:true,
+        indexBar:false,
         store: 'GoodViews',
 
         listeners: {

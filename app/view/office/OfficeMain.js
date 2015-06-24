@@ -17,17 +17,17 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
                 styleHtmlContent: true,
                 scrollable: true,
 
-                items: {
+               items: {
                     docked: 'top',
                     xtype: 'titlebar',
-                    title: '订单申请',
+                    title: '订单申请'/*,
                     items:[
 
                         {
                             xtype:'mainmenu',
                             iconCls:'fa fa-cog'
                         }
-                    ]
+                    ]*/
                 },
 
                 html: [
@@ -39,27 +39,32 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
             {
                 title: '产品维护',
                 iconCls: 'fa fa-shopping-cart',
+                styleHtmlContent: true,
+                scrollable: false,
+                layout: 'fit',
 
                 items: [
-                    {
-                        docked: 'top',
-                        xtype: 'titlebar',
-                        title: '产品维护',
-                        items:[
 
+                    {
+                        xtype: 'navigationview',
+                        autoDestroy: false,
+
+                        //fullscreen: true,
+                        itemId: 'villagenavigationview',
+                        //inside this first item we are going to add a button
+                        items: [
                             {
-                                xtype:'mainmenu',
-                                iconCls:'fa fa-cog'
+                                xtype: 'goodsviewlist',
+                                title: '产品维护'
                             }
                         ]
-                    },
-                    {
-                        xtype: 'video',
-                        url: 'http://av.vimeo.com/64284/137/87347327.mp4?token=1330978144_f9b698fea38cd408d52a2393240c896c',
-                        posterUrl: 'http://b.vimeocdn.com/ts/261/062/261062119_640.jpg'
+
+
                     }
+
                 ]
             },
+
             {
                 title: '我的消息',
                 iconCls: 'fa fa-weixin',
@@ -68,15 +73,16 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
                     {
                         docked: 'top',
                         xtype: 'titlebar',
-                        title: '我的消息',
+                        title: '我的消息'/*,
                         items:[
 
                             {
                                 xtype:'mainmenu',
                                 iconCls:'fa fa-cog'
                             }
-                        ]
+                        ]*/
                     },
+
                     {
                         xtype: 'video',
                         url: 'http://av.vimeo.com/64284/137/87347327.mp4?token=1330978144_f9b698fea38cd408d52a2393240c896c',
