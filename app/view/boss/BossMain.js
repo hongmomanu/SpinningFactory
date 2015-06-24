@@ -24,6 +24,21 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
             'padding': '1px'
         },
 
+        navigationBar : {
+            docked : 'top',
+            items : [
+
+                {
+                    xtype:'mainmenu',
+                    iconCls:'fa fa-cog'
+                }
+
+
+
+            ]
+        },
+
+
 
         items: [
 

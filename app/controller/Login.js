@@ -9,19 +9,11 @@ Ext.define('SpinningFactory.controller.Login', {
     config: {
 
         views: [
-
-
-        'login.Login'
-
-
-
+         'login.Login',
+         'menu.MainMenu'
         ],
         models: [
-
-
             'login.Login'
-
-
         ],
         stores: [
 
