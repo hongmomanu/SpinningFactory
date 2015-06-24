@@ -10,8 +10,8 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
 
         items: [
             {
-                title: 'Welcome',
-                iconCls: 'home',
+                title: '订单申请',
+                iconCls: 'fa fa-tasks',
 
                 styleHtmlContent: true,
                 scrollable: true,
@@ -19,7 +19,7 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
                 items: {
                     docked: 'top',
                     xtype: 'titlebar',
-                    title: 'Welcome to Sencha Touch 2'
+                    title: '订单申请'
                 },
 
                 html: [
@@ -29,14 +29,31 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
                 ].join("")
             },
             {
-                title: 'Get Started',
-                iconCls: 'action',
+                title: '产品维护',
+                iconCls: 'fa fa-shopping-cart',
 
                 items: [
                     {
                         docked: 'top',
                         xtype: 'titlebar',
-                        title: 'Getting Started'
+                        title: '产品维护'
+                    },
+                    {
+                        xtype: 'video',
+                        url: 'http://av.vimeo.com/64284/137/87347327.mp4?token=1330978144_f9b698fea38cd408d52a2393240c896c',
+                        posterUrl: 'http://b.vimeocdn.com/ts/261/062/261062119_640.jpg'
+                    }
+                ]
+            },
+            {
+                title: '我的消息',
+                iconCls: 'fa fa-weixin',
+
+                items: [
+                    {
+                        docked: 'top',
+                        xtype: 'titlebar',
+                        title: '我的消息'
                     },
                     {
                         xtype: 'video',

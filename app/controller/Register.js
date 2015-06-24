@@ -48,7 +48,8 @@ Ext.define('SpinningFactory.controller.Register', {
                 var res=JSON.parse(response.responseText);
                 if(res.success){
 
-                    Ext.Viewport.removeAt(0);
+                    console.log(res);
+                    /*Ext.Viewport.removeAt(0);
                     Ext.Viewport.add(Ext.create('SpinningFactory.view.Main'));
 
                     localStorage.user=JSON.stringify(res.message);
@@ -59,7 +60,7 @@ Ext.define('SpinningFactory.controller.Register', {
                     customerCotroller.initcustomerList();
                     factoryCotroller.initfactoryList();
                     settingCotroller.initSetting();
-
+*/
 
                 }else{
                     Ext.Msg.alert('注册失败',res.message, Ext.emptyFn);

@@ -22,8 +22,35 @@ Ext.define('SpinningFactory.model.register.Register', {
             {
                 name: 'passwordagain',
                 type: 'string'
+            },
+
+            {
+                name: 'factoryname',
+                type: 'string'
+            },
+
+            {
+                name: 'factoryinfo',
+                type: 'string'
+            },
+
+            {
+                name: 'factoryaddress',
+                type: 'string'
             }],
         validations: [{
+            field: 'factoryname',
+            type: 'presence',
+            message: '请输入工厂名称!'
+        },{
+            field: 'factoryaddress',
+            type: 'presence',
+            message: '请输入工厂地址!'
+        },{
+            field: 'factoryinfo',
+            type: 'presence',
+            message: '请输入主营项目!'
+        },{
             field: 'username',
             type: 'presence',
             message: '请输入姓名!'

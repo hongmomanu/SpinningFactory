@@ -16,7 +16,7 @@ Ext.define('SpinningFactory.view.login.Login', {
 
 
         //scrollable: false,
-        scrollable: 'vertical',
+        scrollable: false,
         style: {
             'padding': '1px'
         },

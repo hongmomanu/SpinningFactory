@@ -207,16 +207,20 @@ Ext.define('SpinningFactory.controller.Login', {
                 var res=JSON.parse(response.responseText);
                 if(res.success){
 
+                    console.log(res);
+                    var user=res.user;
                     Ext.Viewport.removeAt(0);
+                    if(user.usertype===0){
+                        Ext.Viewport.add(Ext.create('SpinningFactory.view.boss.BossMain'));
+                    }
+                    /*Ext.Viewport.removeAt(0);
                     Ext.Viewport.add(Ext.create('SpinningFactory.view.Main'));
                     localStorage.user=JSON.stringify(res.user);
                     Globle_Variable.user=res.user;
                     var customerCotroller=me.getApplication().getController('customer');
                     var factoryCotroller=me.getApplication().getController('factory');
-                    var settingCotroller=me.getApplication().getController('Settings');
                     customerCotroller.initcustomerList();
-                    factoryCotroller.initfactoryList();
-                    settingCotroller.initSetting();
+                    factoryCotroller.initfactoryList();*/
 
 
                 }else{

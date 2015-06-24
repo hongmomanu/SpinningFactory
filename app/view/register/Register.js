@@ -11,10 +11,12 @@ Ext.define('SpinningFactory.view.register.Register', {
 
     config: {
 
-        title:'个人注册',
+        title:'工厂注册',
+
         style:{
             'padding':'1px'
         },
+        scrollable: 'vertical',
         layout: 'fit',
         fullscreen: true,
         items:[
@@ -31,21 +33,47 @@ Ext.define('SpinningFactory.view.register.Register', {
                         },
                         items:[{
                             xtype:'textfield',
-                            name:'username',
-                            label:'用户名',
-                            placeHolder:'请输入用户名',
+                            name:'factoryname',
+                            label:'工厂名称',
+                            placeHolder:'请输入工厂名称',
                             required:true,
                             clearIcon:true,
                             labelAlign:'left'
                         },{
                             xtype:'textfield',
-                            name:'realname',
-                            label:'姓名',
-                            placeHolder:'请输入姓名',
+                            name:'factoryaddress',
+                            label:'工厂地址',
+                            placeHolder:'请输入工厂地址',
                             required:true,
                             clearIcon:true,
                             labelAlign:'left'
                         },
+                          {
+                            xtype:'textfield',
+                            name:'factoryinfo',
+                            label:'主营项目',
+                            placeHolder:'请输入主营项目',
+                            required:true,
+                            clearIcon:true,
+                            labelAlign:'left'
+                        },
+                            {
+                                xtype:'textfield',
+                                name:'username',
+                                label:'用户名',
+                                placeHolder:'请输入用户名',
+                                required:true,
+                                clearIcon:true,
+                                labelAlign:'left'
+                            },{
+                                xtype:'textfield',
+                                name:'realname',
+                                label:'经营者姓名',
+                                placeHolder:'请输入经营者姓名',
+                                required:true,
+                                clearIcon:true,
+                                labelAlign:'left'
+                            },
                             {
                                 xtype:'passwordfield',
                                 name:'password',
