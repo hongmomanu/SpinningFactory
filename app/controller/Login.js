@@ -201,7 +201,9 @@ Ext.define('SpinningFactory.controller.Login', {
                     var user=res.user;
                     Ext.Viewport.removeAt(0);
                     localStorage.user=JSON.stringify(res.user);
+                    localStorage.factoryinfo=JSON.stringify(res.factoryinfo);
                     Globle_Variable.user=res.user;
+                    Globle_Variable.factoryinfo=res.factoryinfo;
                     if(user.usertype===0){
                         Ext.Viewport.add(Ext.create('SpinningFactory.view.boss.BossMain'));
                     }else if(user.usertype===1){
@@ -226,7 +228,7 @@ Ext.define('SpinningFactory.controller.Login', {
                 Ext.Msg.alert('登录失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
 
             }
-            var url="user/customerlogin";
+            var url="user/factorylogin";
             var params=formpanel.getValues();
             CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
 

@@ -71,7 +71,7 @@ Ext.define('SpinningFactory.controller.Register', {
                 Ext.Msg.alert('登录失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
             };
 
-            var url="customer/newcustomer";
+            var url="factory/newfactory";
 
             var params=formpanel.getValues();
 

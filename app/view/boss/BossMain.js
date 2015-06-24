@@ -45,7 +45,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
             {
 
 
-                title:'<div >纺织App</div>',
+                title:'<div >'+Globle_Variable.factoryinfo.factoryname+'</div>',
                 layout : 'fit',
                 xtype: 'container',
                 items: [
