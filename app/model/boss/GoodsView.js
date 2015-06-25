@@ -1,13 +1,12 @@
-Ext.define('SpinningFactory.model.office.GoodView', {
+Ext.define('SpinningFactory.model.boss.GoodsView', {
     extend: 'Ext.data.Model',
     config: {
         fields: [
             '_id',
-            'factoryid',
             'goodsname',
             'price',
-            'imgs',
-            'unit'
+            'unit',
+            'colors'
         ],
         validations: [
             {

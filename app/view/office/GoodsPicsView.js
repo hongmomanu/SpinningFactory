@@ -24,7 +24,7 @@ Ext.define('SpinningFactory.view.office.GoodsPicsView', {
 
         // Style the content and make it scrollable
         styleHtmlContent: true,
-        scrollable: true,
+        scrollable: false,
         layout:'fit',
 
         items: [
@@ -45,16 +45,15 @@ Ext.define('SpinningFactory.view.office.GoodsPicsView', {
                                 text:'新增',
                                 iconCls:'fa fa-plus-circle',
                                 ui:'confirm',
+
                                 itemId:'uploadpicture'
                             },
                             {
                                 text:'取消',
                                 iconCls:'fa fa-times',
                                 ui:'decline',
-                                handler:function(){
-                                    me.overlay.hide();
-                                }
-                                //itemId:'uploadpicture'
+
+                                itemId:'cancelpicture'
                             }
 
 

@@ -1,13 +1,16 @@
 Ext.define('SpinningFactory.view.office.OfficeMain', {
     extend: 'Ext.tab.Panel',
     xtype: 'officemain',
+    alias: 'widget.OfficeMain',
+    //itemId: 'loginpanel',
     requires: [
         'Ext.TitleBar',
+        'Ext.NavigationView',
         'Ext.Video'
     ],
     config: {
         tabBarPosition: 'bottom',
-
+        fullscreen: true,
 
         items: [
             {

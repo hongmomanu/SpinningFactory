@@ -2,7 +2,6 @@
  * Created by jack on 6/23/15.
  */
 Ext.define('SpinningFactory.view.boss.BossMain', {
-    //extend: 'Ext.tab.Panel',
     extend: 'Ext.NavigationView',
     xtype: 'bossmain',
     requires: [
@@ -40,7 +39,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
 
             {
 
-                title:'<div >'+Globle_Variable.factoryinfo.factoryname+'</div>',
+                title:'<div >'+(Globle_Variable.factoryinfo?loble_Variable.factoryinfo.factoryname:"")+'</div>',
                 layout : 'fit',
                 xtype: 'container',
                 items: [

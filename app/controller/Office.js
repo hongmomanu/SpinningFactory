@@ -4,14 +4,12 @@
  */
 Ext.define('SpinningFactory.controller.Office', {
     extend: 'Ext.app.Controller',
-
-
     config: {
-
         views: [
             'menu.MainMenu',
             'office.GoodsViewList',
             'office.GoodsPicsView',
+            'office.OfficeMain',
             'office.NewGoodsForm'
         ],
         models: [
@@ -44,6 +42,12 @@ Ext.define('SpinningFactory.controller.Office', {
             },
             uploadpicturebtn:{
                 tap:'doImgCLick'
+            },
+            cancelpicturebtn:{
+                tap:'cancelImgCLick'
+            },
+            savegoodinfobtn:{
+                tap:'savenewgood'
             }
 
         },
@@ -51,8 +55,11 @@ Ext.define('SpinningFactory.controller.Office', {
             officemainview: 'officemain',
             newgoodsbtn: 'officemain #newgoods',
             managerpicbtn: 'officemain #managerpic',
-            uploadpicturebtn: 'officemain #uploadpicture',
+            uploadpicturebtn: 'goodspicsview #uploadpicture',
+            cancelpicturebtn: 'goodspicsview #cancelpicture',
             goodsviewlistview: 'goodsviewlist',
+            newgoodsformview:'newgoodsform',
+            savegoodinfobtn:'newgoodsform #savegoodinfo',
             navView:'officemain #villagenavigationview'
         }
     },
@@ -60,25 +67,57 @@ Ext.define('SpinningFactory.controller.Office', {
 
     initFunc:function (item,e){
 
+
         item.getTabBar().add({
             //xtype: 'button',
             xtype:'mainmenu',
+            ui: 'confirm',
             iconCls:'fa fa-cog fa-color-blue'
 
         });
 
     },
 
-    doImgCLick: function () {
-        alert(1);
+    cancelImgCLick:function(btn){
+        this.overlay.hide();
+
+    },
+    savenewgood:function(btn){
+        var formpanel=btn.up('form');
+        CommonUtil.addMessage();
+        var me=this;
+        var valid = CommonUtil.valid('SpinningFactory.model.office.GoodView', formpanel);
+        if(valid){
+            var successFunc = function (response, action) {
+                var res=JSON.parse(response.responseText);
+                if(res.success){
+
+                }else{
+                    Ext.Msg.alert('添加失败', '添加货物出错', Ext.emptyFn);
+                }
+
+            };
+            var failFunc=function(response, action){
+                Ext.Msg.alert('登录失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+
+            }
+            var url="user/factorylogin";
+            var params=formpanel.getValues();
+            CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+        }
+
+
+    },
+    doImgCLick: function (btn) {
+        var picform=this.getNewgoodsformview();
         var me = this;
+        testobj=me;
         var actionSheet = Ext.create('Ext.ActionSheet', {
             items: [
                 {
                     text: '相机拍照',
                     handler: function () {
-                        //alert(1);
-
                         imagfunc('camera');
                     }
                     //ui  : 'decline'
@@ -86,7 +125,6 @@ Ext.define('SpinningFactory.controller.Office', {
                 {
                     text: '图片库',
                     handler: function () {
-                        //alert(2);
                         imagfunc('library');
                     }
                 },
@@ -116,11 +154,19 @@ Ext.define('SpinningFactory.controller.Office', {
                     //var a=Ext.getCmp('imagerc');
                     //imgpanel.setSrc("data:image/png;base64,"+imgdata);
 
-
                     var win = function (r) {
                         //Ext.Msg.alert('seccess',r.response);
                         var res=JSON.parse(r.response);
-                        var url=Globle_Variable.serverurl+'files/'+res.filename;
+                        var path='files/'+res.filename;
+                        var url=Globle_Variable.serverurl+path;
+                        picform.pics.push(path);
+                        var carousel=me.overlay.down('carousel');
+                        carousel.add(
+                                {
+                                    xtype: 'image',
+                                    src: url
+                                }
+                        );
 
                     }
 
@@ -147,23 +193,42 @@ Ext.define('SpinningFactory.controller.Office', {
     shownmanagerpicview:function(btn){
 
         var me=this;
-        if(!this.showpicsview)this.showpicsview=Ext.create('SpinningFactory.view.office.GoodsPicsView');
+        var picform=this.getNewgoodsformview();
+        if(!picform.pics)picform.pics=['files/14296004957076511'];
+        var showpicsview=Ext.create('SpinningFactory.view.office.GoodsPicsView');
 
-        this.overlay = Ext.Viewport.add(this.showpicsview);
+        var carousel=showpicsview.down('carousel');
+
+        /*carousel.add(
+            [
+
+                {
+                    xtype: 'image',
+                    src: Globle_Variable.serverurl+'files/14296004957076511'
+
+                }
+            ]
+        );*/
+
+        Ext.each(picform.pics,function(item){
+            carousel.add(
+                [
+                    {
+                        xtype: 'image',
+                        src: Globle_Variable.serverurl+item
+                    }
+                ]
+            );
+        });
+
+
+        this.overlay = Ext.Viewport.add(showpicsview);
+
+
+
         this.overlay.showBy(btn);
 
-        var carousel=this.showpicsview.down('carousel');
 
-        carousel.add(
-           [
-
-               {
-                   xtype: 'image',
-                   src: Globle_Variable.serverurl+'files/14296004957076511'
-
-               }
-           ]
-        );
 
 
     },
