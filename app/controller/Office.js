@@ -48,6 +48,9 @@ Ext.define('SpinningFactory.controller.Office', {
             },
             savegoodinfobtn:{
                 tap:'savenewgood'
+            },
+            goodsviewlistview: {
+                itemtap: 'onGoodsSelect'
             }
 
         },
