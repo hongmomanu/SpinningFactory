@@ -11,6 +11,7 @@ Ext.define('SpinningFactory.controller.Office', {
         views: [
             'menu.MainMenu',
             'office.GoodsViewList',
+            'office.GoodsPicsView',
             'office.NewGoodsForm'
         ],
         models: [
@@ -69,6 +70,7 @@ Ext.define('SpinningFactory.controller.Office', {
     },
 
     doImgCLick: function () {
+        alert(1);
         var me = this;
         var actionSheet = Ext.create('Ext.ActionSheet', {
             items: [
@@ -145,83 +147,20 @@ Ext.define('SpinningFactory.controller.Office', {
     shownmanagerpicview:function(btn){
 
         var me=this;
-        var panel= Ext.create('Ext.Container', {
+        if(!this.showpicsview)this.showpicsview=Ext.create('SpinningFactory.view.office.GoodsPicsView');
 
-            //padding:4,
-            // Make it modal so you can click the mask to hide the overlay
-            modal: true,
-            hideOnMaskTap: false,
-
-            // Make it hidden by default
-            hidden: true,
-
-            // Set the width and height of the panel
-            width: '100%',
-            height: '100%',
-
-            contentEl: 'content',
-
-            // Style the content and make it scrollable
-            styleHtmlContent: true,
-            scrollable: true,
-            layout:'fit',
-
-            items: [
-                {
-                    xtype: 'carousel',
-                    defaults: {
-                        styleHtmlContent: true
-                    },
-
-                    items: [
-                        {
-                            xtype: 'toolbar',
-                            docked: 'bottom',
-                            align:'right',
-                            items: [
-
-                                {
-                                    text:'新增',
-                                    iconCls:'fa fa-plus-circle',
-                                    ui:'confirm',
-                                    itemId:'uploadpicture'
-                                },
-                                {
-                                    text:'取消',
-                                    iconCls:'fa fa-times',
-                                    ui:'decline',
-                                    handler:function(){
-                                        me.overlay.hide();
-                                    }
-                                    //itemId:'uploadpicture'
-                                }
-
-
-                            ]
-                        }
-                    ]
-
-                }
-            ]
-        });
-
-        this.overlay = Ext.Viewport.add(panel);
+        this.overlay = Ext.Viewport.add(this.showpicsview);
         this.overlay.showBy(btn);
 
-        var carousel=panel.down('carousel');
+        var carousel=this.showpicsview.down('carousel');
 
         carousel.add(
            [
-
 
                {
                    xtype: 'image',
                    src: Globle_Variable.serverurl+'files/14296004957076511'
 
-               },
-               {
-                   html : 'Item 2',
-                   style: 'background-color: #543333'
                }
            ]
         );
