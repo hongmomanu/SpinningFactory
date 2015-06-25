@@ -10,7 +10,8 @@ Ext.define('SpinningFactory.controller.Office', {
             'office.GoodsViewList',
             'office.GoodsPicsView',
             'office.OfficeMain',
-            'office.NewGoodsForm'
+            'office.NewGoodsForm',
+            'office.EditGoodsForm'
         ],
         models: [
             'office.GoodView'
@@ -32,7 +33,8 @@ Ext.define('SpinningFactory.controller.Office', {
             },
             goodsviewlistview:{
 
-                viewshow:'viewinit'
+                viewshow:'viewinit',
+                itemtap: 'onGoodsSelect'
             },
             newgoodsbtn:{
                 tap:'shownewgoodsform'
@@ -49,8 +51,8 @@ Ext.define('SpinningFactory.controller.Office', {
             savegoodinfobtn:{
                 tap:'savenewgood'
             },
-            goodsviewlistview: {
-                itemtap: 'onGoodsSelect'
+            altergoodinfobtn:{
+                tap:'altergood'
             }
 
         },
@@ -62,7 +64,9 @@ Ext.define('SpinningFactory.controller.Office', {
             cancelpicturebtn: 'goodspicsview #cancelpicture',
             goodsviewlistview: 'goodsviewlist',
             newgoodsformview:'newgoodsform',
+            editgoodsformview:'editgoodsform',
             savegoodinfobtn:'newgoodsform #savegoodinfo',
+            altergoodinfobtn:'editgoodsform #savegoodinfo',
             navView:'officemain #villagenavigationview'
         }
     },
@@ -84,6 +88,22 @@ Ext.define('SpinningFactory.controller.Office', {
     cancelImgCLick:function(btn){
         this.overlay.hide();
 
+    },
+    onGoodsSelect:function(list, index, node, record){
+
+        var nav=this.getNavView();
+        var me=this;
+
+        alert(1);
+        if(!this.altergoodlView){
+            this.altergoodlView=Ext.create('SpinningFactory.view.office.EditGoodsForm');
+        }
+        //this.altergoodlView.setTitle(record.get('name'));
+        nav.push(this.altergoodlView);
+    },
+
+    altergood:function(btn){
+      alert(2);
     },
     savenewgood:function(btn){
         var formpanel=btn.up('formpanel');
