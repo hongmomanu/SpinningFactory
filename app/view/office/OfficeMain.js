@@ -51,8 +51,6 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
                     {
                         xtype: 'navigationview',
                         autoDestroy: false,
-
-
                         scrollable: false,
                         //fullscreen: true,
                         itemId: 'villagenavigationview',
