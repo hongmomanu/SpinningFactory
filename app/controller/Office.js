@@ -83,7 +83,7 @@ Ext.define('SpinningFactory.controller.Office', {
 
     },
     savenewgood:function(btn){
-        var formpanel=btn.up('form');
+        var formpanel=btn.up('formpanel');
         CommonUtil.addMessage();
         var me=this;
         var valid = CommonUtil.valid('SpinningFactory.model.office.GoodView', formpanel);
@@ -91,7 +91,9 @@ Ext.define('SpinningFactory.controller.Office', {
             var successFunc = function (response, action) {
                 var res=JSON.parse(response.responseText);
                 if(res.success){
-
+                    me.getNavView().pop();
+                    var store=me.getGoodsviewlistview().getStore();
+                    store.load();
                 }else{
                     Ext.Msg.alert('添加失败', '添加货物出错', Ext.emptyFn);
                 }
@@ -101,8 +103,10 @@ Ext.define('SpinningFactory.controller.Office', {
                 Ext.Msg.alert('登录失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
 
             }
-            var url="user/factorylogin";
+            var url="factory/addgoodsbyfid";
             var params=formpanel.getValues();
+            params.imgs=formpanel.pics.join(",");
+            params.factoryid=Globle_Variable.factoryinfo._id;
             CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
 
         }

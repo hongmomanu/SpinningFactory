@@ -6,6 +6,7 @@ Ext.define('SpinningFactory.model.office.GoodView', {
             'factoryid',
             'goodsname',
             'price',
+            'colors',
             'imgs',
             'unit'
         ],

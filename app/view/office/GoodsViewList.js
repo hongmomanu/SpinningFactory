@@ -9,12 +9,12 @@ Ext.define('SpinningFactory.view.office.GoodsViewList', {
         variableHeights: true,
         scrollable: 'vertical',
         itemId:'goodsviewlist',
-        onItemDisclosure : {//若配置该项，list每一项的右侧都会出现一个小图标。其他功能请查看api
+        /*onItemDisclosure : {//若配置该项，list每一项的右侧都会出现一个小图标。其他功能请查看api
             handler : function(record, btn, index) {
 
                 this.select(index);
             }
-        },
+        },*/
         //refreshHeightOnUpdate :false,
         scrollToTopOnRefresh :true,
 
@@ -41,9 +41,33 @@ Ext.define('SpinningFactory.view.office.GoodsViewList', {
             ]
         }],
         itemTpl: [
-            '<div class="headshot">',
-            '{name}({data.length})',
-            '</div>'
+            '<table width="100%" height="100%"><tr>',
+
+            '<td width="50%">',
+
+            '<div style="text-align: center;">',
+            '<img width="80px" height="80px"  src="'+Globle_Variable.serverurl+'{imgs}">',
+            '</div>',
+            '<div class="headshot" style="text-align: center;">{goodsname}',
+            '</div>',
+            '</td>',
+
+            '<td width="50%">',
+            '<div style="text-align: center;color: #0946a2">',
+            '<div style="text-align: left">价格:{price}<br></div>',
+            '<div style="text-align: left"> 单位:{unit}<br></div>',
+            '<div style="text-align: left">颜色:{colors}<br></div>',
+            /*'<tpl if="zblb == 1">',
+            '<p>上午</p>',
+            '<tpl else>',
+            '<p>下午</p>',
+            '</tpl>',*/
+            '</div></td>',
+
+
+
+
+            '</tr></table>'
         ].join('')
     }
 });
