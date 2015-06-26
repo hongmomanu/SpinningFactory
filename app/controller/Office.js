@@ -97,17 +97,47 @@ Ext.define('SpinningFactory.controller.Office', {
         //alert(1);
         console.log(record);
         var data=record.data;
+        data.gid=data._id;
         if(!this.altergoodlView){
             this.altergoodlView=Ext.create('SpinningFactory.view.office.EditGoodsForm');
         }
         //this.altergoodlView.setTitle(record.get('name'));
-        this.altergoodlView.pics=data.imgs;
+        this.altergoodlView.pics=data.imgs.split(",");
         this.altergoodlView.setValues(data);
         nav.push(this.altergoodlView);
     },
 
     altergood:function(btn){
-      alert(2);
+
+        var formpanel=btn.up('formpanel');
+        CommonUtil.addMessage();
+        var me=this;
+        var valid = CommonUtil.valid('SpinningFactory.model.office.GoodView', formpanel);
+        if(valid){
+            var successFunc = function (response, action) {
+                var res=JSON.parse(response.responseText);
+                if(res.success){
+                    me.getNavView().pop();
+                    var store=me.getGoodsviewlistview().getStore();
+                    store.load();
+                }else{
+                    Ext.Msg.alert('添加失败', '修改货物出错', Ext.emptyFn);
+                }
+
+            };
+            var failFunc=function(response, action){
+                Ext.Msg.alert('登录失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+
+            }
+            var url="factory/altergoodsbyfid";
+            var params=formpanel.getValues();
+            params.imgs=formpanel.pics.join(",");
+            params.factoryid=Globle_Variable.factoryinfo._id;
+            //params.gid=Globle_Variable.factoryinfo._id;
+            CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+        }
+
     },
     savenewgood:function(btn){
         var formpanel=btn.up('formpanel');
@@ -132,6 +162,7 @@ Ext.define('SpinningFactory.controller.Office', {
             }
             var url="factory/addgoodsbyfid";
             var params=formpanel.getValues();
+            if(!formpanel.pics)formpanel.pics='';
             params.imgs=formpanel.pics.join(",");
             params.factoryid=Globle_Variable.factoryinfo._id;
             CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
@@ -227,7 +258,9 @@ Ext.define('SpinningFactory.controller.Office', {
         var me=this;
         //var picform=this.getNewgoodsformview();
         var picform=btn.up('formpanel');
-        if(!picform.pics)picform.pics=['files/14296004957076511'];
+        if(!picform.pics){
+            picform.pics=['files/14296004957076511'];
+        }
         var showpicsview=Ext.create('SpinningFactory.view.office.GoodsPicsView');
 
         var carousel=showpicsview.down('carousel');
