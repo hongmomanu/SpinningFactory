@@ -10,17 +10,17 @@ Ext.define('SpinningFactory.view.client.GoodsViewList', {
     config: {
         //cls: 'x-contacts',
         emptyText:'无相关内容',
-        useSimpleItems: false,
+        /*useSimpleItems: false,
         variableHeights: true,
         infinite: true,
         disableSelection: true,
-        allowDeselect: false,
+        allowDeselect: false,*/
         scrollToTopOnRefresh: false,
         //store: Ext.create('TweetStore'),
 
         plugins: [
-            { xclass: 'Ext.plugin.ListPaging' },
-            { xclass: 'Ext.plugin.PullRefresh' }
+            { xclass: 'Ext.plugin.ListPaging' }/*,
+            { xclass: 'Ext.plugin.PullRefresh' }*/
         ],
         scrollable: 'vertical',
         itemId:'clientgoodsviewlist',
@@ -31,7 +31,7 @@ Ext.define('SpinningFactory.view.client.GoodsViewList', {
             }
         },*/
         //refreshHeightOnUpdate :false,
-        scrollToTopOnRefresh :true,
+        //scrollToTopOnRefresh :true,
 
         store: 'ClientGoodViews',
 

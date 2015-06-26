@@ -67,101 +67,46 @@ Ext.define('SpinningFactory.controller.Client', {
 
         //alert(1);
         console.log(record);
-        var data=record.data;
-        data.gid=data._id;
-        if(!this.altergoodlView){
-            this.altergoodlView=Ext.create('SpinningFactory.view.office.EditGoodsForm');
-        }
-        //this.altergoodlView.setTitle(record.get('name'));
-        this.altergoodlView.pics=data.imgs.split(",");
-        this.altergoodlView.setValues(data);
-        nav.push(this.altergoodlView);
-    },
+        //alert(1);
 
-    altergood:function(btn){
+        var successFunc = function (response, action) {
+            var res=JSON.parse(response.responseText);
+            console.log(res);
+            if(res.success){
 
-        var formpanel=btn.up('formpanel');
-        CommonUtil.addMessage();
-        var me=this;
-        var valid = CommonUtil.valid('SpinningFactory.model.office.GoodView', formpanel);
-        if(valid){
-            var successFunc = function (response, action) {
-                var res=JSON.parse(response.responseText);
-                if(res.success){
-                    me.getNavView().pop();
-                    var store=me.getGoodsviewlistview().getStore();
-                    store.load();
-                }else{
-                    Ext.Msg.alert('添加失败', '修改货物出错', Ext.emptyFn);
-                }
+            }else{
+                Ext.Msg.confirm( "提示", "是否请求关联商家", function(btn){
+                    if(btn==='yes'){
 
-            };
-            var failFunc=function(response, action){
-                Ext.Msg.alert('登录失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
 
+                    }else{
+
+                    }
+                })
             }
-            var url="factory/altergoodsbyfid";
-            var params=formpanel.getValues();
-            params.imgs=formpanel.pics.join(",");
-            params.factoryid=Globle_Variable.factoryinfo._id;
-            //params.gid=Globle_Variable.factoryinfo._id;
-            CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+        };
+        var failFunc=function(response, action){
+            Ext.Msg.alert('登录失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
 
         }
-
-    },
-    savenewgood:function(btn){
-        var formpanel=btn.up('formpanel');
-        CommonUtil.addMessage();
-        var me=this;
-        var valid = CommonUtil.valid('SpinningFactory.model.office.GoodView', formpanel);
-        if(valid){
-            var successFunc = function (response, action) {
-                var res=JSON.parse(response.responseText);
-                if(res.success){
-                    me.getNavView().pop();
-                    var store=me.getGoodsviewlistview().getStore();
-                    store.load();
-                }else{
-                    Ext.Msg.alert('添加失败', '添加货物出错', Ext.emptyFn);
-                }
-
-            };
-            var failFunc=function(response, action){
-                Ext.Msg.alert('登录失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
-
-            }
-            var url="factory/addgoodsbyfid";
-            var params=formpanel.getValues();
-            if(!formpanel.pics)formpanel.pics='';
-            params.imgs=formpanel.pics.join(",");
-            params.factoryid=Globle_Variable.factoryinfo._id;
-            CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
-
-        }
-
+        var url="customer/ismyfactorysbyid";
+        var params={customerid:Globle_Variable.user._id,factoryid:record.factoryid};
+        CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
 
     },
 
-    shownewgoodsform:function(btn){
 
-        if(!this.goodsform)this.goodsform=Ext.create('SpinningFactory.view.office.NewGoodsForm');
-        this.getNavView().push(this.goodsform);
 
-    },
+
     viewinit:function(view){
         var store=view.getStore();
         var seachinput=view.down('#seachinput');
+        store.setParams({keyword:seachinput.getValue()});
         store.load({
             //define the parameters of the store:
-            params:{
-                keyword : seachinput.getValue()/*,
-                start:0,
-                limit:10*/
-            },
             scope: this,
             callback : function(records, operation, success) {
-
             }});
     },
     returnhomemenuFunc:function(){
