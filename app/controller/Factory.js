@@ -2,23 +2,23 @@
  * Created by jack on 15-03-27.
  * main Controller used by Terminal app
  */
-Ext.define('SpinningFactory.controller.factory', {
+Ext.define('SpinningFactory.controller.Factory', {
     extend: 'Ext.app.Controller',
     config: {
         views: [
-            'factory.factorys',
-            'factory.factorysMessage'
+            /*'factory.factorys',
+            'factory.factorysMessage'*/
 
         ],
         models: [
-            'factory.factory',
-            'factory.factoryMessage'
+            /*'factory.factory',
+            'factory.factoryMessage'*/
 
         ],
         stores: [
 
-            'factory.factorys',
-            'factory.factoryMessages'
+            /*'factory.factorys',
+            'factory.factoryMessages'*/
 
         ],
         maxPosition: 0,
@@ -467,7 +467,7 @@ Ext.define('SpinningFactory.controller.factory', {
 
             var res=JSON.parse(response.responseText);
             if(res){
-                //Ext.Msg.alert('成功', '推荐医生成功', Ext.emptyFn);\
+                //Ext.Msg.alert('成功', '推荐工厂主成功', Ext.emptyFn);\
                 console.log(res);
                 var t=CommonUtil.getovertime(res.applytime);
                 if(t<=0){
@@ -667,7 +667,7 @@ Ext.define('SpinningFactory.controller.factory', {
             cordova.plugins.notification.local.schedule({
                 //id: recommend._id,
                 id:me.messageid,
-                title: "新患者",
+                title: "新买家",
                 text:  customerinfo.realname ,
 
                 //firstAt: monday_9_am,
@@ -700,19 +700,19 @@ Ext.define('SpinningFactory.controller.factory', {
        this.initfactoryList();
     },
 
-    receiveRecommendProcess:function(data,e){
+    receiveRecommendProcess:function(data,e,type){
         //console.log(data);
         //alert("1");
         for(var i=0;i<data.length;i++){
             //alert(i);
             var recommend=data[i];
             //message.message=message.content;
-            this.receiveRecommendNotification(recommend,e);
+            this.receiveRecommendNotification(recommend,e,type);
         }
         //listView.select(1);
     },
 
-    receiveRecommendNotification:function(recommend,e){
+    receiveRecommendNotification:function(recommend,e,type){
         var me=this;
         try {
 
@@ -720,9 +720,9 @@ Ext.define('SpinningFactory.controller.factory', {
             cordova.plugins.notification.local.schedule({
                 //id: recommend._id ,
                 id:me.messageid,
-                title: recommend.rectype==1?("医生:"+recommend.frominfo.userinfo.realname+"推荐的"):
-                    ("患者:"+recommend.frominfo.realname+"推荐的"),
-                text: "新医生:"+recommend.factoryinfo.userinfo.realname,
+                title: recommend.rectype==1?("工厂主:"+recommend.frominfo.realname+"推荐的"):
+                    ("买家:"+recommend.frominfo.realname+"推荐的"),
+                text: type==0?"新工厂主:"+recommend.factoryinfo.userinfo.realname:"新买家:"+recommend.customerinfo.realname,
                 //firstAt: monday_9_am,
                 //every: "week",
                 //sound: "file://sounds/reminder.mp3",
@@ -738,7 +738,7 @@ Ext.define('SpinningFactory.controller.factory', {
 
         }catch (err){
 
-            me.receiveRecommendShow(recommend,e);
+            me.receiveRecommendShow(recommend,e,type);
 
         } finally{
 
@@ -747,11 +747,11 @@ Ext.define('SpinningFactory.controller.factory', {
 
 
     },
-    receiveRecommendShow:function(recommend,e){
+    receiveRecommendShow:function(recommend,e,type){
         //alert(1);
         //console.log(recommend);
-        Ext.Msg.confirm('消息','是否添加'+ (recommend.rectype==1?"医生:"+recommend.frominfo.userinfo.realname+"推荐":
-        "患者:"+recommend.frominfo.realname+"推荐")+"的医生:"+recommend.factoryinfo.userinfo.realname,function(buttonId){
+        Ext.Msg.confirm('消息','是否添加'+ (recommend.rectype==1?"工厂主:"+recommend.frominfo.realname+"推荐":
+        "买家:"+recommend.frominfo.realname+"推荐")+(type==0?"新工厂主:"+recommend.factoryinfo.userinfo.realname:"新买家:"+recommend.customerinfo.realname),function(buttonId){
 
             if(buttonId=='yes'){
 
@@ -763,7 +763,7 @@ Ext.define('SpinningFactory.controller.factory', {
 
                         Ext.Msg.show({
                             title:'成功',
-                            message: (recommend.isfactoryaccepted||recommend.iscustomeraccepted)?'已成功添加医生':
+                            message: (recommend.isfactoryaccepted||recommend.iscustomeraccepted)?'已成功添加'(type==0?"工厂主":"买家"):
                                 '已接受推荐，等待对方同意',
                             buttons: Ext.MessageBox.OK,
                             fn:Ext.emptyFn
@@ -779,7 +779,7 @@ Ext.define('SpinningFactory.controller.factory', {
                     Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
                     //Ext.Msg.alert('test', 'test', Ext.emptyFn);
                 }
-                var url="customer/acceptrecommend";
+                var url=(type==0?"customer/acceptrecommend":"factory/acceptrecommend");
                 var params={
                     rid:recommend._id
                 };
@@ -803,7 +803,7 @@ Ext.define('SpinningFactory.controller.factory', {
         var actionSheet = Ext.create('Ext.ActionSheet', {
             items: [
                 {
-                    text: '推荐患者',
+                    text: '推荐买家',
                     handler:function(){
                         me.showcustomerList(record);
                         actionSheet.hide();
@@ -893,7 +893,7 @@ Ext.define('SpinningFactory.controller.factory', {
                     cordova.plugins.notification.local.schedule({
                         //id: message._id,
                         id: cid,
-                        title: (message.fromtype==0?'病友 ':'医生 ')+ message.userinfo.realname+' 来消息啦!' ,
+                        title: (message.fromtype==0?'病友 ':'工厂主 ')+ message.userinfo.realname+' 来消息啦!' ,
                         text: message.message,
                         //firstAt: monday_9_am,
                         //every: "week",

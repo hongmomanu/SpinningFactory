@@ -56,6 +56,85 @@ Ext.define('SpinningFactory.controller.Client', {
             iconCls:'fa fa-cog fa-color-blue'
 
         });
+        this.websocketInit();
+
+    },
+
+    hideloadingimg:function(data){
+        //console.log(imgid);
+        var factoryController=me.getApplication().getController('Factory');
+        var customerController=me.getApplication().getController('Cutomer');
+        var store=factoryController.messageView[data["toid"]]?factoryController.messageView[data["toid"]].getStore():
+            customerController.messageView[data["toid"]].getStore();
+        //var store=Ext.getStore('PatientMessages');
+        store.data.each(function(a){
+            if(a.get('imgid')==data["imgid"]){
+                a.set('issend','none');
+            }
+        });
+        factoryController.getMessagecontent().setValue('');
+    },
+
+    websocketInit:function(){
+        var url=Globle_Variable.serverurl;
+        url=url.replace(/(:\d+)/g,":3003");
+        url=url.replace("http","ws");
+        this.socket = new WebSocket(url);
+        var me=this;
+
+        this.socket.onmessage = function(event) {
+            var data=JSON.parse(event.data);
+            var factoryController=me.getApplication().getController('Factory');
+            var customerController=me.getApplication().getController('Cutomer');
+            if(data.type=='factorychat'){
+                //聊天咨询
+                console.log("factorychat");
+                console.log(data.data);
+                factoryController.receiveMessageProcess(data.data,event);
+            }
+            else if(data.type=='recommend'){
+                //推荐
+                console.log('recommend');
+                console.log(data.data);
+                factoryController.receiveRecommendProcess(data.data,event);
+
+            }else if(data.type=='recommendconfirm'){
+
+                console.log('recommendconfirm')
+                factoryController.recommendConfirmProcess(data.data,event);
+            }
+            else if(data.type=='quickaccept'){
+                //门诊应答
+                console.log('quickaccept');
+
+                console.log(data.data);
+
+                customerController.receiveQuickAcceptProcess(data.data,event);
+
+
+            }
+            else if(data.type=='chatsuc'){
+                console.log('recommendconfirm');
+                me.hideloadingimg(data.data)
+
+            }
+
+
+        };
+
+        this.socket.onclose = function(event) {
+
+            var d = new Ext.util.DelayedTask(function(){
+                me.websocketInit();
+            });
+            d.delay(5000);
+        };
+        this.socket.onopen = function() {
+            me.socket.send(JSON.stringify({
+                type:"customerconnect",
+                content: Globle_Variable.user._id
+            }));
+        };
 
     },
 
@@ -75,9 +154,37 @@ Ext.define('SpinningFactory.controller.Client', {
             if(res.success){
 
             }else{
-                Ext.Msg.confirm( "提示", "是否请求关联商家", function(btn){
-                    if(btn==='yes'){
+                Ext.Msg.prompt('提示', '请输入请求信息', function(btn,text) {
+                    // text represents the user input value
 
+                    if(btn==='ok'){
+
+                        var successFunc = function (response, action) {
+
+                            var res=JSON.parse(response.responseText);
+                            if(res.success){
+                                //Ext.Msg.alert('成功', '推荐医生成功', Ext.emptyFn);
+
+                            }else{
+                                Ext.Msg.alert('提示', res.message, Ext.emptyFn);
+                            }
+
+                        };
+                        var failFunc=function(response, action){
+                            Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+                            //Ext.Msg.alert('test', 'test', Ext.emptyFn);
+
+                        }
+                        var url="customer/sendmyfactoryTocustomer";
+
+                        var params={
+                            customerid:Globle_Variable.user._id,
+                            fromcustomerid:Globle_Variable.user._id,
+                            factoryid:res.user._id,
+                            text:text
+
+                        };
+                        CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
 
                     }else{
 
@@ -91,7 +198,7 @@ Ext.define('SpinningFactory.controller.Client', {
 
         }
         var url="customer/ismyfactorysbyid";
-        var params={customerid:Globle_Variable.user._id,factoryid:record.factoryid};
+        var params={customerid:Globle_Variable.user._id,factoryid:record.data.factoryid};
         CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
 
     },

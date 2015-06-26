@@ -2,23 +2,23 @@
  * Created by jack on 15-03-27.
  * main Controller used by Terminal app
  */
-Ext.define('SpinningFactory.controller.customer', {
+Ext.define('SpinningFactory.controller.Customer', {
     extend: 'Ext.app.Controller',
     config: {
         views: [
-            'customer.customers',
-            'customer.customersMessage'
+            /*'customer.customers',
+            'customer.customersMessage'*/
 
         ],
         models: [
-            'customer.customer',
-            'customer.customerMessage'
+            /*'customer.customer',
+            'customer.customerMessage'*/
 
         ],
         stores: [
 
-            'customer.customers',
-            'customer.customerMessages'
+            /*'customer.customers',
+            'customer.customerMessages'*/
 
         ],
         maxPosition: 0,
@@ -375,7 +375,7 @@ Ext.define('SpinningFactory.controller.customer', {
         //Ext.Msg.alert('test', 'test', Ext.emptyFn);
 
         var view=this.getcustomersnavview();
-        var factorysList=Ext.widget('factorys',{title:'选择医生'});
+        var factorysList=Ext.widget('factorys',{title:'选择工厂'});
         factorysList.on({
             itemtap  : { fn: this.onfactorySelect, scope: this, single: true }
         });
@@ -386,7 +386,7 @@ Ext.define('SpinningFactory.controller.customer', {
         var me=this;
         //Ext.Msg.alert('2323', '2323', Ext.emptyFn);
         var view=me.getcustomersnavview();
-        Ext.Msg.confirm('消息','确定推荐医生',function(buttonId){
+        Ext.Msg.confirm('消息','确定推荐工厂',function(buttonId){
 
             if(buttonId=='yes'){
 
@@ -395,7 +395,7 @@ Ext.define('SpinningFactory.controller.customer', {
 
                     var res=JSON.parse(response.responseText);
                      if(res.success){
-                         Ext.Msg.alert('成功', '推荐医生成功', Ext.emptyFn);
+                         Ext.Msg.alert('成功', '推荐工厂成功', Ext.emptyFn);
 
                      }else{
                          Ext.Msg.alert('提示', res.message, Ext.emptyFn);
@@ -435,7 +435,7 @@ Ext.define('SpinningFactory.controller.customer', {
         var actionSheet = Ext.create('Ext.ActionSheet', {
             items: [
                 {
-                    text: '推荐医生',
+                    text: '推荐工厂',
                     handler:function(){
                         me.showfactoryList(record);
                         actionSheet.hide();
@@ -513,7 +513,7 @@ Ext.define('SpinningFactory.controller.customer', {
             cordova.plugins.notification.local.schedule({
                 id: recommend._id ,
                 title: "正在进行的问诊..",
-                text: recommend.userinfo.sectionname+"医生:"+recommend.userinfo.realname,
+                text: recommend.userinfo.sectionname+"工厂:"+recommend.userinfo.realname,
                 //firstAt: monday_9_am,
                 //every: "week",
                 //sound: "file://sounds/reminder.mp3",

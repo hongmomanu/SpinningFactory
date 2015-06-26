@@ -42,7 +42,7 @@ Ext.define('SpinningFactory.controller.Boss', {
     // app init func
 
     initFunc:function (item,e){
-
+        this.websocketInit();
 
     },
     returnhomemenuFunc:function(){
@@ -94,6 +94,84 @@ Ext.define('SpinningFactory.controller.Boss', {
         }, false);
 
     },
+
+    hideloadingimg:function(data){
+        //console.log(imgid);
+        var factoryController=me.getApplication().getController('Factory');
+        var customerController=me.getApplication().getController('Cutomer');
+        var store=factoryController.messageView[data["toid"]]?factoryController.messageView[data["toid"]].getStore():
+            customerController.messageView[data["toid"]].getStore();
+        //var store=Ext.getStore('PatientMessages');
+        store.data.each(function(a){
+            if(a.get('imgid')==data["imgid"]){
+                a.set('issend','none');
+            }
+        });
+        factoryController.getMessagecontent().setValue('');
+    },
+
+    websocketInit:function(){
+        var url=Globle_Variable.serverurl;
+        url=url.replace(/(:\d+)/g,":3003");
+        url=url.replace("http","ws");
+        this.socket = new WebSocket(url);
+        var me=this;
+
+        this.socket.onmessage = function(event) {
+            var data=JSON.parse(event.data);
+            var factoryController=me.getApplication().getController('Factory');
+            var customerController=me.getApplication().getController('Cutomer');
+            if(data.type=='factorychat'){
+                //聊天咨询
+                console.log("factorychat");
+                console.log(data.data);
+                factoryController.receiveMessageProcess(data.data,event);
+            }
+            else if(data.type=='recommend'){
+                //推荐
+                console.log('recommend');
+                console.log(data.data);
+                factoryController.receiveRecommendProcess(data.data,event,1);
+
+            }else if(data.type=='recommendconfirm'){
+
+                console.log('recommendconfirm')
+                factoryController.recommendConfirmProcess(data.data,event);
+            }
+            else if(data.type=='quickaccept'){
+                //门诊应答
+                console.log('quickaccept');
+
+                console.log(data.data);
+
+                customerController.receiveQuickAcceptProcess(data.data,event);
+
+
+            }
+            else if(data.type=='chatsuc'){
+                console.log('recommendconfirm');
+                me.hideloadingimg(data.data)
+
+            }
+
+
+        };
+
+        this.socket.onclose = function(event) {
+
+            var d = new Ext.util.DelayedTask(function(){
+                me.websocketInit();
+            });
+            d.delay(5000);
+        };
+        this.socket.onopen = function() {
+            me.socket.send(JSON.stringify({
+                type:"factoryconnect",
+                content: Globle_Variable.user._id
+            }));
+        };
+
+    },
     initNotificationClick:function(e){
 
 
@@ -101,8 +179,8 @@ Ext.define('SpinningFactory.controller.Boss', {
 
             ///Ext.Msg.alert('clicked event0', 'is clicked');
 
-            var factoryController=this.getApplication().getController('factory');
-            var customerController=this.getApplication().getController('customer');
+            var factoryController=this.getApplication().getController('Factory');
+            var customerController=this.getApplication().getController('Customer');
             cordova.plugins.notification.local.on("click", function (notification) {
 
                 var data=JSON.parse(notification.data);
