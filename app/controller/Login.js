@@ -118,6 +118,12 @@ Ext.define('SpinningFactory.controller.Login', {
     },
     autoLogin:function(){
 
+        if(localStorage.isfactory){
+
+        }else{
+
+        }
+
         var userinfo=JSON.parse(localStorage.user);
 
         if(userinfo){
