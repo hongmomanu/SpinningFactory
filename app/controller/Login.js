@@ -282,8 +282,11 @@ Ext.define('SpinningFactory.controller.Login', {
                 {
                     text: '我是工厂',
                     handler: function () {
-                        localStorage.isfactory="factory";
+                        //localStorage.isfactory="factory";
                         actionSheet.hide();
+                        var registerView=Ext.create('SpinningFactory.view.register.Register');
+                        view.push(registerView);
+
                         //me.autoLoginMain();
                     }
                     //ui  : 'decline'
@@ -291,9 +294,10 @@ Ext.define('SpinningFactory.controller.Login', {
                 {
                     text: '我是买家',
                     handler: function () {
-                        localStorage.isfactory="client";
+                        //localStorage.isfactory="client";
                         actionSheet.hide();
-                        me.autoLoginMain();
+                        var registerView=Ext.create('SpinningFactory.view.register.ClientRegister');
+                        view.push(registerView);
                     }
                 }
 
@@ -302,7 +306,6 @@ Ext.define('SpinningFactory.controller.Login', {
         Ext.Viewport.add(actionSheet);
         actionSheet.show();
 
-        var registerView=Ext.create('SpinningFactory.view.register.Register');
-        view.push(registerView);
+
     }
 });
