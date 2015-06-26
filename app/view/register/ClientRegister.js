@@ -31,32 +31,7 @@ Ext.define('SpinningFactory.view.register.ClientRegister', {
                         defaults:{
                             labelWidth:'150px'
                         },
-                        items:[{
-                            xtype:'textfield',
-                            name:'factoryname',
-                            label:'工厂名称',
-                            placeHolder:'请输入工厂名称',
-                            required:true,
-                            clearIcon:true,
-                            labelAlign:'left'
-                        },{
-                            xtype:'textfield',
-                            name:'factoryaddress',
-                            label:'工厂地址',
-                            placeHolder:'请输入工厂地址',
-                            required:true,
-                            clearIcon:true,
-                            labelAlign:'left'
-                        },
-                          {
-                            xtype:'textfield',
-                            name:'factoryinfo',
-                            label:'主营项目',
-                            placeHolder:'请输入主营项目',
-                            required:true,
-                            clearIcon:true,
-                            labelAlign:'left'
-                        },
+                        items:[
                             {
                                 xtype:'textfield',
                                 name:'username',

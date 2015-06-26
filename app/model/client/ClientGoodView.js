@@ -1,4 +1,4 @@
-Ext.define('SpinningFactory.model.client.GoodView', {
+Ext.define('SpinningFactory.model.client.ClientGoodView', {
     extend: 'Ext.data.Model',
     config: {
         fields: [

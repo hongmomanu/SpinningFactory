@@ -1,8 +1,9 @@
-Ext.define('SpinningFactory.store.client.GoodViews', {
+Ext.define('SpinningFactory.store.client.ClientGoodViews', {
     extend: 'Ext.data.Store',
     config: {
-        model: 'SpinningFactory.model.client.GoodView',
+        model: 'SpinningFactory.model.client.ClientGoodView',
         autoLoad: false,
+        pageSize: 10,
         //sorters: '_id',
         /*grouper: {
             groupFn: function(record) {

@@ -8,14 +8,15 @@ Ext.define('SpinningFactory.controller.Client', {
         views: [
 
             'client.ClientMain',
+            'menu.MainMenu',
             'client.GoodsViewList'
 
         ],
         models: [
-            'client.GoodView'
+            'client.ClientGoodView'
         ],
         stores: [
-            'client.GoodViews'
+            'client.ClientGoodViews'
 
         ],
         control: {
@@ -29,7 +30,7 @@ Ext.define('SpinningFactory.controller.Client', {
 
 
             },
-            goodsviewlistview:{
+            clientgoodsviewlistview:{
 
                 viewshow:'viewinit',
                 itemtap: 'onGoodsSelect'
@@ -37,7 +38,7 @@ Ext.define('SpinningFactory.controller.Client', {
 
         },
         refs: {
-            officemainview: 'clientmain',
+            clientmainview: 'clientmain',
             clientgoodsviewlistview: 'clientgoodsviewlist',
 
             navView:'clientmain #villagenavigationview'
@@ -176,6 +177,7 @@ Ext.define('SpinningFactory.controller.Client', {
             if(btn==='yes'){
                 Globle_Variable.user=null;
                 localStorage.user="";
+                localStorage.isfactory="";
                 var menu=Ext.Viewport.down('mainmenu');
                 menu.getMenuItems()[0].hidden=false;
                 menu.getMenuItems()[1].hidden=true;

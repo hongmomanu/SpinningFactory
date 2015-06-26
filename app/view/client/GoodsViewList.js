@@ -3,10 +3,25 @@ Ext.define('SpinningFactory.view.client.GoodsViewList', {
     //alias: 'widget.doctors',
     xtype:'clientgoodsviewlist',
     //cls: 'x-contacts',
+    requires: [
+        'Ext.plugin.ListPaging',
+        'Ext.plugin.PullRefresh'
+    ],
     config: {
         //cls: 'x-contacts',
         emptyText:'无相关内容',
+        useSimpleItems: false,
         variableHeights: true,
+        infinite: true,
+        disableSelection: true,
+        allowDeselect: false,
+        scrollToTopOnRefresh: false,
+        //store: Ext.create('TweetStore'),
+
+        plugins: [
+            { xclass: 'Ext.plugin.ListPaging' },
+            { xclass: 'Ext.plugin.PullRefresh' }
+        ],
         scrollable: 'vertical',
         itemId:'clientgoodsviewlist',
         /*onItemDisclosure : {//若配置该项，list每一项的右侧都会出现一个小图标。其他功能请查看api
@@ -18,7 +33,7 @@ Ext.define('SpinningFactory.view.client.GoodsViewList', {
         //refreshHeightOnUpdate :false,
         scrollToTopOnRefresh :true,
 
-        store: 'GoodViews',
+        store: 'ClientGoodViews',
 
         listeners: {
             painted: function(){

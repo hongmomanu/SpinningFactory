@@ -259,11 +259,13 @@ Ext.define('SpinningFactory.controller.Login', {
 
 
                 }else{
+                    localStorage.isfactory='';
                     Ext.Msg.alert('登录失败', '用户名密码错误', Ext.emptyFn);
                 }
 
             };
             var failFunc=function(response, action){
+                localStorage.isfactory='';
                 Ext.Msg.alert('登录失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
 
             }

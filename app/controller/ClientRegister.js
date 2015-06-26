@@ -35,7 +35,7 @@ Ext.define('SpinningFactory.controller.ClientRegister', {
 
         formpanel=btn.up('panel');
         CommonUtil.addMessage();
-        var valid = CommonUtil.valid('SpinningFactory.model.register.Register', formpanel);
+        var valid = CommonUtil.valid('SpinningFactory.model.register.ClientRegister', formpanel);
         var me =this;
         if(valid){
 
