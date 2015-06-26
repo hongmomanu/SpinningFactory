@@ -96,7 +96,7 @@ Ext.define('SpinningFactory.controller.Client', {
                 //推荐
                 console.log('recommend');
                 console.log(data.data);
-                factoryController.receiveRecommendProcess(data.data,event);
+                factoryController.receiveRecommendProcess(data.data,event,0);
 
             }else if(data.type=='recommendconfirm'){
 
@@ -280,7 +280,7 @@ Ext.define('SpinningFactory.controller.Client', {
                 var message=data.data;
                 var type=data.type;
                 if(type=='recommend'){
-                    factoryController.receiveRecommendShow(message,e);
+                    factoryController.receiveRecommendShow(message,e,0);
                 }else if(type=='quickapplying'){
                     villageController.applywaitinginfoShow(message,e)
                 }else if(type=='quickaccept'){

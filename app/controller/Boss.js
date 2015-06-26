@@ -187,7 +187,7 @@ Ext.define('SpinningFactory.controller.Boss', {
                 var message=data.data;
                 var type=data.type;
                 if(type=='recommend'){
-                    factoryController.receiveRecommendShow(message,e);
+                    factoryController.receiveRecommendShow(message,e,1);
                 }else if(type=='quickapplying'){
                     villageController.applywaitinginfoShow(message,e)
                 }else if(type=='quickaccept'){

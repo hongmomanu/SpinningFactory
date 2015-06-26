@@ -722,7 +722,7 @@ Ext.define('SpinningFactory.controller.Factory', {
                 id:me.messageid,
                 title: recommend.rectype==1?("工厂主:"+recommend.frominfo.realname+"推荐的"):
                     ("买家:"+recommend.frominfo.realname+"推荐的"),
-                text: type==0?"新工厂主:"+recommend.factoryinfo.userinfo.realname:"新买家:"+recommend.customerinfo.realname,
+                text: type==0?"新工厂主:"+recommend.factoryinfo.realname:"新买家:"+recommend.customerinfo.realname,
                 //firstAt: monday_9_am,
                 //every: "week",
                 //sound: "file://sounds/reminder.mp3",
@@ -751,7 +751,7 @@ Ext.define('SpinningFactory.controller.Factory', {
         //alert(1);
         //console.log(recommend);
         Ext.Msg.confirm('消息','是否添加'+ (recommend.rectype==1?"工厂主:"+recommend.frominfo.realname+"推荐":
-        "买家:"+recommend.frominfo.realname+"推荐")+(type==0?"新工厂主:"+recommend.factoryinfo.userinfo.realname:"新买家:"+recommend.customerinfo.realname),function(buttonId){
+        "买家:"+recommend.frominfo.realname+"推荐")+(type==0?"新工厂主:"+recommend.factoryinfo.realname:"新买家:"+recommend.customerinfo.realname),function(buttonId){
 
             if(buttonId=='yes'){
 
@@ -763,7 +763,7 @@ Ext.define('SpinningFactory.controller.Factory', {
 
                         Ext.Msg.show({
                             title:'成功',
-                            message: (recommend.isfactoryaccepted||recommend.iscustomeraccepted)?'已成功添加'(type==0?"工厂主":"买家"):
+                            message: (recommend.isfactoryaccepted||recommend.iscustomeraccepted)?'已成功添加'+(type==0?"工厂主":"买家"):
                                 '已接受推荐，等待对方同意',
                             buttons: Ext.MessageBox.OK,
                             fn:Ext.emptyFn
