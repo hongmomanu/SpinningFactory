@@ -8,6 +8,8 @@ Ext.define('SpinningFactory.controller.Client', {
         views: [
 
             'client.ClientMain',
+            'client.GoodsDetail',
+            'client.GoodsPicsView',
             'menu.MainMenu',
             'client.GoodsViewList'
 
@@ -30,6 +32,9 @@ Ext.define('SpinningFactory.controller.Client', {
 
 
             },
+            managerpicbtn:{
+                tap:'shownmanagerpicview'
+            },
             clientgoodsviewlistview:{
 
                 viewshow:'viewinit',
@@ -40,6 +45,8 @@ Ext.define('SpinningFactory.controller.Client', {
         refs: {
             clientmainview: 'clientmain',
             clientgoodsviewlistview: 'clientgoodsviewlist',
+            goodsdetailview:'goodsdetail',
+            managerpicbtn: 'clientmain #managerpic',
 
             navView:'clientmain #villagenavigationview'
         }
@@ -57,6 +64,39 @@ Ext.define('SpinningFactory.controller.Client', {
 
         });
         this.websocketInit();
+
+    },
+
+    shownmanagerpicview:function(btn){
+
+        var me=this;
+        //var picform=this.getNewgoodsformview();
+        var picform=btn.up('formpanel');
+        if(!picform.pics){
+            picform.pics=['files/14296004957076511'];
+        }
+        var showpicsview=Ext.create('SpinningFactory.view.client.GoodsPicsView');
+
+        var carousel=showpicsview.down('carousel');
+
+
+        Ext.each(picform.pics,function(item){
+            carousel.add(
+                [
+                    {
+                        xtype: 'image',
+                        src: Globle_Variable.serverurl+item
+                    }
+                ]
+            );
+        });
+
+
+        this.overlay = Ext.Viewport.add(showpicsview);
+        this.overlay.showBy(btn);
+
+
+
 
     },
 
@@ -144,14 +184,22 @@ Ext.define('SpinningFactory.controller.Client', {
         var nav=this.getNavView();
         var me=this;
 
-        //alert(1);
-        console.log(record);
-        //alert(1);
 
         var successFunc = function (response, action) {
             var res=JSON.parse(response.responseText);
-            console.log(res);
+            //console.log(res);
             if(res.success){
+                var data=record.data;
+                data.gid=data._id;
+                if(!this.clientgoodlView){
+                    this.clientgoodlView=Ext.create('SpinningFactory.view.client.GoodsDetail');
+                }
+                //this.altergoodlView.setTitle(record.get('name'));
+                this.clientgoodlView.pics=data.imgs.split(",");
+                this.clientgoodlView.setValues(data);
+                nav.push(this.clientgoodlView);
+
+
 
             }else{
                 Ext.Msg.prompt('提示', '请输入请求信息', function(btn,text) {
