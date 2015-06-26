@@ -94,7 +94,8 @@ Ext.define('SpinningFactory.controller.Office', {
         var nav=this.getNavView();
         var me=this;
 
-        alert(1);
+        //alert(1);
+        console.log(record);
         if(!this.altergoodlView){
             this.altergoodlView=Ext.create('SpinningFactory.view.office.EditGoodsForm');
         }
@@ -188,12 +189,13 @@ Ext.define('SpinningFactory.controller.Office', {
                         var url=Globle_Variable.serverurl+path;
                         picform.pics.push(path);
                         var carousel=me.overlay.down('carousel');
-                        carousel.add(
+                        carousel.insert(0,
                                 {
                                     xtype: 'image',
                                     src: url
                                 }
                         );
+                        carousel.setActiveItem(0);
 
                     }
 

@@ -150,14 +150,14 @@ Ext.define('SpinningFactory.controller.Login', {
 
     },
     backbuttonListener:function(){
-        document.addEventListener("backbutton", onBackKeyDown, false);
+       /* document.addEventListener("backbutton", onBackKeyDown, false);
         function onBackKeyDown() {
             navigator.Backbutton.goHome(function() {
                 //console.log('success')
             }, function() {
                 //console.log('fail')
             });
-        }
+        }*/
 
     },
 
