@@ -58,6 +58,7 @@ Ext.define('SpinningFactory.controller.Boss', {
             if(btn==='yes'){
                 Globle_Variable.user=null;
                 localStorage.user="";
+                localStorage.isfactory="";
                 var menu=Ext.Viewport.down('mainmenu');
                 menu.getMenuItems()[0].hidden=false;
                 menu.getMenuItems()[1].hidden=true;

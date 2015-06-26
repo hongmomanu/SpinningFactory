@@ -118,12 +118,42 @@ Ext.define('SpinningFactory.controller.Login', {
     },
     autoLogin:function(){
 
-        if(localStorage.isfactory){
+        if(!localStorage.isfactory){
+            var me=this;
+
+            var actionSheet = Ext.create('Ext.ActionSheet', {
+                items: [
+                    {
+                        text: '我是工厂',
+                        handler: function () {
+                            localStorage.isfactory="factory";
+                            actionSheet.hide();
+                            me.autoLoginMain();
+                        }
+                        //ui  : 'decline'
+                    },
+                    {
+                        text: '我是买家',
+                        handler: function () {
+                            localStorage.isfactory="client";
+                            actionSheet.hide();
+                            me.autoLoginMain();
+                        }
+                    }
+
+                ]
+            });
+            Ext.Viewport.add(actionSheet);
+            actionSheet.show();
 
         }else{
-
+            this.autoLoginMain();
         }
 
+
+
+    },
+    autoLoginMain:function(){
         var userinfo=JSON.parse(localStorage.user);
 
         if(userinfo){
@@ -132,7 +162,6 @@ Ext.define('SpinningFactory.controller.Login', {
             this.docustomerLogin();
 
         }
-
     },
     pauseListener:function(){
         document.addEventListener("pause", onPause, false);
@@ -238,7 +267,7 @@ Ext.define('SpinningFactory.controller.Login', {
                 Ext.Msg.alert('登录失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
 
             }
-            var url="user/factorylogin";
+            var url=localStorage.isfactory=='factory'?"user/factorylogin":"user/customerlogin";
             var params=formpanel.getValues();
             CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
 
@@ -247,6 +276,32 @@ Ext.define('SpinningFactory.controller.Login', {
     },
     doNewcustomer:function(btn){
         var view=this.getLoginformview();
+
+        var actionSheet = Ext.create('Ext.ActionSheet', {
+            items: [
+                {
+                    text: '我是工厂',
+                    handler: function () {
+                        localStorage.isfactory="factory";
+                        actionSheet.hide();
+                        //me.autoLoginMain();
+                    }
+                    //ui  : 'decline'
+                },
+                {
+                    text: '我是买家',
+                    handler: function () {
+                        localStorage.isfactory="client";
+                        actionSheet.hide();
+                        me.autoLoginMain();
+                    }
+                }
+
+            ]
+        });
+        Ext.Viewport.add(actionSheet);
+        actionSheet.show();
+
         var registerView=Ext.create('SpinningFactory.view.register.Register');
         view.push(registerView);
     }
