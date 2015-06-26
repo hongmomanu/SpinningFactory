@@ -49,6 +49,10 @@ Ext.define('SpinningFactory.view.office.EditGoodsForm', {
                                 required:true,
                                 clearIcon:true,
                                 labelAlign:'left'
+                            },{
+                                name:'gid',
+                                xtype:'textfield',
+                                hidden:true
                             },
                             {
                                 xtype:'textfield',

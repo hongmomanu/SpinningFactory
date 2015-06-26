@@ -96,10 +96,13 @@ Ext.define('SpinningFactory.controller.Office', {
 
         //alert(1);
         console.log(record);
+        var data=record.data;
         if(!this.altergoodlView){
             this.altergoodlView=Ext.create('SpinningFactory.view.office.EditGoodsForm');
         }
         //this.altergoodlView.setTitle(record.get('name'));
+        this.altergoodlView.pics=data.imgs;
+        this.altergoodlView.setValues(data);
         nav.push(this.altergoodlView);
     },
 
@@ -222,7 +225,8 @@ Ext.define('SpinningFactory.controller.Office', {
     shownmanagerpicview:function(btn){
 
         var me=this;
-        var picform=this.getNewgoodsformview();
+        //var picform=this.getNewgoodsformview();
+        var picform=btn.up('formpanel');
         if(!picform.pics)picform.pics=['files/14296004957076511'];
         var showpicsview=Ext.create('SpinningFactory.view.office.GoodsPicsView');
 
@@ -252,9 +256,6 @@ Ext.define('SpinningFactory.controller.Office', {
 
 
         this.overlay = Ext.Viewport.add(showpicsview);
-
-
-
         this.overlay.showBy(btn);
 
 
