@@ -23,9 +23,8 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
 
                 scope: this,
                 handler: function() {
-                    var mainview=Ext.Viewport.down('navigationview');
-                    mainview=mainview?mainview:Ext.Viewport.down('tabpanel');
-                    console.log(mainview);
+                    var mainview=Ext.Viewport.down('officemain');
+                    mainview=mainview?mainview:Ext.Viewport.down('bossmain');
                     mainview.fireEvent('logoutmenu', mainview);
                 }
             },

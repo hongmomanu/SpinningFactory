@@ -2,58 +2,193 @@
  * Created by jack on 15-03-27.
  * main Controller used by Terminal app
  */
-Ext.define('SpinningFactory.controller.Login', {
+Ext.define('SpinningFactory.controller.Client', {
     extend: 'Ext.app.Controller',
-
-
     config: {
-
         views: [
-         'login.Login'
+
+            'client.ClientMain',
+            'client.GoodsViewList'
+
         ],
         models: [
-            'login.Login'
+            'client.GoodView'
         ],
         stores: [
+            'client.GoodViews'
 
-            //'customers.customers',
-
-            //'Contacts'
         ],
         control: {
+            clientmainview:{
+                initialize:'initFunc',
+                returnhomemenu:'returnhomemenuFunc',
+                showqrcode:'showqrcodeFunc',
+                logoutmenu:'logoutShow',
+                showabout:'showaboutFunc',
+                loginmenu:'loginShow'
 
-            customerloginbtn:{
 
-                tap:'docustomerLogin'
             },
-            newcustomerbtn:{
+            goodsviewlistview:{
 
-                tap:'doNewcustomer'
-            },
-            loginformview:{
-                initialize:'initFunc'
-
+                viewshow:'viewinit',
+                itemtap: 'onGoodsSelect'
             }
 
         },
         refs: {
+            officemainview: 'clientmain',
+            clientgoodsviewlistview: 'clientgoodsviewlist',
 
-            customerloginbtn: 'loginform #customerlogin',
-            newcustomerbtn: 'loginform #newcustomer',
-            loginformcontent:'loginform #loginformcontent',
-            loginformview: 'loginform'
+            navView:'clientmain #villagenavigationview'
         }
     },
     // app init func
 
     initFunc:function (item,e){
-        this.autoLogin();
-        this.makeLocationListener();
-        this.makeBackGroundListener();
-        this.pauseListener();
-        this.resumeListener();
-        this.backbuttonListener();
-        this.initNotificationClick(e);
+
+
+        item.getTabBar().add({
+            //xtype: 'button',
+            xtype:'mainmenu',
+            ui: 'confirm',
+            iconCls:'fa fa-cog fa-color-blue'
+
+        });
+
+    },
+
+
+    onGoodsSelect:function(list, index, node, record){
+
+        var nav=this.getNavView();
+        var me=this;
+
+        //alert(1);
+        console.log(record);
+        var data=record.data;
+        data.gid=data._id;
+        if(!this.altergoodlView){
+            this.altergoodlView=Ext.create('SpinningFactory.view.office.EditGoodsForm');
+        }
+        //this.altergoodlView.setTitle(record.get('name'));
+        this.altergoodlView.pics=data.imgs.split(",");
+        this.altergoodlView.setValues(data);
+        nav.push(this.altergoodlView);
+    },
+
+    altergood:function(btn){
+
+        var formpanel=btn.up('formpanel');
+        CommonUtil.addMessage();
+        var me=this;
+        var valid = CommonUtil.valid('SpinningFactory.model.office.GoodView', formpanel);
+        if(valid){
+            var successFunc = function (response, action) {
+                var res=JSON.parse(response.responseText);
+                if(res.success){
+                    me.getNavView().pop();
+                    var store=me.getGoodsviewlistview().getStore();
+                    store.load();
+                }else{
+                    Ext.Msg.alert('添加失败', '修改货物出错', Ext.emptyFn);
+                }
+
+            };
+            var failFunc=function(response, action){
+                Ext.Msg.alert('登录失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+
+            }
+            var url="factory/altergoodsbyfid";
+            var params=formpanel.getValues();
+            params.imgs=formpanel.pics.join(",");
+            params.factoryid=Globle_Variable.factoryinfo._id;
+            //params.gid=Globle_Variable.factoryinfo._id;
+            CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+        }
+
+    },
+    savenewgood:function(btn){
+        var formpanel=btn.up('formpanel');
+        CommonUtil.addMessage();
+        var me=this;
+        var valid = CommonUtil.valid('SpinningFactory.model.office.GoodView', formpanel);
+        if(valid){
+            var successFunc = function (response, action) {
+                var res=JSON.parse(response.responseText);
+                if(res.success){
+                    me.getNavView().pop();
+                    var store=me.getGoodsviewlistview().getStore();
+                    store.load();
+                }else{
+                    Ext.Msg.alert('添加失败', '添加货物出错', Ext.emptyFn);
+                }
+
+            };
+            var failFunc=function(response, action){
+                Ext.Msg.alert('登录失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+
+            }
+            var url="factory/addgoodsbyfid";
+            var params=formpanel.getValues();
+            if(!formpanel.pics)formpanel.pics='';
+            params.imgs=formpanel.pics.join(",");
+            params.factoryid=Globle_Variable.factoryinfo._id;
+            CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+        }
+
+
+    },
+
+    shownewgoodsform:function(btn){
+
+        if(!this.goodsform)this.goodsform=Ext.create('SpinningFactory.view.office.NewGoodsForm');
+        this.getNavView().push(this.goodsform);
+
+    },
+    viewinit:function(view){
+        var store=view.getStore();
+        var seachinput=view.down('#seachinput');
+        store.load({
+            //define the parameters of the store:
+            params:{
+                keyword : seachinput.getValue()/*,
+                start:0,
+                limit:10*/
+            },
+            scope: this,
+            callback : function(records, operation, success) {
+
+            }});
+    },
+    returnhomemenuFunc:function(){
+        Ext.Viewport.hideMenu('right');
+        var nav=this.getOfficemainview();
+        nav.setActiveItem(0);
+
+    },
+    logoutShow:function(){
+
+
+        Ext.Msg.confirm( "提示", "是否确认退出", function(btn){
+            if(btn==='yes'){
+                Globle_Variable.user=null;
+                localStorage.user="";
+                var menu=Ext.Viewport.down('mainmenu');
+                menu.getMenuItems()[0].hidden=false;
+                menu.getMenuItems()[1].hidden=true;
+                Ext.Viewport.hideMenu('right');
+                Ext.Msg.alert("提示信息","退出成功!",function(){
+                    window.location.reload();
+                });
+            }else{
+
+            }
+        })
+
+
 
     },
 
@@ -150,14 +285,14 @@ Ext.define('SpinningFactory.controller.Login', {
 
     },
     backbuttonListener:function(){
-       /* document.addEventListener("backbutton", onBackKeyDown, false);
+        document.addEventListener("backbutton", onBackKeyDown, false);
         function onBackKeyDown() {
             navigator.Backbutton.goHome(function() {
                 //console.log('success')
             }, function() {
                 //console.log('fail')
             });
-        }*/
+        }
 
     },
 
@@ -201,17 +336,9 @@ Ext.define('SpinningFactory.controller.Login', {
                     var user=res.user;
                     Ext.Viewport.removeAt(0);
                     localStorage.user=JSON.stringify(res.user);
-                    localStorage.factoryinfo=JSON.stringify(res.factoryinfo);
                     Globle_Variable.user=res.user;
-                    Globle_Variable.factoryinfo=res.factoryinfo;
-
                     if(user.usertype===0){
                         Ext.Viewport.add(Ext.create('SpinningFactory.view.boss.BossMain'));
-
-                    }else if(user.usertype===1){
-                        Ext.Viewport.add(Ext.create('SpinningFactory.view.office.OfficeMain'));
-                    }else if(user.usertype===3){
-                        Ext.Viewport.add(Ext.create('SpinningFactory.view.client.ClientMain'));
                     }
                     /*Ext.Viewport.removeAt(0);
                     Ext.Viewport.add(Ext.create('SpinningFactory.view.Main'));
@@ -232,7 +359,7 @@ Ext.define('SpinningFactory.controller.Login', {
                 Ext.Msg.alert('登录失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
 
             }
-            var url="user/factorylogin";
+            var url="user/customerlogin";
             var params=formpanel.getValues();
             CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
 
