@@ -4,7 +4,7 @@ Ext.define('SpinningFactory.model.factory.Factory', {
         fields: [
             '_id',
             'factoryinfo',
-            'userinfo'
+            'factoryuser'
         ]
     }
 });

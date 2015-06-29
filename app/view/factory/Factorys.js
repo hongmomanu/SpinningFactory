@@ -11,7 +11,7 @@ Ext.define('SpinningFactory.view.factory.Factorys', {
         scrollToTopOnRefresh :true,
         grouped:true,
         //indexBar:true,
-        store: 'factorys',
+        store: 'Factorys',
 
         listeners: {
             painted: function(){
@@ -23,7 +23,8 @@ Ext.define('SpinningFactory.view.factory.Factorys', {
         items: [],
         itemTpl: [
             '<div class="headshot">',
-            '{userinfo.sectionname} {userinfo.realname}',
+            '<div style="font-size: larger;color: #0398ff">{factoryinfo.factoryname}</div> ',
+            '<div style="color: #3889b7">{factoryuser.realname}</div>',
             '</div>'
         ].join('')
     }
