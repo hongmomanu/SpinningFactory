@@ -95,13 +95,16 @@ Ext.define('SpinningFactory.controller.Client', {
                 for(var i=0;i<data.length;i++){
                     if(data[i]._id==res.factoryuser._id){
                         flag=true;
+                        messagelist.select(i);
+                        messagelist.fireEvent('itemtap',listView,i,messagelist.getActiveItem(),store.getAt(i));
                         break;
                     }
 
                 }
                 if(!flag){
-                    console.log(res);
                     store.add(res);
+                    var index=data.length-1;
+                    messagelist.fireEvent('itemtap',listView,index,messagelist.getActiveItem(),store.getAt(index));
 
                 }
 

@@ -865,7 +865,6 @@ Ext.define('SpinningFactory.controller.Factory', {
             selectview.mydata=Globle_Variable.user;
             this.getMessagenavview().push(selectview);
 
-
         }
     },
     onfactorySelect: function (list, index, node, record) {
