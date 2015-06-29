@@ -6,18 +6,26 @@ Ext.define('SpinningFactory.controller.Factory', {
     extend: 'Ext.app.Controller',
     config: {
         views: [
-            'factory.Factorys'/*,
+            'factory.Factorys',
+            'factory.MessageList'
+            /*,
             'factory.factorysMessage'*/
 
         ],
         models: [
-            'factory.Factory'/*,
+            'factory.Factory',
+            'factory.Message'
+
+            /*,
             'factory.factoryMessage'*/
 
         ],
         stores: [
 
-            'factory.Factorys'/*,
+            'factory.Factorys',
+            'factory.Messages'
+
+            /*,
             'factory.factoryMessages'*/
 
         ],
