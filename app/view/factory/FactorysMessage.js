@@ -1,4 +1,4 @@
-Ext.define('SpinningFactory.view.factory.factorysMessage', {
+Ext.define('SpinningFactory.view.factory.FactorysMessage', {
     extend: 'Ext.List',
     xtype: 'factorymessagelist',
     initialize : function() {

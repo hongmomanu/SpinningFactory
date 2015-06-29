@@ -4,6 +4,7 @@ Ext.define('SpinningFactory.model.factory.Message', {
         fields: [
             '_id',
             'factoryinfo',
+            'userinfo',
             'factoryuser'
         ]
     }

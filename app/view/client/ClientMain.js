@@ -68,25 +68,26 @@ Ext.define('SpinningFactory.view.client.ClientMain', {
             {
                 title: '我的消息',
                 iconCls: 'fa fa-weixin',
-
+                layout:'fit',
                 items: [
-                    {
-                        docked: 'top',
-                        xtype: 'titlebar',
-                        layout:'fit',
-                        title: '我的消息'/*,
-                        items:[
 
+                    {
+                        xtype: 'navigationview',
+                        autoDestroy: false,
+                        scrollable: false,
+                        //fullscreen: true,
+                        itemId: 'messagenavigationview',
+                        //inside this first item we are going to add a button
+                        items: [
                             {
-                                xtype:'mainmenu',
-                                iconCls:'fa fa-cog'
+                                xtype: 'messagelist',
+                                title: '我的消息'
                             }
-                        ]*/
-                    },
+                        ]
 
-                    {
-                        xtype: 'messagelist'
+
                     }
+
                 ]
             }
         ]

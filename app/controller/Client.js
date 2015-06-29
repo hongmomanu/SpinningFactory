@@ -51,6 +51,7 @@ Ext.define('SpinningFactory.controller.Client', {
             goodsdetailview:'goodsdetail',
             goodsdetailchatbtn:'goodsdetail #chat',
             managerpicbtn: 'clientmain #managerpic',
+            messagelist: 'clientmain #messagelist',
 
             navView:'clientmain #villagenavigationview'
         }
@@ -78,12 +79,33 @@ Ext.define('SpinningFactory.controller.Client', {
         var formvalues=form.getValues();
         var factoryid=formvalues.factoryid;
         var userid=Globle_Variable.user._id;
+        var me=this;
         var successFunc = function (response, action) {
 
             var res=JSON.parse(response.responseText);
             if(res.success){
                 //Ext.Msg.alert('成功', '推荐医生成功', Ext.emptyFn);
                 console.log(res);
+                testobj=me;
+                me.getClientmainview().setActiveItem(2);
+                var messagelist=me.getMessagelist();
+                var store=messagelist.getStore();
+                var data=store.data.items;
+                var flag=false;
+                for(var i=0;i<data.length;i++){
+                    if(data[i]._id==res.factoryuser._id){
+                        flag=true;
+                        break;
+                    }
+
+                }
+                if(!flag){
+                    console.log(res);
+                    store.add(res);
+
+                }
+
+
 
 
 

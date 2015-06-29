@@ -23,7 +23,8 @@ Ext.define('SpinningFactory.view.factory.MessageList', {
         items: [],
         itemTpl: [
             '<div class="headshot">',
-            '{factoryinfo.factoryname} {factoryuser.realname}',
+            '<div style="font-size: larger;color: #0398ff">{factoryinfo.factoryname}</div> ',
+            '<div style="color: #3889b7">{factoryuser.realname}</div>',
             '</div>'
         ].join('')
     }

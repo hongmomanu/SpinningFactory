@@ -7,26 +7,21 @@ Ext.define('SpinningFactory.controller.Factory', {
     config: {
         views: [
             'factory.Factorys',
-            'factory.MessageList'
-            /*,
-            'factory.factorysMessage'*/
+            'factory.MessageList',
+            'factory.factorysMessage'
 
         ],
         models: [
             'factory.Factory',
-            'factory.Message'
-
-            /*,
-            'factory.factoryMessage'*/
+            'factory.Message',
+            'factory.factoryMessage'
 
         ],
         stores: [
 
             'factory.Factorys',
-            'factory.Messages'
-
-            /*,
-            'factory.factoryMessages'*/
+            'factory.Messages',
+            'factory.factoryMessages'
 
         ],
         maxPosition: 0,
@@ -58,6 +53,11 @@ Ext.define('SpinningFactory.controller.Factory', {
                 itemtaphold:'onfactoryHold',
                 viewshow:'listShow'
             },
+            messagelistview: {
+                itemtap: 'onMessageListSelect',
+                itemtaphold:'onMessageListHold'/*,
+                viewshow:'listShow'*/
+            },
             sendmessagebtn:{
                 tap:'sendMessageControler'
             }
@@ -69,13 +69,15 @@ Ext.define('SpinningFactory.controller.Factory', {
         },
         refs: {
             factorysview: 'factorylist',
+            messagelistview: 'messagelist',
             mainview: 'main',
             factorymessagelistview:'factorymessagelist',
             messagecontent: '#factorysnavigationview #messagecontent',
             choosepicbtn: '#factorysnavigationview #choosepic',
             sendmessagebtn: '#factorysnavigationview #sendmessage',
             customersview: '#customersnavigationview #customerlist',
-            factorysnavview:'main #factorysnavigationview'
+            factorysnavview:'main #factorysnavigationview',
+            messagenavview:'clientmain #messagenavigationview'
         }
     },
     voicetouchbegin:function(item){
@@ -848,6 +850,24 @@ Ext.define('SpinningFactory.controller.Factory', {
             }});
     },
     messageView:{},
+
+    onMessageListSelect:function(list,index,node,record){
+        if (!list.lastTapHold || ( new Date()-list.lastTapHold  > 1000)) {
+            console.log(record);
+
+            if (!this.messageView[record.get('_id')]){
+                this.messageView[record.get('_id')] =Ext.create('SpinningFactory.view.factory.FactorysMessage');
+
+            }
+            var selectview=this.messageView[record.get('_id')];
+            selectview.setTitle(record.get('userinfo').realname);
+            selectview.data=record;
+            selectview.mydata=Globle_Variable.user;
+            this.getMessagenavview().push(selectview);
+
+
+        }
+    },
     onfactorySelect: function (list, index, node, record) {
 
         /*if (!list.lastTapHold || ( new Date()-list.lastTapHold  > 1000)) {
