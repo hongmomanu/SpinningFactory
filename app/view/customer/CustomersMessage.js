@@ -1,10 +1,10 @@
-Ext.define('SpinningFactory.view.customer.customersMessage', {
+Ext.define('SpinningFactory.view.customer.CustomersMessage', {
     extend: 'Ext.List',
     xtype: 'customermessagelist',
 
     initialize : function() {
         var me = this;
-        me.setStore(Ext.create('SpinningFactory.store.customer.customerMessages'));
+        me.setStore(Ext.create('SpinningFactory.store.customer.CustomerMessages'));
         var scroller = this.getScrollable().getScroller();
         scroller.on('refresh', this.scrollToBottom, this);
         me.callParent(arguments);

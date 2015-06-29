@@ -36,12 +36,17 @@ Ext.define('SpinningFactory.controller.Boss', {
             customersbtn:{
                 tap:'showcustomers'
 
+            },
+            mymessagesbtn:{
+                tap:'showmymessages'
+
             }
 
         },
         refs: {
             bossmainview: 'bossmain',
-            customersbtn: 'bossmain #mycustomers'
+            customersbtn: 'bossmain #mycustomers',
+            mymessagesbtn: 'bossmain #mymessages'
 
         }
     },
@@ -58,22 +63,100 @@ Ext.define('SpinningFactory.controller.Boss', {
 
     },
     showcustomers:function(btn){
-        alert(2)
 
         if(!this.customersView){
             //this.reserveView=Ext.create('AffiliatedHospital.view.outpatient.ReserveView');
-            this.customersView=Ext.create('AffiliatedHospital.view.customer.Customers');
+            this.customersView=Ext.create('SpinningFactory.view.customer.Customers');
 
         }
         var store=this.customersView.getStore();
         store.load({
             params:{
-                id:Globle_Variable.user._id
+                userid:Globle_Variable.user._id
             }
         });
 
         this.getBossmainview().push(this.customersView);
     },
+
+    showmymessages:function(){
+
+        if(!this.mymessageView){
+            //this.reserveView=Ext.create('AffiliatedHospital.view.outpatient.ReserveView');
+            this.mymessageView=Ext.create('SpinningFactory.view.factory.MessageList');
+
+        }
+        testobjs=this.getBossmainview();
+
+
+        if(this.getBossmainview().getInnerItems().length<2){
+            this.getBossmainview().push(this.mymessageView);
+        }
+
+
+
+    },
+
+
+
+    showngoodsdetailchatview:function(btn){
+
+
+        var form=btn.up('formpanel');
+        var formvalues=form.getValues();
+        var factoryid=formvalues.factoryid;
+        var userid=Globle_Variable.user._id;
+        var me=this;
+        var successFunc = function (response, action) {
+
+            var res=JSON.parse(response.responseText);
+            if(res.success){
+                //Ext.Msg.alert('成功', '推荐医生成功', Ext.emptyFn);
+                console.log(res);
+                testobj=me;
+                me.getClientmainview().setActiveItem(2);
+                var messagelist=me.getMessagelist();
+                var store=messagelist.getStore();
+                var data=store.data.items;
+                var flag=false;
+                for(var i=0;i<data.length;i++){
+                    if(data[i]._id==res.factoryuser._id){
+                        flag=true;
+                        messagelist.select(i);
+                        messagelist.fireEvent('itemtap',messagelist,i,messagelist.getActiveItem(),store.getAt(i));
+                        break;
+                    }
+
+                }
+                if(!flag){
+                    store.add(res);
+                    var index=data.length-1;
+                    messagelist.fireEvent('itemtap',messagelist,index,messagelist.getActiveItem(),store.getAt(index));
+
+                }
+
+
+
+
+
+            }else{
+                Ext.Msg.alert('提示', res.message, Ext.emptyFn);
+            }
+
+        };
+        var failFunc=function(response, action){
+            Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+            //Ext.Msg.alert('test', 'test', Ext.emptyFn);
+        }
+        var url="factory/getfactoryinfobyid";
+
+        var params={
+            factoryid:factoryid
+        };
+        CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+    },
+
     logoutShow:function(){
 
 
@@ -120,6 +203,7 @@ Ext.define('SpinningFactory.controller.Boss', {
 
     hideloadingimg:function(data){
         //console.log(imgid);
+        var me=this;
         var factoryController=me.getApplication().getController('Factory');
 
         var store=factoryController.messageView[data["toid"]].getStore();
@@ -130,7 +214,9 @@ Ext.define('SpinningFactory.controller.Boss', {
                 a.set('issend','none');
             }
         });
-        factoryController.getMessagecontent().setValue('');
+        testobj=factoryController;
+        if(factoryController.getMessagecontent())factoryController.getMessagecontent().setValue('');
+        if(factoryController.getMessagecontentboss())factoryController.getMessagecontentboss().setValue('');
     },
 
     websocketInit:function(){

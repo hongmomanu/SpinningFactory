@@ -11,7 +11,7 @@ Ext.define('SpinningFactory.store.customer.Customers', {
         },*/
         proxy: {
             type: 'ajax',
-            url: Globle_Variable.serverurl+"factory/getmycustomersbyid"
+            url: Globle_Variable.serverurl+"customer/getmycustomersbyid"
         }
     }
 });

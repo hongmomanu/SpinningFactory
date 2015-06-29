@@ -90,10 +90,12 @@ Ext.define('SpinningFactory.controller.Client', {
                 me.getClientmainview().setActiveItem(2);
                 var messagelist=me.getMessagelist();
                 var store=messagelist.getStore();
+
                 var data=store.data.items;
                 var flag=false;
                 for(var i=0;i<data.length;i++){
-                    if(data[i]._id==res.factoryuser._id){
+
+                    if(data[i].data.fromid==res.factoryuser._id){
                         flag=true;
                         messagelist.select(i);
                         messagelist.fireEvent('itemtap',messagelist,i,messagelist.getActiveItem(),store.getAt(i));
@@ -102,6 +104,7 @@ Ext.define('SpinningFactory.controller.Client', {
 
                 }
                 if(!flag){
+                    res.fromid=res.factoryuser._id;
                     store.add(res);
                     var index=data.length-1;
                     messagelist.fireEvent('itemtap',messagelist,index,messagelist.getActiveItem(),store.getAt(index));
@@ -348,7 +351,7 @@ Ext.define('SpinningFactory.controller.Client', {
     },
     returnhomemenuFunc:function(){
         Ext.Viewport.hideMenu('right');
-        var nav=this.getOfficemainview();
+        var nav=this.getClientmainview();
         nav.setActiveItem(0);
 
     },

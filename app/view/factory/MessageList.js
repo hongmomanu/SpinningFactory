@@ -3,7 +3,7 @@ Ext.define('SpinningFactory.view.factory.MessageList', {
     xtype: 'messagelist',
     alias: 'widget.MessageList',
     config: {
-        title: '我的工厂',
+        title: '我的消息',
         //cls: 'x-contacts',
         variableHeights: true,
         itemId:'messagelist',

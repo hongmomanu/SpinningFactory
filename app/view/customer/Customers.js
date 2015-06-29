@@ -10,6 +10,7 @@ Ext.define('SpinningFactory.view.customer.Customers', {
         scrollToTopOnRefresh :true,
         grouped:true,
         //indexBar:true,
+        title:'我的客户',
         store: 'Customers',
 
         listeners: {

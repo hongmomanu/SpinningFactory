@@ -15,6 +15,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
         centered: true,
         autoDestroy: false,
         //scrollable: 'vertical',
+        title:'网上纺织',
         scrollable:false,
 
         height: '100%',
@@ -161,13 +162,20 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
                                             itemId:'hospitalinfo',
                                             //icon : "resources/icons/muru.png",
                                             iconCls : "fa fa-user-plus fa-color-blue"
-                                        }, {
+                                        }, /*{
                                             xtype : 'button',
                                             text : '行业咨询',
                                             iconAlign : 'top',
                                             itemId:'hospitalnews',
                                             //icon : "resources/icons/shuijiao.png",
                                             iconCls : "fa fa-newspaper-o fa-color-blue"
+                                        },*/{
+                                            xtype : 'button',
+                                            text : '我的消息',
+                                            iconAlign : 'top',
+                                            itemId:'mymessages',
+                                            //icon : "resources/icons/shuijiao.png",
+                                            iconCls : "fa fa-weixin fa-color-blue"
                                         }, {
                                             xtype : 'button',
                                             text : '潜在客户',

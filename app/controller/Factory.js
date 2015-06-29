@@ -60,9 +60,15 @@ Ext.define('SpinningFactory.controller.Factory', {
             },
             sendmessagebtn:{
                 tap:'sendMessageControler'
+            },
+            sendmessagebtnboss:{
+                tap:'sendMessageControlerboss'
             }
             ,
             choosepicbtn:{
+                tap:'doImgCLick'
+            },
+            choosepicbtnboss:{
                 tap:'doImgCLick'
             }
 
@@ -70,17 +76,23 @@ Ext.define('SpinningFactory.controller.Factory', {
         refs: {
             factorysview: 'factorylist',
             messagelistview: 'messagelist',
-            mainview: 'main',
+            clientmainview: 'clientmain',
+            officemainview: 'officemain',
+            bossmainview: 'bossmain',
             factorymessagelistview:'factorymessagelist',
             //messagecontent: '#factorysnavigationview #messagecontent',
             messagecontent: '#messagenavigationview #messagecontent',
+            messagecontentboss: 'bossmain #messagecontent',
             //choosepicbtn: '#factorysnavigationview #choosepic',
             choosepicbtn: '#messagenavigationview #choosepic',
+            choosepicbtnboss: 'bossmain #choosepic',
             //sendmessagebtn: '#factorysnavigationview #sendmessage',
             sendmessagebtn: '#messagenavigationview #sendmessage',
+            sendmessagebtnboss: 'bossmain #sendmessage',
             customersview: '#customersnavigationview #customerlist',
             factorysnavview:'main #factorysnavigationview',
             messagenavview:'clientmain #messagenavigationview'
+
         }
     },
     voicetouchbegin:function(item){
@@ -488,6 +500,14 @@ Ext.define('SpinningFactory.controller.Factory', {
 
     sendMessageControler:function(btn){
         var me=this;
+        btn.fromtype=0;
+        me.applyforfactory(btn,Ext.bind(me.sendMessage, me));
+    },
+    sendMessageControlerboss:function(btn){
+        var me=this;
+
+        btn.fromtype=1;
+
         me.applyforfactory(btn,Ext.bind(me.sendMessage, me));
     },
     scrollMsgList:function(){
@@ -503,6 +523,8 @@ Ext.define('SpinningFactory.controller.Factory', {
         var me=this;
         //var content=Ext.String.trim(this.getMessagecontent().getValue());
         var message=btn.up('list').down('#messagecontent');
+        console.log(btn);
+        testobjs=btn;
         var content = Ext.String.trim(message.getValue());
 
         if((content&&content!='')||btn.isfile){
@@ -550,7 +572,7 @@ Ext.define('SpinningFactory.controller.Factory', {
                     socket.send(JSON.stringify({
                         type:"factorychat",
                         from:myinfo._id,
-                        fromtype:0,
+                        fromtype:btn.fromtype,
                         imgid:imgid,
                         ctype:btn.filetype,
                         to :toinfo.get("factoryuser")._id,
@@ -582,7 +604,7 @@ Ext.define('SpinningFactory.controller.Factory', {
                 socket.send(JSON.stringify({
                     type:"factorychat",
                     from:myinfo._id,
-                    fromtype:0,
+                    fromtype:btn.fromtype,
                     imgid:imgid,
                     to :toinfo.get("factoryuser")._id,
                     content: content
@@ -794,7 +816,8 @@ Ext.define('SpinningFactory.controller.Factory', {
             selectview.setTitle(record.get('factoryuser').realname);
             selectview.data=record;
             selectview.mydata=Globle_Variable.user;
-            this.getMessagenavview().push(selectview);
+            if(this.getMessagenavview())this.getMessagenavview().push(selectview);
+            else if(this.getBossmainview())this.getBossmainview().push(selectview);
 
         }
     },
@@ -889,31 +912,73 @@ Ext.define('SpinningFactory.controller.Factory', {
     },
 
     messageshowfinal:function(message){
-        var messagestore=null;
-        var factoryController=this.getApplication().getController('factory');
-        var customerController=this.getApplication().getController('customer');
-
-        if(message.fromtype==0){
-            messagestore=customerController.messageView[message.fromid].getStore();
-        }else{
+        var factoryController=this.getApplication().getController('Factory');
             //Ext.Msg.alert('clicked event',JSON.stringify(message));
-            messagestore=factoryController.messageView[message.fromid].getStore();
-        }
-        //Ext.Msg.alert('store added', 'is clicked');
+        var messagestore=factoryController.messageView[message.fromid].getStore();
+
         messagestore.add(Ext.apply({local: false}, message));
 
     },
     receiveMessageShow:function(message,e){
         var me=this;
+        //console.log(message);
         try{
 
-            var mainView=this.getMainview();
             var listView=null;
             var messagestore=null;
-            console.log("message");
-            console.log(message);
 
-            if(message.fromtype==0){
+            if(me.getBossmainview()){
+
+                /*var bossontroller=this.getApplication().getController('Boss');
+                bossontroller.returnhomemenuFunc();*/
+
+                me.getBossmainview().down('#mymessages').fireEvent('tap');
+                //this.getBossmainview().fireEvent('itemtap')
+
+
+            }else if(me.getClientmainview()){
+                me.getClientmainview().setActiveItem(2);
+
+
+
+
+
+            }
+
+            var messagelist=me.getMessagelistview();
+            var store=messagelist.getStore();
+            var data=store.data.items;
+            var flag=false;
+            for(var i=0;i<data.length;i++){
+                if(data[i].data.fromid==message.fromid){
+                    flag=true;
+                    messagelist.select(i);
+                    messagelist.fireEvent('itemtap',messagelist,i,messagelist.getActiveItem(),store.getAt(i));
+                    break;
+                }
+
+            }
+            if(!flag){
+                message.factoryuser=message.userinfo;
+                message.factoryinfo=message.userinfo;
+                store.add(message);
+                testobj=store;
+                var index=data.length-1;
+                messagelist.fireEvent('itemtap',messagelist,index,messagelist.getActiveItem(),store.getAt(index));
+
+            }
+        }catch(err){
+
+        }finally{
+
+            me.messageshowfinal(message);
+        }
+
+
+
+
+
+            /*if(message.fromtype==0){
 
                 mainView.setActiveItem(0);
                 listView=this.getcustomersview();
@@ -974,14 +1039,9 @@ Ext.define('SpinningFactory.controller.Factory', {
                 listView.fireEvent('itemtap',listView,index,listView.getActiveItem(),store.getAt(index),e);
 
             }
-            //alert(1);
+            //alert(1);*/
 
-        }catch(err) {
 
-        }finally{
-            this.messageshowfinal(message);
-
-        }
     },
     filterReceiveIndex:function(data,store){
         var listdata=store.data.items;
