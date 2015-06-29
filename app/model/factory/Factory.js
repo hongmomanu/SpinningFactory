@@ -1,9 +1,9 @@
-Ext.define('SpinningFactory.model.factory.factory', {
+Ext.define('SpinningFactory.model.factory.Factory', {
     extend: 'Ext.data.Model',
     config: {
         fields: [
-            'loc',
             '_id',
+            'factoryinfo',
             'userinfo'
         ]
     }

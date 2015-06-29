@@ -18,25 +18,23 @@ Ext.define('SpinningFactory.view.client.ClientMain', {
 
                 styleHtmlContent: true,
                 scrollable: true,
+                layout:'fit',
 
-               items: {
-                    docked: 'top',
-                    xtype: 'titlebar',
-                    title: '我的工厂'/*,
-                    items:[
+               items: [
+                   {
+                       docked: 'top',
+                       xtype: 'titlebar',
+                       title: '我的工厂'
+                   },
 
-                        {
-                            xtype:'mainmenu',
-                            iconCls:'fa fa-cog'
-                        }
-                    ]*/
-                },
+                   {
+                       xtype: 'factorylist'
 
-                html: [
-                    "You've just generated a new Sencha Touch 2 project. What you're looking at right now is the ",
-                    "contents of <a target='_blank' href=\"app/view/Main.js\">app/view/Main.js</a> - edit that file ",
-                    "and refresh to change what's rendered here."
-                ].join("")
+                   }
+
+               ]
+
+
             },
             {
                 title: '查找商品',

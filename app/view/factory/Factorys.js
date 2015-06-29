@@ -1,9 +1,9 @@
-Ext.define('SpinningFactory.view.factory.factorys', {
+Ext.define('SpinningFactory.view.factory.Factorys', {
     extend: 'Ext.List',
     xtype: 'factorys',
-    alias: 'widget.factorys',
+    alias: 'widget.factorylist',
     config: {
-        //title: '医生圈',
+        title: '我的工厂',
         //cls: 'x-contacts',
         variableHeights: true,
         itemId:'factorylist',
