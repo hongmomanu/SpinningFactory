@@ -1,4 +1,4 @@
-Ext.define('SpinningFactory.model.factory.factoryMessage', {
+Ext.define('SpinningFactory.model.factory.FactoryMessage', {
     extend: 'Ext.data.Model',
     config: {
         fields: [

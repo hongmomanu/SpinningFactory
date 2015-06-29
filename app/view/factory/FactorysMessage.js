@@ -3,7 +3,7 @@ Ext.define('SpinningFactory.view.factory.FactorysMessage', {
     xtype: 'factorymessagelist',
     initialize : function() {
         var me = this;
-        me.setStore(Ext.create('SpinningFactory.store.factory.factoryMessages'));
+        me.setStore(Ext.create('SpinningFactory.store.factory.FactoryMessages'));
         var scroller = this.getScrollable().getScroller();
         scroller.on('refresh', this.scrollToBottom, this);
         me.callParent(arguments);

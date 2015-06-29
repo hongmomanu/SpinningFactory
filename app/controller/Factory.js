@@ -8,20 +8,20 @@ Ext.define('SpinningFactory.controller.Factory', {
         views: [
             'factory.Factorys',
             'factory.MessageList',
-            'factory.factorysMessage'
+            'factory.FactorysMessage'
 
         ],
         models: [
             'factory.Factory',
             'factory.Message',
-            'factory.factoryMessage'
+            'factory.FactoryMessage'
 
         ],
         stores: [
 
             'factory.Factorys',
             'factory.Messages',
-            'factory.factoryMessages'
+            'factory.FactoryMessages'
 
         ],
         maxPosition: 0,
@@ -860,7 +860,7 @@ Ext.define('SpinningFactory.controller.Factory', {
 
             }
             var selectview=this.messageView[record.get('_id')];
-            selectview.setTitle(record.get('userinfo').realname);
+            selectview.setTitle(record.get('factoryuser').realname);
             selectview.data=record;
             selectview.mydata=Globle_Variable.user;
             this.getMessagenavview().push(selectview);
