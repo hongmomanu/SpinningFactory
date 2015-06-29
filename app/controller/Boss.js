@@ -63,11 +63,16 @@ Ext.define('SpinningFactory.controller.Boss', {
         if(!this.customersView){
             //this.reserveView=Ext.create('AffiliatedHospital.view.outpatient.ReserveView');
             this.customersView=Ext.create('AffiliatedHospital.view.customer.Customers');
-            var store=this.possibleIllView.down('possibleilllist').getStore();
-            store.load();
-        }
 
-        this.getNav().push(this.possibleIllView);
+        }
+        var store=this.customersView.getStore();
+        store.load({
+            params:{
+                id:Globle_Variable.user._id
+            }
+        });
+
+        this.getBossmainview().push(this.customersView);
     },
     logoutShow:function(){
 

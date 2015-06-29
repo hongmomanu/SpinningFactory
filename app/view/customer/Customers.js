@@ -1,7 +1,7 @@
-Ext.define('SpinningFactory.view.customer.customers', {
+Ext.define('SpinningFactory.view.customer.Customers', {
     extend: 'Ext.List',
     xtype: 'customers',
-    alias: 'widget.customers',
+    alias: 'widget.Customers',
     config: {
 
         variableHeights: true,
@@ -10,7 +10,7 @@ Ext.define('SpinningFactory.view.customer.customers', {
         scrollToTopOnRefresh :true,
         grouped:true,
         //indexBar:true,
-        store: 'customers',
+        store: 'Customers',
 
         listeners: {
             painted: function(){

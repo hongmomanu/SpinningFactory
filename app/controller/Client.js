@@ -245,8 +245,7 @@ Ext.define('SpinningFactory.controller.Client', {
         //console.log(imgid);
         var factoryController=this.getApplication().getController('Factory');
 
-        console.log(data);
-        testobj=factoryController;
+
         var store=factoryController.messageView[data["toid"]].getStore();
         //var store=Ext.getStore('PatientMessages');
         store.data.each(function(a){
