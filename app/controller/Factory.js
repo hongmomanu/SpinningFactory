@@ -835,14 +835,22 @@ Ext.define('SpinningFactory.controller.Factory', {
     onMainPush: function (view, item) {
         //this.getfactorysnavview().deselectAll();
     },
-    listShow:function(){
-        //this.initcustomerList();
-        //Ext.Msg.alert('侧额额', 'cess 说', Ext.emptyFn);
+    listShow:function(view){
+        var store=view.getStore();
+
+        store.load({
+            //define the parameters of the store:
+            params:{
+                customerid : Globle_Variable.user._id
+            },
+            scope: this,
+            callback : function(records, operation, success) {
+            }});
     },
     messageView:{},
     onfactorySelect: function (list, index, node, record) {
 
-        if (!list.lastTapHold || ( new Date()-list.lastTapHold  > 1000)) {
+        /*if (!list.lastTapHold || ( new Date()-list.lastTapHold  > 1000)) {
             console.log(record);
 
             if (!this.messageView[record.get('_id')]){
@@ -864,7 +872,7 @@ Ext.define('SpinningFactory.controller.Factory', {
 
 
         }
-
+*/
 
 
         // Push the show contact view into the navigation view

@@ -260,9 +260,14 @@ Ext.define('SpinningFactory.controller.Client', {
         store.setParams({keyword:seachinput.getValue()});
         store.load({
             //define the parameters of the store:
+            params:{
+                page:1
+            },
+
             scope: this,
             callback : function(records, operation, success) {
             }});
+        store.setParams({page:2});
     },
     returnhomemenuFunc:function(){
         Ext.Viewport.hideMenu('right');
