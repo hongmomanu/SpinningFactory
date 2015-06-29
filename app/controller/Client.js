@@ -96,7 +96,7 @@ Ext.define('SpinningFactory.controller.Client', {
                     if(data[i]._id==res.factoryuser._id){
                         flag=true;
                         messagelist.select(i);
-                        messagelist.fireEvent('itemtap',listView,i,messagelist.getActiveItem(),store.getAt(i));
+                        messagelist.fireEvent('itemtap',messagelist,i,messagelist.getActiveItem(),store.getAt(i));
                         break;
                     }
 
@@ -104,7 +104,7 @@ Ext.define('SpinningFactory.controller.Client', {
                 if(!flag){
                     store.add(res);
                     var index=data.length-1;
-                    messagelist.fireEvent('itemtap',listView,index,messagelist.getActiveItem(),store.getAt(index));
+                    messagelist.fireEvent('itemtap',messagelist,index,messagelist.getActiveItem(),store.getAt(index));
 
                 }
 
@@ -216,7 +216,7 @@ Ext.define('SpinningFactory.controller.Client', {
 
             }
             else if(data.type=='chatsuc'){
-                console.log('recommendconfirm');
+                console.log('chatsuc');
                 me.hideloadingimg(data.data)
 
             }
@@ -240,6 +240,22 @@ Ext.define('SpinningFactory.controller.Client', {
 
     },
 
+
+    hideloadingimg:function(data){
+        //console.log(imgid);
+        var factoryController=this.getApplication().getController('Factory');
+
+        console.log(data);
+        testobj=factoryController;
+        var store=factoryController.messageView[data["toid"]].getStore();
+        //var store=Ext.getStore('PatientMessages');
+        store.data.each(function(a){
+            if(a.get('imgid')==data["imgid"]){
+                a.set('issend','none');
+            }
+        });
+        factoryController.getMessagecontent().setValue('');
+    },
 
     onGoodsSelect:function(list, index, node, record){
 

@@ -437,5 +437,8 @@ body.x-desktop {
 .fa-color-blue{
 	color: #1572B3;
 }
+.x-tab .x-button-icon.picture:before,.x-button .x-button-icon.picture:before{position:absolute;top:0;right:0;bottom:0;left:0;text-align:center;font-family:"pictos";content:"P"}
+.x-tab .x-button-icon.voice:before,.x-button .x-button-icon.voice:before{position:absolute;top:0;right:0;bottom:0;left:0;text-align:center;font-family:"pictos";content:"m"}
+
 /*
 #1572B3*/

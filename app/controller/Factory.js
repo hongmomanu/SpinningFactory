@@ -72,9 +72,12 @@ Ext.define('SpinningFactory.controller.Factory', {
             messagelistview: 'messagelist',
             mainview: 'main',
             factorymessagelistview:'factorymessagelist',
-            messagecontent: '#factorysnavigationview #messagecontent',
-            choosepicbtn: '#factorysnavigationview #choosepic',
-            sendmessagebtn: '#factorysnavigationview #sendmessage',
+            //messagecontent: '#factorysnavigationview #messagecontent',
+            messagecontent: '#messagenavigationview #messagecontent',
+            //choosepicbtn: '#factorysnavigationview #choosepic',
+            choosepicbtn: '#messagenavigationview #choosepic',
+            //sendmessagebtn: '#factorysnavigationview #sendmessage',
+            sendmessagebtn: '#messagenavigationview #sendmessage',
             customersview: '#customersnavigationview #customerlist',
             factorysnavview:'main #factorysnavigationview',
             messagenavview:'clientmain #messagenavigationview'
@@ -467,85 +470,8 @@ Ext.define('SpinningFactory.controller.Factory', {
         });
     },
     applyforfactory:function(btn,callback){
-        var listview=btn.up('list');
-        var myinfo= listview.mydata;
-        var applytimelabel=listview.down('label');
+        callback(btn);
 
-        var toinfo=listview.data;
-        var me=this;
-        var successFunc = function (response, action) {
-
-            var res=JSON.parse(response.responseText);
-            if(res){
-                //Ext.Msg.alert('成功', '推荐工厂主成功', Ext.emptyFn);\
-                console.log(res);
-                var t=CommonUtil.getovertime(res.applytime);
-                if(t<=0){
-                    if(res.nums==0){
-                        var actionSheet = Ext.create('Ext.ActionSheet', {
-                            items: [
-                                {
-                                    text: '继续问诊(已挂号)',
-                                    handler:function(){
-                                        //me.showcustomerList(record);
-                                        me.continueAsk(btn);
-                                        actionSheet.hide();
-                                    }
-                                },
-
-                                {
-                                    text: '我要退款',
-                                    disabled:res.isreply,
-                                    handler : function() {
-                                        me.aliback(btn);
-                                        actionSheet.hide();
-                                    },
-                                    ui  : 'confirm'
-                                }
-                            ]
-                        });
-
-                        Ext.Viewport.add(actionSheet);
-                        actionSheet.show();
-                    }else{
-                        me.applyforpay(myinfo,toinfo,btn);
-                    }
-
-                }else{
-                    var timecallback=function(t,asktimeinterval){
-                        if(t<=0){
-                            clearInterval(asktimeinterval);
-                            me.sendMessageControler(btn);
-                            me.showDoctosView({fromid:toinfo.get("_id")});
-
-                        }else{
-                            var m=Math.floor(t/1000/60%60);
-                            var s=Math.floor(t/1000%60);
-                            applytimelabel.setHtml('<div>问诊时间剩余:'+m + "分 "+s + "秒"+'</div>');
-                            applytimelabel.show();
-                        }
-
-                    };
-                    CommonUtil.lefttime(timecallback,res.applytime,toinfo.get("_id"));
-                    callback(btn);
-                }
-
-            }else{
-                  me.applyforpay(myinfo,toinfo,btn);
-            }
-
-        };
-        var failFunc=function(response, action){
-            Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
-        }
-        var url="customer/applyforfactory";
-
-        var params={
-            customerid:myinfo._id,
-            factoryid:toinfo.get("_id")
-
-        };
-        CommonUtil.ajaxSend(params,url,successFunc,failFunc,'GET');
     },
 
     showDoctosView:function(message){
@@ -591,9 +517,14 @@ Ext.define('SpinningFactory.controller.Factory', {
 
             //this.scrollMsgList();
 
-            var mainController=this.getApplication().getController('Main');
+            var clientController=this.getApplication().getController('Client');
+            var officeController=this.getApplication().getController('Office');
+            var bossController=this.getApplication().getController('Boss');
 
-            var socket=mainController.socket;
+            var socket=null;
+            if(clientController.socket)socket=clientController.socket;
+            else if(officeController.socket)socket=officeController.socket;
+            else if(bossController.socket)socket=bossController.socket;
 
             /*Ext.Msg.alert('tip',JSON.stringify({
                 type:"factorychat",
@@ -622,7 +553,7 @@ Ext.define('SpinningFactory.controller.Factory', {
                         fromtype:0,
                         imgid:imgid,
                         ctype:btn.filetype,
-                        to :toinfo.get("_id"),
+                        to :toinfo.get("factoryuser")._id,
                         content: res.filename
                     }));
 
@@ -653,7 +584,7 @@ Ext.define('SpinningFactory.controller.Factory', {
                     from:myinfo._id,
                     fromtype:0,
                     imgid:imgid,
-                    to :toinfo.get("_id"),
+                    to :toinfo.get("factoryuser")._id,
                     content: content
                 }));
 
@@ -855,11 +786,11 @@ Ext.define('SpinningFactory.controller.Factory', {
         if (!list.lastTapHold || ( new Date()-list.lastTapHold  > 1000)) {
             console.log(record);
 
-            if (!this.messageView[record.get('_id')]){
-                this.messageView[record.get('_id')] =Ext.create('SpinningFactory.view.factory.FactorysMessage');
+            if (!this.messageView[record.get('factoryuser')._id]){
+                this.messageView[record.get('factoryuser')._id] =Ext.create('SpinningFactory.view.factory.FactorysMessage');
 
             }
-            var selectview=this.messageView[record.get('_id')];
+            var selectview=this.messageView[record.get('factoryuser')._id];
             selectview.setTitle(record.get('factoryuser').realname);
             selectview.data=record;
             selectview.mydata=Globle_Variable.user;
