@@ -32,11 +32,17 @@ Ext.define('SpinningFactory.controller.Boss', {
                 loginmenu:'loginShow'
 
 
+            },
+            customersbtn:{
+                tap:'showcustomers'
+
             }
 
         },
         refs: {
-            bossmainview: 'bossmain'
+            bossmainview: 'bossmain',
+            customersbtn: 'bossmain #mycustomers'
+
         }
     },
     // app init func
@@ -50,6 +56,18 @@ Ext.define('SpinningFactory.controller.Boss', {
         var nav=this.getBossmainview();
         nav.pop(nav.getInnerItems().length - 1);
 
+    },
+    showcustomers:function(btn){
+        alert(2)
+
+        if(!this.customersView){
+            //this.reserveView=Ext.create('AffiliatedHospital.view.outpatient.ReserveView');
+            this.customersView=Ext.create('AffiliatedHospital.view.customer.Customers');
+            var store=this.possibleIllView.down('possibleilllist').getStore();
+            store.load();
+        }
+
+        this.getNav().push(this.possibleIllView);
     },
     logoutShow:function(){
 
@@ -98,9 +116,9 @@ Ext.define('SpinningFactory.controller.Boss', {
     hideloadingimg:function(data){
         //console.log(imgid);
         var factoryController=me.getApplication().getController('Factory');
-        var customerController=me.getApplication().getController('Cutomer');
-        var store=factoryController.messageView[data["toid"]]?factoryController.messageView[data["toid"]].getStore():
-            customerController.messageView[data["toid"]].getStore();
+
+        var store=factoryController.messageView[data["toid"]].getStore();
+
         //var store=Ext.getStore('PatientMessages');
         store.data.each(function(a){
             if(a.get('imgid')==data["imgid"]){

@@ -128,6 +128,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
                                             text : '我的客户',
                                             iconAlign : 'top',
                                             //icon : "resources/icons/tiwen.png",
+                                            itemId:'mycustomers',
                                             iconCls : "fa fa-users fa-color-blue" ,
                                             handler : function() {
                                             }

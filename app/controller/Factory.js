@@ -910,6 +910,8 @@ Ext.define('SpinningFactory.controller.Factory', {
             var mainView=this.getMainview();
             var listView=null;
             var messagestore=null;
+            console.log("message");
+            console.log(message);
 
             if(message.fromtype==0){
 

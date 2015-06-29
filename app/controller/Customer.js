@@ -6,19 +6,19 @@ Ext.define('SpinningFactory.controller.Customer', {
     extend: 'Ext.app.Controller',
     config: {
         views: [
-            /*'customer.customers',
-            'customer.customersMessage'*/
+            'customer.Customers',
+            'customer.CustomersMessage'
 
         ],
         models: [
-            /*'customer.customer',
-            'customer.customerMessage'*/
+            'customer.Customer',
+            'customer.CustomerMessage'
 
         ],
         stores: [
 
-            /*'customer.customers',
-            'customer.customerMessages'*/
+            'customer.Customers',
+            'customer.CustomerMessages'
 
         ],
         maxPosition: 0,
