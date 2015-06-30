@@ -1,4 +1,4 @@
-Ext.define('SpinningFactory.model.office.OrderView', {
+Ext.define('SpinningFactory.model.workshop.OrderStatueView', {
     extend: 'Ext.data.Model',
     config: {
         fields: [
@@ -6,6 +6,7 @@ Ext.define('SpinningFactory.model.office.OrderView', {
             'factoryid',
             'goodsname',
             'num',
+            'hasnum',
             'goodinfo',
             'price',
             'status',

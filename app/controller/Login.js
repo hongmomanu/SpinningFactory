@@ -245,6 +245,8 @@ Ext.define('SpinningFactory.controller.Login', {
 
                     }else if(user.usertype===1){
                         Ext.Viewport.add(Ext.create('SpinningFactory.view.office.OfficeMain'));
+                    }else if(user.usertype===2){
+                        Ext.Viewport.add(Ext.create('SpinningFactory.view.workshop.WorkShopMain'));
                     }else if(user.usertype===3){
                         Ext.Viewport.add(Ext.create('SpinningFactory.view.client.ClientMain'));
                     }

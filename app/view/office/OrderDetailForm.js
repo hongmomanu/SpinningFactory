@@ -45,6 +45,19 @@ Ext.define('SpinningFactory.view.office.OrderDetailForm', {
                                 hidden:true
                             },
                             {
+                                name:'_id',
+                                xtype:'textfield',
+                                hidden:true
+                            },{
+                                name:'status',
+                                xtype:'textfield',
+                                hidden:true
+                            },{
+                                name:'factoryid',
+                                xtype:'textfield',
+                                hidden:true
+                            },
+                            {
                                 xtype:'textfield',
                                 name:'num',
                                 label:'订单数量',

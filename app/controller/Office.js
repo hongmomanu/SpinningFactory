@@ -106,7 +106,37 @@ Ext.define('SpinningFactory.controller.Office', {
     },
 
     sendtowork:function(btn){
-        alert(1);
+        //alert(1);
+
+        var form=btn.up('formpanel');
+        var data=form.getValues();
+        console.log(data);
+        if(data.status>=1){
+            Ext.Msg.alert('提示', '已提交过,请勿重复提交', Ext.emptyFn);
+            return;
+        }
+        var me=this;
+        var successFunc = function (response, action) {
+            var res=JSON.parse(response.responseText);
+            if(res.success){
+                Ext.Msg.alert('成功', '提交工厂成功', Ext.emptyFn);
+                me.getOrdernavView().pop();
+
+            }else{
+                Ext.Msg.alert('失败', '提交工厂出错', Ext.emptyFn);
+            }
+
+        };
+        var failFunc=function(response, action){
+            Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+
+        }
+        var url="factory/sendtowork";
+        var params=data;
+        params.oid=data._id;
+
+        //params.gid=Globle_Variable.factoryinfo._id;
+        CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
 
     },
 
@@ -114,9 +144,83 @@ Ext.define('SpinningFactory.controller.Office', {
 
         var form=btn.up('formpanel');
         var data=form.getValues();
-        console.log(data);
+        var me=this;
+        if(data.status==4){
+            Ext.Msg.alert("提示","已完成的订单");
+            return ;
 
-        alert(2);
+        }
+        if(data.hasnum-data.num<0){
+            Ext.Msg.alert("提示","库存不足无法完成订单");
+        }
+        else{
+
+            var successFunc = function (response, action) {
+
+                var res=JSON.parse(response.responseText);
+
+                if(res.success){
+                    me.makegoodnum(data);
+
+                }else{
+                    //Ext.Msg.alert('失败', '绣', Ext.emptyFn);
+                }
+
+            };
+            var failFunc=function(response, action){
+                Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+
+            }
+            var url="factory/changestatusbyid";
+            var params={
+                status:4,
+                oid:data._id
+            };
+            CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+
+
+
+
+
+
+
+
+
+        }
+
+    },
+
+    makegoodnum:function(data){
+        var me=this;
+        var successFunc = function (response, action) {
+            var res=JSON.parse(response.responseText);
+            if(res.success){
+
+                Ext.Msg.alert('成功', '完成订单', Ext.emptyFn);
+                me.getOrdernavView().pop();
+
+
+            }else{
+                //Ext.Msg.alert('失败', '绣', Ext.emptyFn);
+            }
+
+        };
+        var failFunc=function(response, action){
+            Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+
+        }
+        // console.log(data);
+        var url="factory/makegoodnumsbyid";
+        var params={
+            num:(0-data.num),
+            factoryid:data.factoryid,
+            goodsid:data.gid
+        };
+
+        CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+
     },
     cancelImgCLick:function(btn){
         this.overlay.hide();
@@ -140,6 +244,8 @@ Ext.define('SpinningFactory.controller.Office', {
         var nav=this.getOrdernavView();
         var me=this;
 
+        console.log(record.data);
+
         var successFunc = function (response, action) {
             var res=JSON.parse(response.responseText);
             if(res.success){
@@ -150,8 +256,11 @@ Ext.define('SpinningFactory.controller.Office', {
                 }
                 //this.altergoodlView.setTitle(record.get('name'));
 
-                var formdata=Ext.apply(record.data,record.data.goodinfo)
+                var formdata=record.data;
                 formdata.gid=record.data.goodinfo._id;
+                formdata.goodsname=record.data.goodinfo.goodsname;
+                console.log("formdata")
+                //formdata.gid=record.data.goodinfo._id;
                 if(data.length==0)formdata.hasnum=0;
                 else formdata.hasnum=data[0].num;
                 me.orderdetailView.setValues(formdata);

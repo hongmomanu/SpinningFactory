@@ -1,14 +1,14 @@
-Ext.define('SpinningFactory.view.office.OrdersViewList', {
+Ext.define('SpinningFactory.view.workshop.OrdersStatueViewList', {
     extend: 'Ext.List',
     //alias: 'widget.doctors',
-    xtype:'ordersviewlist',
+    xtype:'ordersstatueviewlist',
     //cls: 'x-contacts',
     config: {
         //cls: 'x-contacts',
         emptyText:'无相关内容',
         variableHeights: true,
         scrollable: 'vertical',
-        itemId:'ordersviewlist',
+        itemId:'ordersstatueviewlist',
         /*onItemDisclosure : {//若配置该项，list每一项的右侧都会出现一个小图标。其他功能请查看api
             handler : function(record, btn, index) {
 
@@ -18,7 +18,7 @@ Ext.define('SpinningFactory.view.office.OrdersViewList', {
         //refreshHeightOnUpdate :false,
         scrollToTopOnRefresh :true,
 
-        store: 'OrderViews',
+        store: 'OrderStatueViews',
 
         listeners: {
             painted: function(){
@@ -55,7 +55,7 @@ Ext.define('SpinningFactory.view.office.OrdersViewList', {
 
                 '<td width="50%">',
                 '<div style="text-align: center;color: #0946a2">',
-                '<div style="text-align: left">数量:{num}<br></div>',
+                '<div style="text-align: left">数量:{num}/库存已有:{hasnum}<br></div>',
                 '<div style="text-align: left"> 单位:{goodinfo.unit}<br></div>',
                 '<div style="text-align: left">颜色:{colors}<br></div>',
                 '<div style="text-align: left"><tpl if="status == 0">',

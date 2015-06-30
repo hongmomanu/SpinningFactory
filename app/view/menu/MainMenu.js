@@ -26,6 +26,7 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
                     var mainview=Ext.Viewport.down('officemain');
                     mainview=mainview?mainview:Ext.Viewport.down('bossmain');
                     mainview=mainview?mainview:Ext.Viewport.down('clientmain');
+                    mainview=mainview?mainview:Ext.Viewport.down('workshopmain');
                     mainview.fireEvent('logoutmenu', mainview);
                 }
             },
@@ -47,6 +48,7 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
                     var mainview=Ext.Viewport.down('officemain');
                     mainview=mainview?mainview:Ext.Viewport.down('bossmain');
                     mainview=mainview?mainview:Ext.Viewport.down('clientmain');
+                    mainview=mainview?mainview:Ext.Viewport.down('workshopmain');
                     mainview.fireEvent('returnhomemenu', mainview);
 
                 }
@@ -58,6 +60,7 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
                     var mainview=Ext.Viewport.down('officemain');
                     mainview=mainview?mainview:Ext.Viewport.down('bossmain');
                     mainview=mainview?mainview:Ext.Viewport.down('clientmain');
+                    mainview=mainview?mainview:Ext.Viewport.down('workshopmain');
                     mainview.fireEvent('showqrcode', mainview);
                     //Ext.Viewport.hideMenu('right');
                     /*Ext.getCmp('searchBar').hide();
@@ -74,6 +77,7 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
                     var mainview=Ext.Viewport.down('officemain');
                     mainview=mainview?mainview:Ext.Viewport.down('bossmain');
                     mainview=mainview?mainview:Ext.Viewport.down('clientmain');
+                    mainview=mainview?mainview:Ext.Viewport.down('workshopmain');
                     mainview.fireEvent('showabout', mainview);
                     //Ext.Viewport.hideMenu('right');
                     /*Ext.getCmp('searchBar').hide();

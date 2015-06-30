@@ -78,6 +78,7 @@ Ext.define('SpinningFactory.controller.Factory', {
             messagelistview: 'messagelist',
             clientmainview: 'clientmain',
             officemainview: 'officemain',
+            workshopview: 'workshopmain',
             bossmainview: 'bossmain',
             factorymessagelistview:'factorymessagelist',
             //messagecontent: '#factorysnavigationview #messagecontent',
