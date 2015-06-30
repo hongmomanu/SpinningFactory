@@ -1,7 +1,7 @@
-Ext.define('SpinningFactory.view.client.GoodsDetail', {
+Ext.define('SpinningFactory.view.client.GoodsOrder', {
 
     extend: 'Ext.form.Panel',
-    xtype: 'goodsdetail',
+    xtype: 'goodsorder',
     //alias: 'widget.NewGoodsFormPanel',
     requires: [
         'Ext.form.Panel',
@@ -11,7 +11,7 @@ Ext.define('SpinningFactory.view.client.GoodsDetail', {
 
     config: {
 
-        title:'商品详情',
+        title:'订单详情',
 
         style:{
             'padding':'1px'
@@ -26,7 +26,7 @@ Ext.define('SpinningFactory.view.client.GoodsDetail', {
                 items:[
                     {
                         xtype:'fieldset',
-                        instructions:'请填写信息',
+                        instructions:'请填写订单信息',
                         centered: true,
                         defaults:{
                             labelWidth:'100px'
@@ -41,12 +41,13 @@ Ext.define('SpinningFactory.view.client.GoodsDetail', {
                             labelAlign:'left'
                         },
                             {
-                                xtype:'textfield',
-                                name:'price',
-                                flex:'1',
-                                label:'价格(元)',
-                                placeHolder:'请输入价格',
-                                readOnly:true,
+                                xtype:'spinnerfield',
+                                name:'nums',
+                                //flex:'1',
+                                label:'数量',
+                                placeHolder:'请输入数量',
+                                minValue: 1,
+                                maxValue: 10000,
                                 required:true,
                                 clearIcon:true,
                                 labelAlign:'left'
@@ -55,39 +56,25 @@ Ext.define('SpinningFactory.view.client.GoodsDetail', {
                                 xtype:'textfield',
                                 hidden:true
                             },{
+                                name:'unit',
+                                xtype:'textfield',
+                                hidden:true
+                            },{
                                 name:'factoryid',
                                 xtype:'textfield',
                                 hidden:true
                             },
-                            {
-                                xtype:'textfield',
-                                name:'unit',
-                                readOnly:true,
-                                flex:'1',
-                                label:'单位',
-                                required:true,
-                                clearIcon:true,
-                                labelAlign:'left'
-                            },
 
 
                             {
-                                xtype: 'textareafield',
+                                xtype: 'textfield',
                                 maxRows: 4,
                                 name:'colors',
                                 label:'颜色',
                                 required:true,
-                                readOnly:true,
+                                readOnly:false,
                                 clearIcon:true,
                                 labelAlign:'left'
-                            },
-                            {
-                                xtype: 'button',
-                                itemId: 'managerpic',
-                                name:'managerpic',
-                                text:'图片详情',
-                                iconCls:'fa fa-picture-o',
-                                label:'图片详情'
                             }
 
                         ]
@@ -105,15 +92,15 @@ Ext.define('SpinningFactory.view.client.GoodsDetail', {
                 items:[
                     {
                         xtype:'button',
-                        text:'预定',
+                        text:'提交',
                         ui:'confirm',
-                        itemId:'ordergood'
+                        itemId:'ordersend'
                     },
                     {
                         xtype:'button',
-                        text:'聊天',
+                        text:'取消',
                         ui:'decline',
-                        itemId:'chat'
+                        itemId:'ordercancel'
                     }
                 ]
             }

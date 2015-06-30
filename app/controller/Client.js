@@ -8,6 +8,7 @@ Ext.define('SpinningFactory.controller.Client', {
         views: [
 
             'client.ClientMain',
+            'client.GoodsOrder',
             'client.GoodsDetail',
             'client.GoodsPicsView',
             'menu.MainMenu',
@@ -38,6 +39,15 @@ Ext.define('SpinningFactory.controller.Client', {
             goodsdetailchatbtn:{
                 tap:'showngoodsdetailchatview'
             },
+            goodsdetailorderbtn:{
+                tap:'showngoodsdetailorderview'
+            },
+            goodsordersendbtn:{
+                tap:'sendorder'
+            },
+            goodsordercancelbtn:{
+                tap:'cancelorder'
+            },
             clientgoodsviewlistview:{
 
                 viewshow:'viewinit',
@@ -50,6 +60,9 @@ Ext.define('SpinningFactory.controller.Client', {
             clientgoodsviewlistview: 'clientgoodsviewlist',
             goodsdetailview:'goodsdetail',
             goodsdetailchatbtn:'goodsdetail #chat',
+            goodsordersendbtn:'goodsorder #ordersend',
+            goodsordercancelbtn:'goodsorder #ordercancel',
+            goodsdetailorderbtn:'goodsdetail #ordergood',
             managerpicbtn: 'clientmain #managerpic',
             messagelist: 'clientmain #messagelist',
 
@@ -71,6 +84,62 @@ Ext.define('SpinningFactory.controller.Client', {
         this.websocketInit();
 
     },
+    sendorder:function(btn){
+        var form=btn.up('formpanel');
+        var formvalues=form.getValues();
+        var me=this;
+        formvalues.fromid=Globle_Variable.user._id;
+        var successFunc = function (response, action) {
+
+            var res=JSON.parse(response.responseText);
+            if(res.success){
+
+                Ext.Msg.alert('提示', "提交订单成功", Ext.emptyFn);
+
+                me.getNavView().pop();
+
+            }else{
+                Ext.Msg.alert('提示', res.message, Ext.emptyFn);
+            }
+
+        };
+        var failFunc=function(response, action){
+            Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+            //Ext.Msg.alert('test', 'test', Ext.emptyFn);
+        }
+        var url="customer/makeorderbyid";
+
+        var params=formvalues;
+        CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+
+
+
+    },
+    cancelorder:function(btn){
+        //alert(2);
+        this.getNavView().pop();
+
+    },
+
+    showngoodsdetailorderview:function(btn){
+        testobj=btn;
+        var form=btn.up('formpanel');
+        var formvalues=form.getValues();
+
+        var data=formvalues;
+        //data.gid=data._id;
+        if(!this.clientgoodlorderView){
+            this.clientgoodlorderView=Ext.create('SpinningFactory.view.client.GoodsOrder');
+        }
+        //this.altergoodlView.setTitle(record.get('name'));
+        var nav=this.getNavView();
+
+        this.clientgoodlorderView.setValues(data);
+        nav.push(this.clientgoodlorderView);
+
+
+    },
 
     showngoodsdetailchatview:function(btn){
 
@@ -84,9 +153,6 @@ Ext.define('SpinningFactory.controller.Client', {
 
             var res=JSON.parse(response.responseText);
             if(res.success){
-                //Ext.Msg.alert('成功', '推荐医生成功', Ext.emptyFn);
-                console.log(res);
-                testobj=me;
                 me.getClientmainview().setActiveItem(2);
                 var messagelist=me.getMessagelist();
                 var store=messagelist.getStore();
