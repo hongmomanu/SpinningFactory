@@ -12,6 +12,7 @@ Ext.define('SpinningFactory.controller.Office', {
             'office.GoodsPicsView',
             'office.OfficeMain',
             'office.NewGoodsForm',
+            'office.OrderDetailForm',
             'office.EditGoodsForm'
         ],
         models: [
@@ -77,7 +78,8 @@ Ext.define('SpinningFactory.controller.Office', {
             editgoodsformview:'editgoodsform',
             savegoodinfobtn:'newgoodsform #savegoodinfo',
             altergoodinfobtn:'editgoodsform #savegoodinfo',
-            navView:'officemain #villagenavigationview'
+            navView:'officemain #villagenavigationview',
+            ordernavView:'officemain #ordernavigationview'
         }
     },
     // app init func
@@ -98,11 +100,59 @@ Ext.define('SpinningFactory.controller.Office', {
     cancelImgCLick:function(btn){
         this.overlay.hide();
 
+
+
+        /*if(!this.altergoodlView){
+            this.altergoodlView=Ext.create('SpinningFactory.view.office.EditGoodsForm');
+        }
+        //this.altergoodlView.setTitle(record.get('name'));
+        this.altergoodlView.pics=data.imgs.split(",");
+        this.altergoodlView.setValues(data);
+        nav.push(this.altergoodlView);*/
+
+
     },
 
     onOrdersSelect:function(list,index,node,record){
 
-        alert(1);
+
+        var nav=this.getOrdernavView();
+        var me=this;
+
+        var successFunc = function (response, action) {
+            var res=JSON.parse(response.responseText);
+            if(res.success){
+                var data=res.data;
+
+                if(!me.orderdetailView){
+                    me.orderdetailView=Ext.create('SpinningFactory.view.office.OrderDetailForm');
+                }
+                //this.altergoodlView.setTitle(record.get('name'));
+
+                var formdata=Ext.apply(record.data,record.data.goodinfo)
+                formdata.gid=record.data.goodinfo._id;
+                if(data.length==0)formdata.hasnum=0;
+                else formdata.hasnum=data[0].num;
+                me.orderdetailView.setValues(formdata);
+                nav.push(me.orderdetailView);
+
+            }else{
+                Ext.Msg.alert('失败', '获取库存失败', Ext.emptyFn);
+            }
+
+        };
+        var failFunc=function(response, action){
+            Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+
+        }
+        var url="factory/gethasnumbygid";
+        var params={
+            gid:record.data.goodinfo._id
+
+        };
+
+        CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
 
     },
     onGoodsSelect:function(list, index, node, record){
@@ -332,6 +382,7 @@ Ext.define('SpinningFactory.controller.Office', {
     returnhomemenuFunc:function(){
         Ext.Viewport.hideMenu('right');
         var nav=this.getOfficemainview();
+
         nav.setActiveItem(0);
 
     },

@@ -1,7 +1,7 @@
 Ext.define('SpinningFactory.view.office.OrderDetailForm', {
 
     extend: 'Ext.form.Panel',
-    xtype: 'editgoodsform',
+    xtype: 'orderdetailform',
     //alias: 'widget.NewGoodsFormPanel',
     requires: [
         'Ext.form.Panel',
@@ -11,7 +11,7 @@ Ext.define('SpinningFactory.view.office.OrderDetailForm', {
 
     config: {
 
-        title:'商品修改',
+        title:'订单处理',
 
         style:{
             'padding':'1px'
@@ -26,7 +26,7 @@ Ext.define('SpinningFactory.view.office.OrderDetailForm', {
                 items:[
                     {
                         xtype:'fieldset',
-                        instructions:'请填写信息',
+                        instructions:'订单处理',
                         centered: true,
                         defaults:{
                             labelWidth:'100px'
@@ -36,32 +36,33 @@ Ext.define('SpinningFactory.view.office.OrderDetailForm', {
                             name:'goodsname',
                             label:'商品名称',
                             placeHolder:'请输入商品名称',
-                            required:true,
-                            clearIcon:true,
+                            readOnly:true,
                             labelAlign:'left'
                         },
                             {
-                                xtype:'textfield',
-                                name:'price',
-                                flex:'1',
-                                label:'价格(元)',
-                                placeHolder:'请输入价格',
-                                required:true,
-                                clearIcon:true,
-                                labelAlign:'left'
-                            },{
                                 name:'gid',
                                 xtype:'textfield',
                                 hidden:true
                             },
                             {
                                 xtype:'textfield',
+                                name:'num',
+                                label:'订单数量',
+                                placeHolder:'请输入单位',
+                                readOnly:true,
+                                labelAlign:'left'
+                            }, {
+                                xtype:'textfield',
+                                name:'hasnum',
+                                label:'库存',
+                                readOnly:true,
+                                labelAlign:'left'
+                            }, {
+                                xtype:'textfield',
                                 name:'unit',
                                 flex:'1',
                                 label:'单位',
-                                placeHolder:'请输入单位',
-                                required:true,
-                                clearIcon:true,
+                                readOnly:true,
                                 labelAlign:'left'
                             },
 
@@ -71,18 +72,8 @@ Ext.define('SpinningFactory.view.office.OrderDetailForm', {
                                 maxRows: 4,
                                 name:'colors',
                                 label:'颜色',
-                                placeHolder:'请输入用户名',
-                                required:true,
-                                clearIcon:true,
+                                readOnly:true,
                                 labelAlign:'left'
-                            },
-                            {
-                                xtype: 'button',
-                                itemId: 'managerpic',
-                                name:'managerpic',
-                                text:'图片管理',
-                                iconCls:'fa fa-picture-o',
-                                label:'图片管理'
                             }
 
                         ]
@@ -100,8 +91,15 @@ Ext.define('SpinningFactory.view.office.OrderDetailForm', {
                 items:[
                     {
                         xtype:'button',
-                        text:'保存',
-                        itemId:'savegoodinfo'
+                        text:'提交工厂',
+                        ui:'confirm',
+                        itemId:'sendtowork'
+                    },
+                    {
+                        xtype:'button',
+                        text:'完成订单',
+                        ui:'decline',
+                        itemId:'finishorder'
                     }
                 ]
             }
