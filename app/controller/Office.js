@@ -42,8 +42,8 @@ Ext.define('SpinningFactory.controller.Office', {
 
             ordersviewlistview:{
 
-                viewshow:'viewinit'/*,
-                itemtap: 'onGoodsSelect'*/
+                viewshow:'viewinit',
+                itemtap: 'onOrdersSelect'
             },
             newgoodsbtn:{
                 tap:'shownewgoodsform'
@@ -97,6 +97,12 @@ Ext.define('SpinningFactory.controller.Office', {
 
     cancelImgCLick:function(btn){
         this.overlay.hide();
+
+    },
+
+    onOrdersSelect:function(list,index,node,record){
+
+        alert(1);
 
     },
     onGoodsSelect:function(list, index, node, record){
