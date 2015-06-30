@@ -14,30 +14,52 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
 
         items: [
             {
-                title: '订单申请',
+                title: '订单详情',
                 iconCls: 'fa fa-tasks',
 
                 styleHtmlContent: true,
-                scrollable: true,
+                scrollable: false,
+                layout: 'fit',
 
-               items: {
+                items: [
+
+                    {
+                        xtype: 'navigationview',
+                        autoDestroy: false,
+                        scrollable: false,
+                        //fullscreen: true,
+                        itemId: 'ordernavigationview',
+                        //inside this first item we are going to add a button
+                        items: [
+                            {
+                                xtype: 'ordersviewlist',
+                                title: '订单详情'
+                            }
+                        ]
+
+
+                    }
+
+                ]
+
+               /*items: [{
                     docked: 'top',
                     xtype: 'titlebar',
-                    title: '订单申请'/*,
+                    title: '订单申请'/!*,
                     items:[
 
                         {
                             xtype:'mainmenu',
                             iconCls:'fa fa-cog'
                         }
-                    ]*/
-                },
+                    ]*!/
+                }],
 
                 html: [
                     "You've just generated a new Sencha Touch 2 project. What you're looking at right now is the ",
                     "contents of <a target='_blank' href=\"app/view/Main.js\">app/view/Main.js</a> - edit that file ",
                     "and refresh to change what's rendered here."
-                ].join("")
+                ].join("")*/
             },
             {
                 title: '产品维护',

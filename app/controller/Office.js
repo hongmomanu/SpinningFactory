@@ -8,16 +8,19 @@ Ext.define('SpinningFactory.controller.Office', {
         views: [
             'menu.MainMenu',
             'office.GoodsViewList',
+            'office.OrdersViewList',
             'office.GoodsPicsView',
             'office.OfficeMain',
             'office.NewGoodsForm',
             'office.EditGoodsForm'
         ],
         models: [
-            'office.GoodView'
+            'office.GoodView',
+            'office.OrderView'
         ],
         stores: [
-            'office.GoodViews'
+            'office.GoodViews',
+            'office.OrderViews'
 
         ],
         control: {
@@ -35,6 +38,12 @@ Ext.define('SpinningFactory.controller.Office', {
 
                 viewshow:'viewinit',
                 itemtap: 'onGoodsSelect'
+            },
+
+            ordersviewlistview:{
+
+                viewshow:'viewinit'/*,
+                itemtap: 'onGoodsSelect'*/
             },
             newgoodsbtn:{
                 tap:'shownewgoodsform'
@@ -63,6 +72,7 @@ Ext.define('SpinningFactory.controller.Office', {
             uploadpicturebtn: 'goodspicsview #uploadpicture',
             cancelpicturebtn: 'goodspicsview #cancelpicture',
             goodsviewlistview: 'goodsviewlist',
+            ordersviewlistview: 'ordersviewlist',
             newgoodsformview:'newgoodsform',
             editgoodsformview:'editgoodsform',
             savegoodinfobtn:'newgoodsform #savegoodinfo',
