@@ -30,7 +30,16 @@ Ext.define('SpinningFactory.view.boss.MembersViewList', {
         items: [],
         itemTpl: [
             '<div class="headshot">',
-            '{name}({data.length})',
+            '<div>{realname}</div>',
+            '<div>',
+            '<tpl if="usertype == 0">',
+            '<p style="color: dodgerblue;">角色:工厂主(管理员)</p>',
+            '<tpl elseif="usertype == 1">',
+            '<p style="color: gray;">角色:办公人员</p>',
+            '<tpl else>',
+            '<p style="color: green;">角色:生产车间</p>',
+            '</tpl>',
+            '</div>',
             '</div>'
         ].join('')
     }

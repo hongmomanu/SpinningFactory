@@ -10,12 +10,15 @@ Ext.define('SpinningFactory.controller.Boss', {
 
         views: [
          'menu.MainMenu',
-         'boss.BossMain'
+         'boss.BossMain',
+         'boss.MembersViewList'
         ],
         models: [
+            'boss.MemberView'
         ],
         stores: [
 
+            'boss.MemberViews'
             //'customers.customers',
 
             //'Contacts'
@@ -33,8 +36,15 @@ Ext.define('SpinningFactory.controller.Boss', {
 
 
             },
+            membersview:{
+                viewshow:'viewInit'
+            },
             customersbtn:{
                 tap:'showcustomers'
+
+            },
+            usersmanagerbtn:{
+                tap:'showusers'
 
             },
             mymessagesbtn:{
@@ -45,7 +55,9 @@ Ext.define('SpinningFactory.controller.Boss', {
         },
         refs: {
             bossmainview: 'bossmain',
+            membersview:'bossmain #membersviewlist',
             customersbtn: 'bossmain #mycustomers',
+            usersmanagerbtn: 'bossmain #usersmanager',
             mymessagesbtn: 'bossmain #mymessages'
 
         }
@@ -60,6 +72,36 @@ Ext.define('SpinningFactory.controller.Boss', {
         Ext.Viewport.hideMenu('right');
         var nav=this.getBossmainview();
         nav.pop(nav.getInnerItems().length - 1);
+
+    },
+    viewInit:function(view){
+        var store=view.getStore();
+        store.load({
+            //define the parameters of the store:
+            params:{
+                factoryid : Globle_Variable.user.factoryid
+            },
+            scope: this,
+            callback : function(records, operation, success) {
+
+            }});
+    },
+    showusers:function(btn){
+
+        if(!this.mermbersView){
+            //this.reserveView=Ext.create('AffiliatedHospital.view.outpatient.ReserveView');
+            this.mermbersView=Ext.create('SpinningFactory.view.boss.MembersViewList');
+
+        }
+        var store=this.mermbersView.getStore();
+        store.load({
+            params:{
+                userid:Globle_Variable.user._id
+            }
+        });
+
+        this.getBossmainview().push(this.mermbersView);
+
 
     },
     showcustomers:function(btn){

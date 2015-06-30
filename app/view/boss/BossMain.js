@@ -90,11 +90,11 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
 
                                         items : [{
                                             xtype : 'button',
-                                            text : '订单审核',
+                                            text : '用户管理',
                                             iconAlign : 'top',
                                             //icon : "resources/icons/muru.png",
                                             iconCls:'fa fa-question-circle fa-color-blue',
-                                            itemId:'outpatientreserve'
+                                            itemId:'usersmanager'
                                         }, {
                                             xtype : 'button',
                                             text : '订单状态',
