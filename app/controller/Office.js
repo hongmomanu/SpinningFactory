@@ -63,6 +63,12 @@ Ext.define('SpinningFactory.controller.Office', {
             },
             altergoodinfobtn:{
                 tap:'altergood'
+            },
+            sendtoworkbtn:{
+                tap:'sendtowork'
+            },
+            finishorderbtn:{
+                tap:'finishorder'
             }
 
         },
@@ -77,6 +83,8 @@ Ext.define('SpinningFactory.controller.Office', {
             newgoodsformview:'newgoodsform',
             editgoodsformview:'editgoodsform',
             savegoodinfobtn:'newgoodsform #savegoodinfo',
+            sendtoworkbtn:'orderdetailform #sendtowork',
+            finishorderbtn:'orderdetailform #finishorder',
             altergoodinfobtn:'editgoodsform #savegoodinfo',
             navView:'officemain #villagenavigationview',
             ordernavView:'officemain #ordernavigationview'
@@ -97,6 +105,19 @@ Ext.define('SpinningFactory.controller.Office', {
 
     },
 
+    sendtowork:function(btn){
+        alert(1);
+
+    },
+
+    finishorder:function(btn){
+
+        var form=btn.up('formpanel');
+        var data=form.getValues();
+        console.log(data);
+
+        alert(2);
+    },
     cancelImgCLick:function(btn){
         this.overlay.hide();
 
