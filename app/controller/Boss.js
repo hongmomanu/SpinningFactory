@@ -50,6 +50,10 @@ Ext.define('SpinningFactory.controller.Boss', {
             mymessagesbtn:{
                 tap:'showmymessages'
 
+            },
+            newuserbtn:{
+                tap:'shownewuser'
+
             }
 
         },
@@ -58,6 +62,7 @@ Ext.define('SpinningFactory.controller.Boss', {
             membersview:'bossmain #membersviewlist',
             customersbtn: 'bossmain #mycustomers',
             usersmanagerbtn: 'bossmain #usersmanager',
+            newuserbtn: 'bossmain #newuser',
             mymessagesbtn: 'bossmain #mymessages'
 
         }
@@ -72,6 +77,10 @@ Ext.define('SpinningFactory.controller.Boss', {
         Ext.Viewport.hideMenu('right');
         var nav=this.getBossmainview();
         nav.pop(nav.getInnerItems().length - 1);
+
+    },
+    shownewuser:function(btn){
+        alert(22);
 
     },
     viewInit:function(view){

@@ -27,7 +27,21 @@ Ext.define('SpinningFactory.view.boss.MembersViewList', {
                 this.fireEvent('viewshow', this);
             }
         },
-        items: [],
+        items: [{
+            xtype: 'toolbar',
+            docked: 'bottom',
+            align:'right',
+            items: [
+
+                {
+                    text:'新增',
+                    iconCls:'fa fa-plus-circle',
+                    itemId:'newuser'
+                }
+
+
+            ]
+        }],
         itemTpl: [
             '<div class="headshot">',
             '<div>{realname}</div>',
