@@ -37,6 +37,9 @@ Ext.define('SpinningFactory.controller.Boss', {
 
 
             },
+            customersview:{
+                itemtap:'onCustomerSelect'
+            },
             membersview:{
                 viewshow:'viewInit'
             },
@@ -69,11 +72,13 @@ Ext.define('SpinningFactory.controller.Boss', {
         refs: {
             bossmainview: 'bossmain',
             membersview:'bossmain #membersviewlist',
+            customersview:'bossmain #customerlist',
             customersbtn: 'bossmain #mycustomers',
             usersmanagerbtn: 'bossmain #usersmanager',
             newuserbtn: 'bossmain #newuser',
             addnewuserbtn: 'newmemberform #add',
             cancelnewuserbtn: 'newmemberform #cancel',
+            messagelist: 'bossmain #messagelist',
             mymessagesbtn: 'bossmain #mymessages'
 
         }
@@ -82,6 +87,56 @@ Ext.define('SpinningFactory.controller.Boss', {
 
     initFunc:function (item,e){
         this.websocketInit();
+
+    },
+    onCustomerSelect:function(list, index, node, record){
+
+        //alert(1);
+        console.log(record);
+        var me=this;
+        /*var nav=this.getBossmainview();
+        nav.pop();*/
+        this.showmymessages(true);
+
+
+        var messagelist=me.getMessagelist();
+        var store=messagelist.getStore();
+
+        try {
+
+            var data=store.data.items;
+            var flag=false;
+            for(var i=0;i<data.length;i++){
+                if(data[i].data.fromid==record.data.customerinfo._id){
+                    flag=true;
+                    messagelist.select(i);
+                    messagelist.fireEvent('itemtap',messagelist,i,messagelist.getActiveItem(),store.getAt(i));
+                    break;
+                }
+
+            }
+            if(!flag){
+                record.data.fromid=record.data.customerinfo._id;
+                record.data.factoryuser=record.data.customerinfo;
+                record.data.factoryinfo=record.data.customerinfo;
+                store.add(record.data);
+                var index=data.length-1;
+                messagelist.fireEvent('itemtap',messagelist,index,messagelist.getActiveItem(),store.getAt(index));
+
+            }
+
+        }catch(e){
+
+        }
+
+
+
+
+
+
+
+        //nav.down('#mymessages').fireEvent('tap');
+
 
     },
     returnhomemenuFunc:function(){
@@ -114,7 +169,40 @@ Ext.define('SpinningFactory.controller.Boss', {
 
     addnewuser:function(btn){
 
-        alert(1);
+        var form=btn.up('formpanel');
+        var values=form.getValues();
+        var me=this;
+
+        var successFunc = function (response, action) {
+
+            var res=JSON.parse(response.responseText);
+            if(res.success){
+                //console.log(res);
+                Ext.Msg.alert('提示','添加成功', Ext.emptyFn);
+                me.getBossmainview().pop();
+
+            }else{
+                Ext.Msg.alert('提示', res.message, Ext.emptyFn);
+            }
+
+        };
+        var failFunc=function(response, action){
+            Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+            //Ext.Msg.alert('test', 'test', Ext.emptyFn);
+        }
+        var url="factory/newfactoryuser";
+
+        var params=values;
+        params.factoryid=Globle_Variable.factoryinfo._id;
+        params.password=1;
+        CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+
+
+
+
+
+
     },
     cancelnewuser:function(btn){
 
@@ -157,7 +245,8 @@ Ext.define('SpinningFactory.controller.Boss', {
         this.getBossmainview().push(this.customersView);
     },
 
-    showmymessages:function(){
+
+    showmymessages:function(isdirect){
 
         if(!this.mymessageView){
             //this.reserveView=Ext.create('AffiliatedHospital.view.outpatient.ReserveView');
@@ -167,7 +256,8 @@ Ext.define('SpinningFactory.controller.Boss', {
         testobjs=this.getBossmainview();
 
 
-        if(this.getBossmainview().getInnerItems().length<2){
+
+        if(this.getBossmainview().getInnerItems().length<2||isdirect){
             this.getBossmainview().push(this.mymessageView);
         }
 

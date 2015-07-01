@@ -9,7 +9,7 @@ Ext.define('SpinningFactory.view.factory.MessageList', {
         itemId:'messagelist',
         //refreshHeightOnUpdate :false,
         scrollToTopOnRefresh :true,
-        grouped:true,
+        //grouped:true,
         //indexBar:true,
         store: 'Messages',
 
