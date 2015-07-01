@@ -1,5 +1,7 @@
 /*公共类*/
 
+
+
 Ext.define('CommonUtil', {
     statics: {
         /*为Ext.Viewport添加一个消息提示组件*/

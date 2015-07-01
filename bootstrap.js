@@ -34,7 +34,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js",
   "Ext.draw.engine.SvgContext.Gradient": "touch/src/draw/engine/SvgContext.js",
   "SpinningFactory": "app",
-  "SpinningFactory.controller.customer": "app/controller/Cutomer.js",
+  "SpinningFactory.controller.customer": "app/controller/Customer.js",
   "SpinningFactory.controller.factory": "app/controller/Factory.js",
   "SpinningFactory.model.customer.customer": "app/model/customer/Customer.js",
   "SpinningFactory.model.customer.customerMessage": "app/model/customer/CustomerMessage.js",
@@ -796,6 +796,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "SpinningFactory.view.factory.factorysMessage": [],
   "SpinningFactory.view.login.Login": [],
   "SpinningFactory.view.menu.MainMenu": [],
+  "SpinningFactory.view.office.GoodsPicsView": [],
   "SpinningFactory.view.office.GoodsViewList": [],
   "SpinningFactory.view.office.NewGoodsForm": [],
   "SpinningFactory.view.office.OfficeMain": [],
@@ -1787,6 +1788,9 @@ Ext.ClassManager.addNameAliasMappings({
     "widget.mainmenu",
     "widget.mainmenus"
   ],
+  "SpinningFactory.view.office.GoodsPicsView": [
+    "widget.goodspicsview"
+  ],
   "SpinningFactory.view.office.GoodsViewList": [
     "widget.goodsviewlist"
   ],
@@ -1794,6 +1798,7 @@ Ext.ClassManager.addNameAliasMappings({
     "widget.newgoodsform"
   ],
   "SpinningFactory.view.office.OfficeMain": [
+    "widget.OfficeMain",
     "widget.officemain"
   ],
   "SpinningFactory.view.register.Register": [

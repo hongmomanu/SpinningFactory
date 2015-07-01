@@ -14,7 +14,9 @@ Ext.define('SpinningFactory.view.boss.NewMemberForm', {
         title:'新增用户',
 
         style:{
+
             'padding':'1px'
+
         },
         scrollable: 'vertical',
         layout: 'fit',
@@ -49,14 +51,7 @@ Ext.define('SpinningFactory.view.boss.NewMemberForm', {
                                 clearIcon:true,
                                 labelAlign:'left'
                             },
-                            {
-                                xtype:'passwordfield',
-                                name:'password',
-                                label:'密码',
-                                placeHolder:'请输入密码',
-                                required:true,
-                                clearIcon:true
-                            },
+
                             {
                                 xtype: 'selectfield',
                                 name:'usertype',
@@ -81,8 +76,13 @@ Ext.define('SpinningFactory.view.boss.NewMemberForm', {
                 items:[
                     {
                         xtype:'button',
-                        text:'注册',
-                        itemId:'customerregister'
+                        text:'新增',
+                        itemId:'add'
+                    },
+                    {
+                        xtype:'button',
+                        text:'取消',
+                        itemId:'cancel'
                     }
                 ]
             }

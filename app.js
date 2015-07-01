@@ -25,11 +25,12 @@ Ext.application({
         'Login',
         'Register',
         'Boss',
-        'Office'
-        /*'factory',
-        'Village',
-        'Settings',
-        'customer'*/
+        'Client',
+        'WorkShop',
+        'ClientRegister',
+        'Office',
+        'Factory',
+        'Customer'
     ],
 
     icon: {
@@ -53,6 +54,22 @@ Ext.application({
     launch: function() {
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
+
+        Ext.override(Ext.MessageBox, {
+
+            hide:  function () {
+
+                if ( this .activeAnimation && this .activeAnimation._onEnd) {
+
+                    this .activeAnimation._onEnd();
+
+                }
+
+                return this .callParent(arguments);
+
+            }
+
+        });
 
         // Initialize the main view
         //Ext.Viewport.add(Ext.create('SpinningFactory.view.Main'));
