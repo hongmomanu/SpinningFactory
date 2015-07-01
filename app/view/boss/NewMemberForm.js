@@ -2,7 +2,7 @@ Ext.define('SpinningFactory.view.boss.NewMemberForm', {
 
     extend: 'Ext.form.Panel',
     xtype: 'newmemberform',
-    alias: 'widget.RegisterPanel',
+    //alias: 'widget.RegisterPanel',
     requires: [
         'Ext.form.Panel',
         'Ext.form.FieldSet',
@@ -10,13 +10,9 @@ Ext.define('SpinningFactory.view.boss.NewMemberForm', {
     ],
 
     config: {
-
         title:'新增用户',
-
         style:{
-
             'padding':'1px'
-
         },
         scrollable: 'vertical',
         layout: 'fit',

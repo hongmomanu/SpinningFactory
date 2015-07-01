@@ -11,6 +11,7 @@ Ext.define('SpinningFactory.controller.Boss', {
         views: [
          'menu.MainMenu',
          'boss.BossMain',
+         'boss.NewMemberForm',
          'boss.MembersViewList'
         ],
         models: [
@@ -54,6 +55,14 @@ Ext.define('SpinningFactory.controller.Boss', {
             newuserbtn:{
                 tap:'shownewuser'
 
+            },
+            addnewuserbtn:{
+                tap:'addnewuser'
+
+            },
+            cancelnewuserbtn:{
+                tap:'cancelnewuser'
+
             }
 
         },
@@ -63,6 +72,8 @@ Ext.define('SpinningFactory.controller.Boss', {
             customersbtn: 'bossmain #mycustomers',
             usersmanagerbtn: 'bossmain #usersmanager',
             newuserbtn: 'bossmain #newuser',
+            addnewuserbtn: 'newmemberform #add',
+            cancelnewuserbtn: 'newmemberform #cancel',
             mymessagesbtn: 'bossmain #mymessages'
 
         }
@@ -80,7 +91,12 @@ Ext.define('SpinningFactory.controller.Boss', {
 
     },
     shownewuser:function(btn){
-        alert(22);
+
+        if(!this.newmermbersView){
+            this.newmermbersView=Ext.create('SpinningFactory.view.boss.NewMemberForm');
+        }
+        this.getBossmainview().push(this.newmermbersView);
+
 
     },
     viewInit:function(view){
@@ -95,6 +111,17 @@ Ext.define('SpinningFactory.controller.Boss', {
 
             }});
     },
+
+    addnewuser:function(btn){
+
+        alert(1);
+    },
+    cancelnewuser:function(btn){
+
+        alert(2);
+
+    },
+
     showusers:function(btn){
 
         if(!this.mermbersView){
