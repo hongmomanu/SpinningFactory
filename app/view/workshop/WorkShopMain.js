@@ -41,7 +41,7 @@ Ext.define('SpinningFactory.view.workshop.WorkShopMain', {
             {
                 title: '已完成订单',
                 iconCls: 'fa fa-check',
-
+                layout:'fit',
                 items: [
                     {
                         docked: 'top',
@@ -49,12 +49,11 @@ Ext.define('SpinningFactory.view.workshop.WorkShopMain', {
                         title: '已完成订单'
                     },
                     {
-                        xtype: 'video',
-                        url: 'http://av.vimeo.com/64284/137/87347327.mp4?token=1330978144_f9b698fea38cd408d52a2393240c896c',
-                        posterUrl: 'http://b.vimeocdn.com/ts/261/062/261062119_640.jpg'
+                        xtype: 'ordersfinishviewlist'
+
                     }
                 ]
-            },
+            }/*,
             {
                 title: '我的消息',
                 iconCls: 'fa fa-weixin',
@@ -71,7 +70,7 @@ Ext.define('SpinningFactory.view.workshop.WorkShopMain', {
                         posterUrl: 'http://b.vimeocdn.com/ts/261/062/261062119_640.jpg'
                     }
                 ]
-            }
+            }*/
         ]
     }
 });

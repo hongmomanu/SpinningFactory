@@ -1,14 +1,20 @@
-Ext.define('SpinningFactory.view.workshop.OrdersStatueViewList', {
+Ext.define('SpinningFactory.view.workshop.OrdersFinishViewList', {
     extend: 'Ext.List',
     //alias: 'widget.doctors',
-    xtype:'ordersstatueviewlist',
+    xtype:'ordersfinishviewlist',
+    initialize : function() {
+        var me = this;
+        me.setStore(Ext.create('SpinningFactory.store.workshop.OrderStatueViews'));
+
+        me.callParent(arguments);
+    },
     //cls: 'x-contacts',
     config: {
         //cls: 'x-contacts',
-        emptyText:'暂无订单任务',
+        emptyText:'无相关内容',
         variableHeights: true,
         scrollable: 'vertical',
-        itemId:'ordersstatueviewlist',
+        itemId:'ordersfinishviewlist',
         /*onItemDisclosure : {//若配置该项，list每一项的右侧都会出现一个小图标。其他功能请查看api
             handler : function(record, btn, index) {
 
@@ -18,7 +24,7 @@ Ext.define('SpinningFactory.view.workshop.OrdersStatueViewList', {
         //refreshHeightOnUpdate :false,
         scrollToTopOnRefresh :true,
 
-        store: 'OrderStatueViews',
+        /*store: 'OrderStatueViews',*/
 
         listeners: {
             painted: function(){

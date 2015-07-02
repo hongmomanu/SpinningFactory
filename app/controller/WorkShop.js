@@ -9,6 +9,7 @@ Ext.define('SpinningFactory.controller.WorkShop', {
             'menu.MainMenu',
 
             'workshop.WorkShopMain',
+            'workshop.OrdersFinishViewList',
             'workshop.OrdersStatueViewList'
         ],
         models: [
@@ -35,6 +36,10 @@ Ext.define('SpinningFactory.controller.WorkShop', {
 
                 viewshow:'viewinit',
                 itemtap: 'onOrdeSelect'
+            },
+            ordersfinishviewlistview:{
+
+                viewshow:'viewinitfinish'
             }/*,
 
             ordersviewlistview:{
@@ -70,7 +75,8 @@ Ext.define('SpinningFactory.controller.WorkShop', {
         },
         refs: {
             workshopmainview: 'workshopmain',
-            workshoporderslistview: 'ordersstatueviewlist'
+            workshoporderslistview: 'ordersstatueviewlist',
+            ordersfinishviewlistview: 'ordersfinishviewlist'
             /*newgoodsbtn: 'officemain #newgoods',
             managerpicbtn: 'officemain #managerpic',
             uploadpicturebtn: 'goodspicsview #uploadpicture',
@@ -109,7 +115,21 @@ Ext.define('SpinningFactory.controller.WorkShop', {
         store.load({
             //define the parameters of the store:
             params:{
-                factoryid : Globle_Variable.user.factoryid
+                factoryid : Globle_Variable.user.factoryid,
+                status:'0,1,2,3'
+            },
+            scope: this,
+            callback : function(records, operation, success) {
+
+            }});
+    },
+    viewinitfinish:function(view){
+        var store=view.getStore();
+        store.load({
+            //define the parameters of the store:
+            params:{
+                factoryid : Globle_Variable.user.factoryid,
+                status:'4'
             },
             scope: this,
             callback : function(records, operation, success) {
