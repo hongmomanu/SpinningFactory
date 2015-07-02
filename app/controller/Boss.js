@@ -88,12 +88,16 @@ Ext.define('SpinningFactory.controller.Boss', {
     // app init func
 
     initFunc:function (item,e){
+        this.getBossmainview().getNavigationBar().setTitle(Globle_Variable.factoryinfo.factoryname);
         this.websocketInit();
 
     },
     onMemberSelect:function(list,index,node,record){
-        console.log(record);
-        alert(1);
+        if(!this.editmermbersView){
+            this.editmermbersView=Ext.create('SpinningFactory.view.boss.EditMemberForm');
+        }
+        this.editmermbersView.setValues(record.raw);
+        this.getBossmainview().push(this.editmermbersView);
 
     },
     onCustomerSelect:function(list, index, node, record){

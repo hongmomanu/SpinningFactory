@@ -15,7 +15,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
         centered: true,
         autoDestroy: false,
         //scrollable: 'vertical',
-        title:'网上纺织',
+
         scrollable:false,
 
         height: '100%',
@@ -24,7 +24,10 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
             'padding': '1px'
         },
 
+        //title:''
+
         navigationBar : {
+
             docked : 'top',
             items : [
 
@@ -40,7 +43,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
 
             {
 
-                title:'<div >'+(Globle_Variable.factoryinfo?loble_Variable.factoryinfo.factoryname:"")+'</div>',
+                title:'我的工厂',
                 layout : 'fit',
                 xtype: 'container',
                 items: [

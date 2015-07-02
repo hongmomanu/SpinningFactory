@@ -44,9 +44,29 @@ Ext.define('SpinningFactory.view.boss.EditMemberForm', {
                                 name:'realname',
                                 label:'姓名',
                                 placeHolder:'请输入姓名',
-                                required:true,
-                                clearIcon:true,
+                                /*required:true,
+                                clearIcon:true,*/
                                 labelAlign:'left'
+                            },{
+                                xtype:'textfield',
+                                name:'password',
+                                label:'密码',
+                                //placeHolder:'请输入姓名',
+                                /*required:true,
+                                clearIcon:true,*/
+                                labelAlign:'left'
+                            },{
+                                xtype:'textfield',
+                                name:'usertype',
+                                hidden:true,
+                                label:'usertype'
+
+                            },{
+                                xtype:'textfield',
+                                name:'_id',
+                                hidden:true,
+                                label:'id'
+
                             }/*,
 
                             {
