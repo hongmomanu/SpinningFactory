@@ -837,6 +837,59 @@ Ext.define('SpinningFactory.controller.Factory', {
         }
     },
     onfactorySelect: function (list, index, node, record) {
+        //console.log(record);
+
+        var me=this;
+
+        me.getClientmainview().setActiveItem(2);
+        var messagelist=me.getMessagelistview();
+        var store=messagelist.getStore();
+
+        try {
+
+            var data=store.data.items;
+            var flag=false;
+            for(var i=0;i<data.length;i++){
+                if(data[i].data.fromid==record.data.factoryuser._id){
+                    flag=true;
+                    messagelist.select(i);
+                    messagelist.fireEvent('itemtap',messagelist,i,messagelist.getActiveItem(),store.getAt(i));
+                    break;
+                }
+
+            }
+            if(!flag){
+                record.data.fromid=record.data.factoryuser._id;
+                store.add(record.data);
+                var index=data.length-1;
+                messagelist.fireEvent('itemtap',messagelist,index,messagelist.getActiveItem(),store.getAt(index));
+
+            }
+
+        }catch(e){
+
+        }
+
+
+
+
+
+        /*if (!list.lastTapHold || ( new Date()-list.lastTapHold  > 1000)) {
+
+            if (!this.messageView[record.get('factoryuser')._id]){
+                this.messageView[record.get('factoryuser')._id] =Ext.create('SpinningFactory.view.factory.FactorysMessage');
+
+            }
+            var selectview=this.messageView[record.get('customerinfo')._id];
+            //var messageView=Ext.create('factoryApp.view.factorys.factoryMessage');
+            selectview.setTitle(record.get('customerinfo').realname);
+            selectview.data=record;
+            selectview.mydata=Globle_Variable.user;
+            this.getcustomersnavview().push(selectview);
+
+        }*/
+
+
 
         /*if (!list.lastTapHold || ( new Date()-list.lastTapHold  > 1000)) {
             console.log(record);
