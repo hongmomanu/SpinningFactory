@@ -9,7 +9,7 @@ Ext.define('SpinningFactory.view.factory.Factorys', {
         itemId:'factorylist',
         //refreshHeightOnUpdate :false,
         scrollToTopOnRefresh :true,
-        grouped:true,
+        //grouped:true,
         //indexBar:true,
         store: 'Factorys',
 

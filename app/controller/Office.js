@@ -368,8 +368,12 @@ Ext.define('SpinningFactory.controller.Office', {
 
     },
     doImgCLick: function (btn) {
-        var picform=this.getNewgoodsformview();
+        var form=btn.up('goodspicsview');
+        var picform=form.picform;
+
         var me = this;
+
+        console.log(picform);
         testobj=me;
         var actionSheet = Ext.create('Ext.ActionSheet', {
             items: [
@@ -398,6 +402,7 @@ Ext.define('SpinningFactory.controller.Office', {
 
         Ext.Viewport.add(actionSheet);
         actionSheet.show();
+        //testobj=me;
 
         var imagfunc = function (type) {
             actionSheet.hide();
@@ -419,6 +424,7 @@ Ext.define('SpinningFactory.controller.Office', {
                         var url=Globle_Variable.serverurl+path;
                         picform.pics.push(path);
                         var carousel=me.overlay.down('carousel');
+
                         carousel.insert(0,
                                 {
                                     xtype: 'image',
@@ -458,6 +464,8 @@ Ext.define('SpinningFactory.controller.Office', {
             picform.pics=['files/14296004957076511'];
         }
         var showpicsview=Ext.create('SpinningFactory.view.office.GoodsPicsView');
+
+        showpicsview.picform=picform;
 
         var carousel=showpicsview.down('carousel');
 
