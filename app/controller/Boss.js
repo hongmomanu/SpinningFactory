@@ -9,10 +9,11 @@ Ext.define('SpinningFactory.controller.Boss', {
     config: {
 
         views: [
-         'menu.MainMenu',
-         'boss.BossMain',
-         'boss.NewMemberForm',
-         'boss.MembersViewList'
+            'menu.MainMenu',
+            'boss.BossMain',
+            'boss.EditMemberForm',
+            'boss.NewMemberForm',
+            'boss.MembersViewList'
         ],
         models: [
             'boss.MemberView'
