@@ -47,7 +47,7 @@ Ext.define('SpinningFactory.view.office.GoodsViewList', {
                 '<td width="50%">',
 
                 '<div style="text-align: center;">',
-                '<img width="80px" height="80px"  src="'+Globle_Variable.serverurl+'{[this.shorterimg(values)]}">',
+                '<img class=transparent width="80px" height="80px"  src="'+Globle_Variable.serverurl+'{[this.shorterimg(values)]}">',
                 '</div>',
                 '<div class="headshot" style="text-align: center;">{goodsname}',
                 '</div>',

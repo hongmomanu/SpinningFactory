@@ -33,17 +33,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLResultSetRowList": "touch/src/device/sqlite/Sencha.js",
   "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js",
   "Ext.draw.engine.SvgContext.Gradient": "touch/src/draw/engine/SvgContext.js",
-  "SpinningFactory": "app",
-  "SpinningFactory.controller.customer": "app/controller/Customer.js",
-  "SpinningFactory.controller.factory": "app/controller/Factory.js",
-  "SpinningFactory.model.customer.customer": "app/model/customer/Customer.js",
-  "SpinningFactory.model.customer.customerMessage": "app/model/customer/CustomerMessage.js",
-  "SpinningFactory.model.factory.factory": "app/model/factory/Factory.js",
-  "SpinningFactory.model.factory.factoryMessage": "app/model/factory/FactorMessage.js",
-  "SpinningFactory.view.customer.customers": "app/view/customer/Customers.js",
-  "SpinningFactory.view.customer.customersMessage": "app/view/customer/CustomersMessage.js",
-  "SpinningFactory.view.factory.factorys": "app/view/factory/Factorys.js",
-  "SpinningFactory.view.factory.factorysMessage": "app/view/factory/FactorysMessage.js"
+  "SpinningFactory": "app"
 });
 
 Ext.ClassManager.addNameAlternateMappings({
@@ -772,35 +762,66 @@ Ext.ClassManager.addNameAlternateMappings({
     "Ext.viewport.WP"
   ],
   "SpinningFactory.controller.Boss": [],
+  "SpinningFactory.controller.Client": [],
+  "SpinningFactory.controller.ClientRegister": [],
+  "SpinningFactory.controller.Customer": [],
+  "SpinningFactory.controller.Factory": [],
   "SpinningFactory.controller.Login": [],
   "SpinningFactory.controller.Office": [],
   "SpinningFactory.controller.Register": [],
-  "SpinningFactory.controller.customer": [],
-  "SpinningFactory.controller.factory": [],
+  "SpinningFactory.controller.WorkShop": [],
+  "SpinningFactory.model.boss.GoodsView": [],
   "SpinningFactory.model.boss.MemberView": [],
-  "SpinningFactory.model.customer.customer": [],
-  "SpinningFactory.model.customer.customerMessage": [],
-  "SpinningFactory.model.factory.factory": [],
-  "SpinningFactory.model.factory.factoryMessage": [],
+  "SpinningFactory.model.client.ClientGoodView": [],
+  "SpinningFactory.model.customer.Customer": [],
+  "SpinningFactory.model.customer.CustomerMessage": [],
+  "SpinningFactory.model.factory.Factory": [],
+  "SpinningFactory.model.factory.FactoryMessage": [],
+  "SpinningFactory.model.factory.Message": [],
   "SpinningFactory.model.login.Login": [],
   "SpinningFactory.model.office.GoodView": [],
+  "SpinningFactory.model.office.OrderView": [],
+  "SpinningFactory.model.register.ClientRegister": [],
   "SpinningFactory.model.register.Register": [],
+  "SpinningFactory.model.workshop.OrderStatueView": [],
   "SpinningFactory.store.boss.MemberViews": [],
+  "SpinningFactory.store.client.ClientGoodViews": [],
+  "SpinningFactory.store.customer.CustomerMessages": [],
+  "SpinningFactory.store.customer.Customers": [],
+  "SpinningFactory.store.factory.FactoryMessages": [],
+  "SpinningFactory.store.factory.Factorys": [],
+  "SpinningFactory.store.factory.Messages": [],
   "SpinningFactory.store.office.GoodViews": [],
+  "SpinningFactory.store.office.OrderViews": [],
+  "SpinningFactory.store.workshop.OrderStatueViews": [],
   "SpinningFactory.view.Main": [],
   "SpinningFactory.view.boss.BossMain": [],
+  "SpinningFactory.view.boss.EditMemberForm": [],
   "SpinningFactory.view.boss.MembersViewList": [],
-  "SpinningFactory.view.customer.customers": [],
-  "SpinningFactory.view.customer.customersMessage": [],
-  "SpinningFactory.view.factory.factorys": [],
-  "SpinningFactory.view.factory.factorysMessage": [],
+  "SpinningFactory.view.boss.NewMemberForm": [],
+  "SpinningFactory.view.client.ClientMain": [],
+  "SpinningFactory.view.client.GoodsDetail": [],
+  "SpinningFactory.view.client.GoodsOrder": [],
+  "SpinningFactory.view.client.GoodsPicsView": [],
+  "SpinningFactory.view.client.GoodsViewList": [],
+  "SpinningFactory.view.customer.Customers": [],
+  "SpinningFactory.view.customer.CustomersMessage": [],
+  "SpinningFactory.view.factory.Factorys": [],
+  "SpinningFactory.view.factory.FactorysMessage": [],
+  "SpinningFactory.view.factory.MessageList": [],
   "SpinningFactory.view.login.Login": [],
   "SpinningFactory.view.menu.MainMenu": [],
+  "SpinningFactory.view.office.EditGoodsForm": [],
   "SpinningFactory.view.office.GoodsPicsView": [],
   "SpinningFactory.view.office.GoodsViewList": [],
   "SpinningFactory.view.office.NewGoodsForm": [],
   "SpinningFactory.view.office.OfficeMain": [],
+  "SpinningFactory.view.office.OrderDetailForm": [],
+  "SpinningFactory.view.office.OrdersViewList": [],
+  "SpinningFactory.view.register.ClientRegister": [],
   "SpinningFactory.view.register.Register": [],
+  "SpinningFactory.view.workshop.OrdersFinishViewList": [],
+  "SpinningFactory.view.workshop.OrdersStatueViewList": [],
   "SpinningFactory.view.workshop.WorkShopMain": []
 });
 
@@ -1744,41 +1765,86 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
   "SpinningFactory.controller.Boss": [],
+  "SpinningFactory.controller.Client": [],
+  "SpinningFactory.controller.ClientRegister": [],
+  "SpinningFactory.controller.Customer": [],
+  "SpinningFactory.controller.Factory": [],
   "SpinningFactory.controller.Login": [],
   "SpinningFactory.controller.Office": [],
   "SpinningFactory.controller.Register": [],
-  "SpinningFactory.controller.customer": [],
-  "SpinningFactory.controller.factory": [],
+  "SpinningFactory.controller.WorkShop": [],
+  "SpinningFactory.model.boss.GoodsView": [],
   "SpinningFactory.model.boss.MemberView": [],
-  "SpinningFactory.model.customer.customer": [],
-  "SpinningFactory.model.customer.customerMessage": [],
-  "SpinningFactory.model.factory.factory": [],
-  "SpinningFactory.model.factory.factoryMessage": [],
+  "SpinningFactory.model.client.ClientGoodView": [],
+  "SpinningFactory.model.customer.Customer": [],
+  "SpinningFactory.model.customer.CustomerMessage": [],
+  "SpinningFactory.model.factory.Factory": [],
+  "SpinningFactory.model.factory.FactoryMessage": [],
+  "SpinningFactory.model.factory.Message": [],
   "SpinningFactory.model.login.Login": [],
   "SpinningFactory.model.office.GoodView": [],
+  "SpinningFactory.model.office.OrderView": [],
+  "SpinningFactory.model.register.ClientRegister": [],
   "SpinningFactory.model.register.Register": [],
+  "SpinningFactory.model.workshop.OrderStatueView": [],
   "SpinningFactory.store.boss.MemberViews": [],
+  "SpinningFactory.store.client.ClientGoodViews": [],
+  "SpinningFactory.store.customer.CustomerMessages": [],
+  "SpinningFactory.store.customer.Customers": [],
+  "SpinningFactory.store.factory.FactoryMessages": [],
+  "SpinningFactory.store.factory.Factorys": [],
+  "SpinningFactory.store.factory.Messages": [],
   "SpinningFactory.store.office.GoodViews": [],
+  "SpinningFactory.store.office.OrderViews": [],
+  "SpinningFactory.store.workshop.OrderStatueViews": [],
   "SpinningFactory.view.Main": [
     "widget.main"
   ],
   "SpinningFactory.view.boss.BossMain": [
     "widget.bossmain"
   ],
+  "SpinningFactory.view.boss.EditMemberForm": [
+    "widget.editmemberform"
+  ],
   "SpinningFactory.view.boss.MembersViewList": [
     "widget.membersviewlist"
   ],
-  "SpinningFactory.view.customer.customers": [
+  "SpinningFactory.view.boss.NewMemberForm": [
+    "widget.newmemberform"
+  ],
+  "SpinningFactory.view.client.ClientMain": [
+    "widget.ClientMain",
+    "widget.clientmain"
+  ],
+  "SpinningFactory.view.client.GoodsDetail": [
+    "widget.goodsdetail"
+  ],
+  "SpinningFactory.view.client.GoodsOrder": [
+    "widget.goodsorder"
+  ],
+  "SpinningFactory.view.client.GoodsPicsView": [
+    "widget.goodspicsview"
+  ],
+  "SpinningFactory.view.client.GoodsViewList": [
+    "widget.clientgoodsviewlist"
+  ],
+  "SpinningFactory.view.customer.Customers": [
+    "widget.Customers",
     "widget.customers"
   ],
-  "SpinningFactory.view.customer.customersMessage": [
+  "SpinningFactory.view.customer.CustomersMessage": [
     "widget.customermessagelist"
   ],
-  "SpinningFactory.view.factory.factorys": [
+  "SpinningFactory.view.factory.Factorys": [
+    "widget.factorylist",
     "widget.factorys"
   ],
-  "SpinningFactory.view.factory.factorysMessage": [
+  "SpinningFactory.view.factory.FactorysMessage": [
     "widget.factorymessagelist"
+  ],
+  "SpinningFactory.view.factory.MessageList": [
+    "widget.MessageList",
+    "widget.messagelist"
   ],
   "SpinningFactory.view.login.Login": [
     "widget.LoginPanel",
@@ -1787,6 +1853,9 @@ Ext.ClassManager.addNameAliasMappings({
   "SpinningFactory.view.menu.MainMenu": [
     "widget.mainmenu",
     "widget.mainmenus"
+  ],
+  "SpinningFactory.view.office.EditGoodsForm": [
+    "widget.editgoodsform"
   ],
   "SpinningFactory.view.office.GoodsPicsView": [
     "widget.goodspicsview"
@@ -1801,9 +1870,25 @@ Ext.ClassManager.addNameAliasMappings({
     "widget.OfficeMain",
     "widget.officemain"
   ],
+  "SpinningFactory.view.office.OrderDetailForm": [
+    "widget.orderdetailform"
+  ],
+  "SpinningFactory.view.office.OrdersViewList": [
+    "widget.ordersviewlist"
+  ],
+  "SpinningFactory.view.register.ClientRegister": [
+    "widget.RegisterPanel",
+    "widget.clientregisterform"
+  ],
   "SpinningFactory.view.register.Register": [
     "widget.RegisterPanel",
     "widget.registerform"
+  ],
+  "SpinningFactory.view.workshop.OrdersFinishViewList": [
+    "widget.ordersfinishviewlist"
+  ],
+  "SpinningFactory.view.workshop.OrdersStatueViewList": [
+    "widget.ordersstatueviewlist"
   ],
   "SpinningFactory.view.workshop.WorkShopMain": [
     "widget.workshopmain"
