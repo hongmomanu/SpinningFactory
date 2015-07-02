@@ -68,6 +68,14 @@ Ext.define('SpinningFactory.controller.Boss', {
             cancelnewuserbtn:{
                 tap:'cancelnewuser'
 
+            },
+            altermemberbtn:{
+                tap:'altermember'
+
+            },
+            delmemberbtn:{
+                tap:'delmember'
+
             }
 
         },
@@ -77,6 +85,8 @@ Ext.define('SpinningFactory.controller.Boss', {
             customersview:'bossmain #customerlist',
             customersbtn: 'bossmain #mycustomers',
             usersmanagerbtn: 'bossmain #usersmanager',
+            altermemberbtn: 'editmemberform #alter',
+            delmemberbtn: 'editmemberform #del',
             newuserbtn: 'bossmain #newuser',
             addnewuserbtn: 'newmemberform #add',
             cancelnewuserbtn: 'newmemberform #cancel',
@@ -90,6 +100,79 @@ Ext.define('SpinningFactory.controller.Boss', {
     initFunc:function (item,e){
         this.getBossmainview().getNavigationBar().setTitle(Globle_Variable.factoryinfo.factoryname);
         this.websocketInit();
+
+    },
+    altermember:function(btn){
+        var form=btn.up('formpanel');
+        var formvalues=form.getValues();
+        var me=this;
+        var successFunc = function (response, action) {
+
+            var res=JSON.parse(response.responseText);
+            if(res.success){
+                //console.log(res);
+                Ext.Msg.alert('提示','修改成功', Ext.emptyFn);
+                me.getBossmainview().pop();
+
+            }else{
+                Ext.Msg.alert('提示', res.message, Ext.emptyFn);
+            }
+
+        };
+        var failFunc=function(response, action){
+            Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+            //Ext.Msg.alert('test', 'test', Ext.emptyFn);
+        }
+        var url="factory/editfactoryuser";
+
+        var params=formvalues;
+
+        CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+
+        //alert(1);
+    },
+    delmember:function(btn){
+        var form=btn.up('formpanel');
+        var formvalues=form.getValues();
+        var me=this;
+
+        if(formvalues.usertype==0){
+            Ext.Msg.alert("提示","管理员账户不能删除");
+            return;
+        }
+
+        Ext.Msg.confirm( "提示", "确定删除此用户么", function(btn){
+            if(btn==='yes'){
+                var successFunc = function (response, action) {
+
+                    var res=JSON.parse(response.responseText);
+                    if(res.success){
+                        //console.log(res);
+                        Ext.Msg.alert('提示','删除成功', Ext.emptyFn);
+                        me.getBossmainview().pop();
+
+                    }else{
+                        Ext.Msg.alert('提示', res.message, Ext.emptyFn);
+                    }
+
+                };
+                var failFunc=function(response, action){
+                    Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+                    //Ext.Msg.alert('test', 'test', Ext.emptyFn);
+                }
+                var url="factory/delfactoryuser";
+
+                var params=formvalues;
+
+                CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+            }else{
+
+            }
+        })
+
+
 
     },
     onMemberSelect:function(list,index,node,record){
@@ -250,14 +333,19 @@ Ext.define('SpinningFactory.controller.Boss', {
             this.customersView=Ext.create('SpinningFactory.view.customer.Customers');
 
         }
-        var store=this.customersView.getStore();
-        store.load({
-            params:{
-                userid:Globle_Variable.user._id
-            }
-        });
 
-        this.getBossmainview().push(this.customersView);
+
+
+
+        if(this.getBossmainview().getInnerItems().length<2){
+            var store=this.customersView.getStore();
+            store.load({
+                params:{
+                    userid:Globle_Variable.user._id
+                }
+            });
+            this.getBossmainview().push(this.customersView);
+        }
     },
 
 
