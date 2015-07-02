@@ -537,7 +537,7 @@ Ext.define('SpinningFactory.controller.Client', {
         }
 
     },
-    backbuttonListener:function(){
+    /*backbuttonListener:function(){
         document.addEventListener("backbutton", onBackKeyDown, false);
         function onBackKeyDown() {
             navigator.Backbutton.goHome(function() {
@@ -547,7 +547,7 @@ Ext.define('SpinningFactory.controller.Client', {
             });
         }
 
-    },
+    },*/
 
 
     makeLocationListener:function(){

@@ -88,7 +88,7 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
                     }
 
                 ]
-            },
+            }/*,
 
             {
                 title: '我的消息',
@@ -98,14 +98,14 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
                     {
                         docked: 'top',
                         xtype: 'titlebar',
-                        title: '我的消息'/*,
+                        title: '我的消息'/!*,
                         items:[
 
                             {
                                 xtype:'mainmenu',
                                 iconCls:'fa fa-cog'
                             }
-                        ]*/
+                        ]*!/
                     },
 
                     {
@@ -114,7 +114,7 @@ Ext.define('SpinningFactory.view.office.OfficeMain', {
                         posterUrl: 'http://b.vimeocdn.com/ts/261/062/261062119_640.jpg'
                     }
                 ]
-            }
+            }*/
         ]
     }
 });

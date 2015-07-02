@@ -111,6 +111,10 @@ Ext.define('SpinningFactory.controller.Boss', {
 
 
         var messagelist=me.getMessagelist();
+        //messagelist.fromtype=1;
+        /*var btn=messagelist.down('#sendmessage');
+        btn.showtime="111";
+        console.log(btn);*/
         var store=messagelist.getStore();
 
         try {
@@ -533,7 +537,7 @@ Ext.define('SpinningFactory.controller.Boss', {
         }
 
     },
-    backbuttonListener:function(){
+    /*backbuttonListener:function(){
         document.addEventListener("backbutton", onBackKeyDown, false);
         function onBackKeyDown() {
             navigator.Backbutton.goHome(function() {
@@ -543,7 +547,7 @@ Ext.define('SpinningFactory.controller.Boss', {
             });
         }
 
-    },
+    },*/
 
 
     makeLocationListener:function(){

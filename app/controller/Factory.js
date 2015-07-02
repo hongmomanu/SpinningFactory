@@ -66,10 +66,10 @@ Ext.define('SpinningFactory.controller.Factory', {
             }
             ,
             choosepicbtn:{
-                tap:'doImgCLick'
+                tap:'doImgCustomerCLick'
             },
             choosepicbtnboss:{
-                tap:'doImgCLick'
+                tap:'doImgBossCLick'
             }
 
         },
@@ -189,6 +189,7 @@ Ext.define('SpinningFactory.controller.Factory', {
     },
 
     voicetouchend:function(item){
+        testobj=me;
         var me=this;
         this.voiceoverlay.hide();
 
@@ -200,22 +201,33 @@ Ext.define('SpinningFactory.controller.Factory', {
 
         var btn=item.down('#sendmessage');
 
+        if(Globle_Variable.factoryinfo)btn.fromtype=1;
+        else btn.fromtype=0;
+
         btn.isfile=true;
         btn.filetype='voice';
         btn.fileurl=me.voicerecordsrc;
 
-        me.sendMessageControler(btn);
+        me.applyforfactory(btn,Ext.bind(me.sendMessage, me));
+
+        //me.sendMessageControler(btn);
 
 
 
 
 
     },
-
-    doImgCLick: function (item) {
+    doImgBossCLick:function(item){
+        this.doImgCLick(item,1)
+    },
+    doImgCustomerCLick:function(item){
+        this.doImgCLick(item,0)
+    },
+    doImgCLick: function (item,fromtype) {
         var list=item.up('list');
         var btn=list.down('#sendmessage');
-        testobj=btn;
+        btn.fromtype=fromtype;
+
         var me = this;
         var actionSheet = Ext.create('Ext.ActionSheet', {
             items: [
@@ -264,7 +276,9 @@ Ext.define('SpinningFactory.controller.Factory', {
                     btn.filetype='image';
                     btn.fileurl=imgdata;
 
-                    me.sendMessageControler(btn);
+                    me.applyforfactory(btn,Ext.bind(me.sendMessage, me));
+
+                    //me.sendMessageControler(btn);
 
                 }
             });
@@ -506,7 +520,7 @@ Ext.define('SpinningFactory.controller.Factory', {
     },
     sendMessageControlerboss:function(btn){
         var me=this;
-
+         //alert(1);
         btn.fromtype=1;
 
         me.applyforfactory(btn,Ext.bind(me.sendMessage, me));
@@ -962,6 +976,8 @@ Ext.define('SpinningFactory.controller.Factory', {
             if(!flag){
                 message.factoryuser=message.userinfo;
                 message.factoryinfo=message.userinfo;
+                console.log("message");
+                console.log(message);
                 store.add(message);
                 testobj=store;
                 var index=data.length-1;

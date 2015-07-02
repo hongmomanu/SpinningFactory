@@ -41,7 +41,9 @@ Ext.define('SpinningFactory.controller.Login', {
             customerloginbtn: 'loginform #customerlogin',
             newcustomerbtn: 'loginform #newcustomer',
             loginformcontent:'loginform #loginformcontent',
-            loginformview: 'loginform'
+            loginformview: 'loginform',
+            navView:'officemain #villagenavigationview',
+            ordernavView:'officemain #ordernavigationview'
         }
     },
     // app init func
@@ -184,15 +186,56 @@ Ext.define('SpinningFactory.controller.Login', {
         }
 
     },
+    isallnotdisplay:function(backbuttons){
+        var flag=true;
+        var element=null;
+        for(var i=0;i<backbuttons.elements.length;i++){
+            if(backbuttons.elements[i].style.display!='none'){
+                flag=false;
+                element=backbuttons.elements[i];
+                break;
+
+            }
+        }
+        return {flag:flag,element:element}
+    },
     backbuttonListener:function(){
-       /* document.addEventListener("backbutton", onBackKeyDown, false);
+        var me=this;
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            document.addEventListener("backbutton", onBackKeyDown, false);
+        }
         function onBackKeyDown() {
-            navigator.Backbutton.goHome(function() {
-                //console.log('success')
-            }, function() {
-                //console.log('fail')
-            });
-        }*/
+            var backbuttons=Ext.select('.x-button-back');
+            var filteritem=me.isallnotdisplay(backbuttons);
+            if(backbuttons.elements.length==0||filteritem.flag){
+                Ext.Msg.confirm( "提示", "是否确认退出", function(btn){
+                    if(btn==='yes'){
+                        navigator.app.exitApp();
+
+                    }else{
+
+                    }
+                })
+            }else{
+                var id=filteritem.element.id;
+                var btn=Ext.getCmp(id);
+                btn.fireEvent('tap');
+            }
+            /*if(items.length>1){
+                //me.getNav().pop()
+            }else{
+                Ext.Msg.confirm( "提示", "是否确认退出", function(btn){
+                    if(btn==='yes'){
+                        navigator.app.exitApp();
+
+                    }else{
+
+                    }
+                })
+            }*/
+
+        }
 
     },
 

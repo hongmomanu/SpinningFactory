@@ -28,7 +28,7 @@ Ext.define('SpinningFactory.view.office.OrdersViewList', {
         items: [{
             xtype: 'toolbar',
             docked: 'bottom',
-            align:'right',
+            align:'right'/*,
             items: [
 
                 {
@@ -38,7 +38,7 @@ Ext.define('SpinningFactory.view.office.OrdersViewList', {
                 }
 
 
-            ]
+            ]*/
         }],
         itemTpl:new Ext.XTemplate(
             [
