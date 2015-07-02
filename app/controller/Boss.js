@@ -41,7 +41,8 @@ Ext.define('SpinningFactory.controller.Boss', {
                 itemtap:'onCustomerSelect'
             },
             membersview:{
-                viewshow:'viewInit'
+                viewshow:'viewInit',
+                itemtap:'onMemberSelect'
             },
             customersbtn:{
                 tap:'showcustomers'
@@ -87,6 +88,11 @@ Ext.define('SpinningFactory.controller.Boss', {
 
     initFunc:function (item,e){
         this.websocketInit();
+
+    },
+    onMemberSelect:function(list,index,node,record){
+        console.log(record);
+        alert(1);
 
     },
     onCustomerSelect:function(list, index, node, record){
