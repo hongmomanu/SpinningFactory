@@ -11,6 +11,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
     ],
     config: {
 
+
         fullscreen: true,
         centered: true,
         autoDestroy: false,
@@ -24,7 +25,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
             'padding': '1px'
         },
 
-        //title:''
+        //title:'我的工厂',
 
         navigationBar : {
 
@@ -41,11 +42,21 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
 
         items: [
 
+
             {
 
-                title:'我的工厂',
+                //title:'我的工厂',
+
                 layout : 'fit',
                 xtype: 'container',
+                listeners: {
+                    painted: function(){
+                        var item=this.up('navigationview');
+
+                        item.fireEvent('viewshow', item);
+                        //alert(1);
+                    }
+                },
                 items: [
 
 
@@ -101,7 +112,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
                                         }, {
                                             xtype : 'button',
                                             text : '订单状态',
-                                            itemId:'possibleill',
+                                            itemId:'workingstatus',
                                             iconAlign : 'top',
                                             iconCls : "fa fa-info-circle fa-color-blue"
                                             //icon : "resources/icons/weinai.png"
@@ -116,7 +127,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
                                             xtype : 'button',
                                             text : '历史订单',
                                             iconAlign : 'top',
-                                            itemId:'datequery',
+                                            itemId:'historystatus',
                                             iconCls:'fa fa-history fa-color-blue',
                                             //icon : "resources/icons/niaobu.png",
                                             handler : function() {

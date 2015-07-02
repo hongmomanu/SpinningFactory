@@ -510,7 +510,8 @@ Ext.define('SpinningFactory.controller.Office', {
         store.load({
             //define the parameters of the store:
             params:{
-                factoryid : Globle_Variable.user.factoryid
+                factoryid : Globle_Variable.user.factoryid,
+                status:'0,1,2,3,4'
             },
             scope: this,
             callback : function(records, operation, success) {

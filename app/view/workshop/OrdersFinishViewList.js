@@ -12,6 +12,7 @@ Ext.define('SpinningFactory.view.workshop.OrdersFinishViewList', {
     config: {
         //cls: 'x-contacts',
         emptyText:'无相关内容',
+        title:'历史订单',
         variableHeights: true,
         scrollable: 'vertical',
         itemId:'ordersfinishviewlist',

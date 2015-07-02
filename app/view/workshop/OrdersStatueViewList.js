@@ -7,6 +7,7 @@ Ext.define('SpinningFactory.view.workshop.OrdersStatueViewList', {
         //cls: 'x-contacts',
         emptyText:'暂无订单任务',
         variableHeights: true,
+        title:'订单状态',
         scrollable: 'vertical',
         itemId:'ordersstatueviewlist',
         /*onItemDisclosure : {//若配置该项，list每一项的右侧都会出现一个小图标。其他功能请查看api

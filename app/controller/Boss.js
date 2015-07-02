@@ -11,6 +11,7 @@ Ext.define('SpinningFactory.controller.Boss', {
         views: [
             'menu.MainMenu',
             'boss.BossMain',
+
             'boss.EditMemberForm',
             'boss.NewMemberForm',
             'boss.MembersViewList'
@@ -30,6 +31,7 @@ Ext.define('SpinningFactory.controller.Boss', {
 
             bossmainview:{
                 initialize:'initFunc',
+               viewshow:'mainshowFunc',
                 returnhomemenu:'returnhomemenuFunc',
                 showqrcode:'showqrcodeFunc',
                 logoutmenu:'logoutShow',
@@ -48,6 +50,13 @@ Ext.define('SpinningFactory.controller.Boss', {
             customersbtn:{
                 tap:'showcustomers'
 
+            },
+            historystatusbtn:{
+                tap:'showhistorystatus'
+
+            },
+            workingstatusbtn:{
+                tap:'showworkingstatus'
             },
             usersmanagerbtn:{
                 tap:'showusers'
@@ -84,6 +93,8 @@ Ext.define('SpinningFactory.controller.Boss', {
             membersview:'bossmain #membersviewlist',
             customersview:'bossmain #customerlist',
             customersbtn: 'bossmain #mycustomers',
+            workingstatusbtn: 'bossmain #workingstatus',
+            historystatusbtn: 'bossmain #historystatus',
             usersmanagerbtn: 'bossmain #usersmanager',
             altermemberbtn: 'editmemberform #alter',
             delmemberbtn: 'editmemberform #del',
@@ -98,9 +109,14 @@ Ext.define('SpinningFactory.controller.Boss', {
     // app init func
 
     initFunc:function (item,e){
-        this.getBossmainview().getNavigationBar().setTitle(Globle_Variable.factoryinfo.factoryname);
+        //this.getBossmainview().getNavigationBar().setTitle(Globle_Variable.factoryinfo.factoryname);
+        //var panel=this.getBossmainview().down('panel');
+        //testobj=this.getBossmainview();
         this.websocketInit();
 
+    },
+    mainshowFunc:function(item){
+        this.getBossmainview().getNavigationBar().setTitle(Globle_Variable.factoryinfo.factoryname);
     },
     altermember:function(btn){
         var form=btn.up('formpanel');
@@ -323,6 +339,41 @@ Ext.define('SpinningFactory.controller.Boss', {
         });
 
         this.getBossmainview().push(this.mermbersView);
+
+
+    },
+
+    showhistorystatus:function(btn){
+        if(!this.historystatusView){
+            //this.reserveView=Ext.create('AffiliatedHospital.view.outpatient.ReserveView');
+            this.historystatusView=Ext.create('SpinningFactory.view.workshop.OrdersFinishViewList');
+
+        }
+
+
+        if(this.getBossmainview().getInnerItems().length<2){
+           /* var store=this.customersView.getStore();
+            store.load({
+                params:{
+                    userid:Globle_Variable.user._id
+                }
+            });*/
+            this.getBossmainview().push(this.historystatusView);
+        }
+
+    },
+    showworkingstatus:function(btn){
+
+        if(!this.workingstatusView){
+            //this.reserveView=Ext.create('AffiliatedHospital.view.outpatient.ReserveView');
+            this.workingstatusView=Ext.create('SpinningFactory.view.workshop.OrdersStatueViewList');
+
+        }
+
+        if(this.getBossmainview().getInnerItems().length<2){
+
+            this.getBossmainview().push(this.workingstatusView);
+        }
 
 
     },
