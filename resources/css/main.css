@@ -440,6 +440,19 @@ body.x-desktop {
 .x-tab .x-button-icon.picture:before,.x-button .x-button-icon.picture:before{position:absolute;top:0;right:0;bottom:0;left:0;text-align:center;font-family:"pictos";content:"P"}
 .x-tab .x-button-icon.voice:before,.x-button .x-button-icon.voice:before{position:absolute;top:0;right:0;bottom:0;left:0;text-align:center;font-family:"pictos";content:"m"}
 
-.transp-block{background:#fff url(../icons/sy2.jpg) no-repeat right bottom;margin:0px auto;width:80px;height:80px;overflow:hidden}img.transparent{filter:alpha(opacity=70);moz-opacity:.70;opacity:.70}
+
+
+.transp-block{background:#fff url(../icons/sy5.jpg)
+no-repeat right bottom;margin:0px auto;width:80px;height:80px;overflow:hidden}
+
+.transparent{filter:alpha(opacity=50);moz-opacity:.50;opacity:.50}
+
+/*.watermark {
+	background:transparent url(../icons/sy3.gif) no-repeat;
+	filter:alpha(opacity=75);
+	opacity:.75;
+}
+.transp-block{filter:alpha(opacity=75);
+	opacity:.75;}*/
 /*
 #1572B3*/

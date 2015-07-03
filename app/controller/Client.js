@@ -48,6 +48,9 @@ Ext.define('SpinningFactory.controller.Client', {
             goodsordercancelbtn:{
                 tap:'cancelorder'
             },
+            clientgoodssearchbtn:{
+                tap:'goodsearch'
+            },
             clientgoodsviewlistview:{
 
                 viewshow:'viewinit',
@@ -58,6 +61,8 @@ Ext.define('SpinningFactory.controller.Client', {
         refs: {
             clientmainview: 'clientmain',
             clientgoodsviewlistview: 'clientgoodsviewlist',
+            clientgoodssearchbtn: 'clientgoodsviewlist #search',
+
             goodsdetailview:'goodsdetail',
             goodsdetailchatbtn:'goodsdetail #chat',
             goodsordersendbtn:'goodsorder #ordersend',
@@ -83,6 +88,11 @@ Ext.define('SpinningFactory.controller.Client', {
         });
         this.websocketInit();
 
+    },
+    goodsearch:function(btn){
+        //alert(1);
+        var viewlist=btn.up('clientgoodsviewlist');
+        this.viewinit(viewlist);
     },
     sendorder:function(btn){
         var form=btn.up('formpanel');
@@ -117,7 +127,6 @@ Ext.define('SpinningFactory.controller.Client', {
 
     },
     cancelorder:function(btn){
-        alert(2);
         this.getNavView().pop();
 
     },
@@ -403,17 +412,18 @@ Ext.define('SpinningFactory.controller.Client', {
     viewinit:function(view){
         var store=view.getStore();
         var seachinput=view.down('#seachinput');
-        store.setParams({keyword:seachinput.getValue()});
+        //store.setParams({keyword:seachinput.getValue()});
         store.load({
             //define the parameters of the store:
             params:{
-                page:1
+                page:1,
+                keyword:seachinput.getValue()
             },
 
             scope: this,
             callback : function(records, operation, success) {
             }});
-        store.setParams({page:2});
+        store.setParams({page:2,keyword:seachinput.getValue()});
     },
     returnhomemenuFunc:function(){
         Ext.Viewport.hideMenu('right');
