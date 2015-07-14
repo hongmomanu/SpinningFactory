@@ -29,6 +29,10 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
 
         navigationBar : {
 
+            /*backButton: {
+                iconCls: 'fa fa-arrow-circle-o-left',
+                ui: 'plain'
+            },*/
             docked : 'top',
             items : [
 

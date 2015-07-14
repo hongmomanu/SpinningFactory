@@ -85,15 +85,16 @@ Ext.define('SpinningFactory.controller.Login', {
 
             ///Ext.Msg.alert('clicked event0', 'is clicked');
 
-            var factoryController=this.getApplication().getController('factory');
-            var customerController=this.getApplication().getController('customer');
+            var factoryController=this.getApplication().getController('Factory');
+            var customerController=this.getApplication().getController('Customer');
             cordova.plugins.notification.local.on("click", function (notification) {
 
                 var data=JSON.parse(notification.data);
                 var message=data.data;
                 var type=data.type;
                 if(type=='recommend'){
-                    factoryController.receiveRecommendShow(message,e);
+                    //Ext.Msg.alert('clicked event', type);
+                    factoryController.receiveRecommendShow(message,e,(localStorage.isfactory=="factory"?1:0));
                 }else if(type=='quickapplying'){
                     villageController.applywaitinginfoShow(message,e)
                 }else if(type=='quickaccept'){

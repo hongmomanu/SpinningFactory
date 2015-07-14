@@ -698,9 +698,9 @@ Ext.define('SpinningFactory.controller.Factory', {
             cordova.plugins.notification.local.schedule({
                 //id: recommend._id ,
                 id:me.messageid,
-                title: recommend.rectype==1?("工厂主:"+recommend.frominfo.realname+"推荐的"):
-                    ("买家:"+recommend.frominfo.realname+"推荐的"),
-                text: type==0?"新工厂主:"+recommend.factoryinfo.realname:"新买家:"+recommend.customerinfo.realname,
+                title:(recommend.rectype==1?"工厂主:"+recommend.frominfo.realname+"推荐":
+                "买家:"+recommend.frominfo.realname+"推荐")+(type==0?"新工厂主:"+recommend.factoryinfo.realname:"新买家:"+recommend.customerinfo.realname),
+                text: "请求建立关系",
                 //firstAt: monday_9_am,
                 //every: "week",
                 //sound: "file://sounds/reminder.mp3",

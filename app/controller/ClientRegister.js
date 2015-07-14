@@ -44,6 +44,12 @@ Ext.define('SpinningFactory.controller.ClientRegister', {
                 if(res.success){
 
                     console.log(res);
+
+                    Ext.Msg.alert('注册成功', '注册成功', function(){
+                        //window.location.reload();
+                        localStorage.user=JSON.stringify(res.message);
+                        window.location.reload();
+                    });
                     /*Ext.Viewport.removeAt(0);
                     Ext.Viewport.add(Ext.create('SpinningFactory.view.Main'));
 
