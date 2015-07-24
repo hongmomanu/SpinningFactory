@@ -330,7 +330,16 @@ Ext.define('SpinningFactory.controller.Office', {
                 if(res.success){
                     me.getNavView().pop();
                     var store=me.getGoodsviewlistview().getStore();
-                    store.load();
+                    store.load({
+                        //define the parameters of the store:
+                        params:{
+                            factoryid : Globle_Variable.user.factoryid,
+                            status:'0,1,2,3,4'
+                        },
+                        scope: this,
+                        callback : function(records, operation, success) {
+
+                        }});
                 }else{
                     Ext.Msg.alert('添加失败', '修改货物出错', Ext.emptyFn);
                 }
@@ -361,7 +370,16 @@ Ext.define('SpinningFactory.controller.Office', {
                 if(res.success){
                     me.getNavView().pop();
                     var store=me.getGoodsviewlistview().getStore();
-                    store.load();
+                    store.load({
+                        //define the parameters of the store:
+                        params:{
+                            factoryid : Globle_Variable.user.factoryid,
+                            status:'0,1,2,3,4'
+                        },
+                        scope: this,
+                        callback : function(records, operation, success) {
+
+                        }});
                 }else{
                     Ext.Msg.alert('添加失败', '添加货物出错', Ext.emptyFn);
                 }

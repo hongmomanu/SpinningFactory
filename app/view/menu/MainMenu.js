@@ -109,7 +109,7 @@ Ext.define('SpinningFactory.view.menu.MainMenu', {
                     var cont=$('#biggercode');
                     cont.html('');
                     cont.qrcode({
-                        text	: Globle_Variable.serverurl+'files/app.apk',//3g.qq.com
+                        text	: Globle_Variable.serverurl+'files/download.html',//3g.qq.com
                         width		: 220,
                         height		: 220
                     });
