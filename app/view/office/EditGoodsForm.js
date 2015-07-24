@@ -102,6 +102,13 @@ Ext.define('SpinningFactory.view.office.EditGoodsForm', {
                         xtype:'button',
                         text:'保存',
                         itemId:'savegoodinfo'
+                    },
+                    {
+                        xtype:'button',
+                        text:'新建订单',
+                        hidden:true,
+                        ui:'confirm',
+                        itemId:'ordergood'
                     }
                 ]
             }

@@ -99,6 +99,7 @@ Ext.define('SpinningFactory.controller.Client', {
         var formvalues=form.getValues();
         var me=this;
         formvalues.fromid=Globle_Variable.user._id;
+        var nav=this.getNavView()?this.getNavView():btn.up('navigationview')
         var successFunc = function (response, action) {
 
             var res=JSON.parse(response.responseText);
@@ -106,7 +107,7 @@ Ext.define('SpinningFactory.controller.Client', {
 
                 Ext.Msg.alert('提示', "提交订单成功", Ext.emptyFn);
 
-                me.getNavView().pop();
+                nav.pop();
 
             }else{
                 Ext.Msg.alert('提示', res.message, Ext.emptyFn);
@@ -127,7 +128,8 @@ Ext.define('SpinningFactory.controller.Client', {
 
     },
     cancelorder:function(btn){
-        this.getNavView().pop();
+        var nav=this.getNavView()?this.getNavView():btn.up('navigationview')
+        nav.pop();
 
     },
 
@@ -142,7 +144,8 @@ Ext.define('SpinningFactory.controller.Client', {
             this.clientgoodlorderView=Ext.create('SpinningFactory.view.client.GoodsOrder');
         }
         //this.altergoodlView.setTitle(record.get('name'));
-        var nav=this.getNavView();
+        //var nav=this.getNavView();
+        var nav=this.getNavView()?this.getNavView():btn.up('navigationview')
 
         this.clientgoodlorderView.setValues(data);
         nav.push(this.clientgoodlorderView);

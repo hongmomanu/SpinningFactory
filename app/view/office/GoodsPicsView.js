@@ -47,11 +47,17 @@ Ext.define('SpinningFactory.view.office.GoodsPicsView', {
                                 ui:'confirm',
 
                                 itemId:'uploadpicture'
-                            },
-                            {
-                                text:'取消',
+                            },{
+                                text:'删除',
                                 iconCls:'fa fa-times',
                                 ui:'decline',
+
+                                itemId:'delpicture'
+                            },
+                            {
+                                text:'完成',
+                                iconCls:'fa fa-reply-all',
+                                ui:'confirm',
 
                                 itemId:'cancelpicture'
                             }

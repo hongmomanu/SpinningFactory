@@ -985,6 +985,7 @@ Ext.define('SpinningFactory.controller.Factory', {
         var messagestore=factoryController.messageView[message.fromid].getStore();
 
         messagestore.add(Ext.apply({local: false}, message));
+        //alert(3);
 
     },
     receiveMessageShow:function(message,e){
@@ -1000,7 +1001,22 @@ Ext.define('SpinningFactory.controller.Factory', {
                 /*var bossontroller=this.getApplication().getController('Boss');
                 bossontroller.returnhomemenuFunc();*/
 
-                me.getBossmainview().down('#mymessages').fireEvent('tap');
+                testobjss=me.getBossmainview();
+                var nav=me.getBossmainview();
+                if(nav.getInnerItems()[nav.getInnerItems().length-1].xtype=='factorymessagelist'){
+
+                }else{
+                    /*nav.pop(nav.getInnerItems().length - 1);
+                    var length=nav.getInnerItems().length - 1;*/
+                    while(nav.getInnerItems().length>2){
+                        nav.removeAt(nav.getInnerItems().length-1);
+                    }
+
+                    nav.down('#mymessages').fireEvent('tap');
+                }
+
+                //nav.pop()me.getBossmainview()
+                //alert(1);
                 //this.getBossmainview().fireEvent('itemtap')
 
 

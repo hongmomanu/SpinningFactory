@@ -19,8 +19,39 @@ Ext.define('SpinningFactory.view.client.GoodsViewList', {
         //store: Ext.create('TweetStore'),
 
         plugins: [
-            { xclass: 'Ext.plugin.ListPaging' }/*,
-            { xclass: 'Ext.plugin.PullRefresh' }*/
+            { xclass: 'Ext.plugin.ListPaging' },
+            {
+                //xclass: 'Ext.plugin.PullRefresh' ,
+                xtype: 'refreshFn' ,
+                pullText: '下拉可以更新',
+                releaseText: '松开开始更新',
+                loadingText: '正在刷新……',
+                refreshFn: function (loaded, arguments) {
+                  //Ext.Msg.alert('别他妈拉我了! 艹');
+                    loaded.getList().getStore().getProxy().setExtraParam('q', '参数'); //设置proxy参数
+                    //loaded.getList().getStore().getProxy().setExtraParam('page', 1);
+                    var seachinput=loaded.getList().down('#seachinput');
+                    loaded.getList().getStore().load({
+                        //define the parameters of the store:
+                        params:{
+                            page:1,
+                            keyword:seachinput.getValue()
+                        },
+
+                        scope: this,
+                        callback : function(records, operation, success) {
+                        }});
+                    /*loaded.getList().getStore().loadPage(0, {
+                        callback: function (record, operation, success) { Ext.Viewport.unmask(); }, scope: this });*/
+                    //Ext.getStore(userStore).loadPage(1,'what',1);
+                }
+                /*refreshFn: function (loaded, arguments) {
+                    loaded.getList().getStore().getProxy().setExtraParam('q', '参数'); //设置proxy参数
+                    loaded.getList().getStore().loadPage(1, {
+                        callback: function (record, operation, success) { Ext.Viewport.unmask(); }, scope: this });
+                }*/
+
+            }
         ],
         scrollable: 'vertical',
         itemId:'clientgoodsviewlist',

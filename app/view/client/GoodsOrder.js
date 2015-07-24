@@ -44,6 +44,7 @@ Ext.define('SpinningFactory.view.client.GoodsOrder', {
                                 xtype:'spinnerfield',
                                 name:'nums',
                                 increment: 1,
+                                stepValue:10,
                                 //flex:'1',
                                 label:'数量',
                                 placeHolder:'请输入数量',

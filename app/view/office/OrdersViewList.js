@@ -25,21 +25,25 @@ Ext.define('SpinningFactory.view.office.OrdersViewList', {
                 this.fireEvent('viewshow', this);
             }
         },
-        items: [{
+        items: [
+
+            /*{
             xtype: 'toolbar',
             docked: 'bottom',
-            align:'right'/*,
+            align:'right',
             items: [
 
                 {
-                    text:'新增',
+                    text:'新建订单',
                     iconCls:'fa fa-plus-circle',
-                    itemId:'newgoods'
+                    itemId:'neworders'
                 }
 
 
-            ]*/
-        }],
+            ]
+        }*/
+
+        ],
         itemTpl:new Ext.XTemplate(
             [
                 '<table width="100%" height="100%"><tr>',
