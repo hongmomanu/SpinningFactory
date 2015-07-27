@@ -583,6 +583,9 @@ Ext.define('SpinningFactory.controller.Boss', {
                 console.log('recommendconfirm');
                 me.hideloadingimg(data.data)
 
+            }else if(data.type=='refresh'){
+
+
             }
 
 

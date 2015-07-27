@@ -714,6 +714,9 @@ Ext.define('SpinningFactory.controller.Office', {
                 console.log('recommendconfirm');
                 me.hideloadingimg(data.data)
 
+            }else if(data.type=='refresh'){
+
+
             }
 
 

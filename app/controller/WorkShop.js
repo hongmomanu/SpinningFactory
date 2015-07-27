@@ -323,6 +323,9 @@ Ext.define('SpinningFactory.controller.WorkShop', {
                 console.log('recommendconfirm');
                 me.hideloadingimg(data.data)
 
+            }else if(data.type=='refresh'){
+
+
             }
 
 

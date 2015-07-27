@@ -350,6 +350,9 @@ Ext.define('SpinningFactory.controller.Client', {
                 console.log('chatsuc');
                 me.hideloadingimg(data.data)
 
+            }else if(data.type=='refresh'){
+
+
             }
 
 
