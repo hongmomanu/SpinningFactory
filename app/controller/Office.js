@@ -72,6 +72,8 @@ Ext.define('SpinningFactory.controller.Office', {
             },
             finishorderbtn:{
                 tap:'finishorder'
+            },backorderbtn:{
+                tap:'backorder'
             },
             newordersbtn:{
                 tap:'neworder'
@@ -93,6 +95,7 @@ Ext.define('SpinningFactory.controller.Office', {
             savegoodinfobtn:'newgoodsform #savegoodinfo',
             sendtoworkbtn:'orderdetailform #sendtowork',
             finishorderbtn:'orderdetailform #finishorder',
+            backorderbtn:'orderdetailform #backorder',
             altergoodinfobtn:'editgoodsform #savegoodinfo',
             navView:'officemain #villagenavigationview',
             ordernavView:'officemain #ordernavigationview'
@@ -155,6 +158,47 @@ Ext.define('SpinningFactory.controller.Office', {
 
     },
 
+    backorder:function(btn){
+        var form=btn.up('formpanel');
+        var data=form.getValues();
+        var me=this;
+        //alert(data.status);
+        if(data.status==4){
+            Ext.Msg.alert("提示","已经完成订单不能退回");
+            return ;
+
+        }
+
+        var successFunc = function (response, action) {
+
+            var res=JSON.parse(response.responseText);
+
+            if(res.success){
+                //me.makegoodnum(data);
+                Ext.Msg.alert('成功', '订单已退回客户修改', Ext.emptyFn);
+                me.getOrdernavView().pop();
+
+            }else{
+                //Ext.Msg.alert('失败', '绣', Ext.emptyFn);
+            }
+
+        };
+        var failFunc=function(response, action){
+            Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+
+        }
+        var url="factory/changestatusbyid";
+        var params={
+            status:5,
+            oid:data._id
+        };
+        CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+
+
+
+    },
+
     finishorder:function(btn){
 
         var form=btn.up('formpanel');
@@ -162,6 +206,11 @@ Ext.define('SpinningFactory.controller.Office', {
         var me=this;
         if(data.status==4){
             Ext.Msg.alert("提示","已完成的订单");
+            return ;
+
+        }
+        if(data.status==5){
+            Ext.Msg.alert("提示","订单退回修改中");
             return ;
 
         }
@@ -334,7 +383,7 @@ Ext.define('SpinningFactory.controller.Office', {
                         //define the parameters of the store:
                         params:{
                             factoryid : Globle_Variable.user.factoryid,
-                            status:'0,1,2,3,4'
+                            status:'0,1,2,3,4,5'
                         },
                         scope: this,
                         callback : function(records, operation, success) {
@@ -374,7 +423,7 @@ Ext.define('SpinningFactory.controller.Office', {
                         //define the parameters of the store:
                         params:{
                             factoryid : Globle_Variable.user.factoryid,
-                            status:'0,1,2,3,4'
+                            status:'0,1,2,3,4,5'
                         },
                         scope: this,
                         callback : function(records, operation, success) {
@@ -570,7 +619,7 @@ Ext.define('SpinningFactory.controller.Office', {
             //define the parameters of the store:
             params:{
                 factoryid : Globle_Variable.user.factoryid,
-                status:'0,1,2,3,4'
+                status:'0,1,2,3,4,5'
             },
             scope: this,
             callback : function(records, operation, success) {

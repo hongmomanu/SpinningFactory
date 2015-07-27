@@ -1,7 +1,7 @@
-Ext.define('SpinningFactory.view.office.OrderDetailForm', {
+Ext.define('SpinningFactory.view.client.OrderDetailForm', {
 
     extend: 'Ext.form.Panel',
-    xtype: 'orderdetailform',
+    xtype: 'clientorderdetailform',
     //alias: 'widget.NewGoodsFormPanel',
     requires: [
         'Ext.form.Panel',
@@ -62,12 +62,13 @@ Ext.define('SpinningFactory.view.office.OrderDetailForm', {
                                 name:'num',
                                 label:'订单数量',
                                 placeHolder:'请输入单位',
-                                readOnly:true,
+                                //readOnly:true,
                                 labelAlign:'left'
                             }, {
                                 xtype:'textfield',
                                 name:'hasnum',
                                 label:'库存',
+                                hidden:true,
                                 readOnly:true,
                                 labelAlign:'left'
                             }, {
@@ -75,6 +76,13 @@ Ext.define('SpinningFactory.view.office.OrderDetailForm', {
                                 name:'unit',
                                 flex:'1',
                                 label:'单位',
+                                readOnly:true,
+                                labelAlign:'left'
+                            },{
+                                xtype:'textfield',
+                                name:'price',
+                                flex:'1',
+                                label:'价格',
                                 readOnly:true,
                                 labelAlign:'left'
                             },
@@ -104,22 +112,11 @@ Ext.define('SpinningFactory.view.office.OrderDetailForm', {
                 items:[
                     {
                         xtype:'button',
-                        text:'提交工厂',
+                        text:'修改提交',
                         ui:'confirm',
-                        itemId:'sendtowork'
-                    },
-                    {
-                        xtype:'button',
-                        text:'完成订单',
-                        ui:'decline',
-                        itemId:'finishorder'
-                    },
-                    {
-                        xtype:'button',
-                        text:'退回订单(客户修改)',
-                        ui:'decline',
-                        itemId:'backorder'
+                        itemId:'sendtofactory'
                     }
+
                 ]
             }
         ]

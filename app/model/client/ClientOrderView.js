@@ -1,4 +1,4 @@
-Ext.define('SpinningFactory.model.office.OrderView', {
+Ext.define('SpinningFactory.model.client.ClientOrderView', {
     extend: 'Ext.data.Model',
     config: {
         fields: [
@@ -7,9 +7,8 @@ Ext.define('SpinningFactory.model.office.OrderView', {
             'goodsname',
             'num',
             'goodinfo',
-            'clientinfo',
-            'time',
             'price',
+            'time',
             'status',
             'colors',
             'imgs',

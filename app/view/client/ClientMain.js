@@ -64,6 +64,34 @@ Ext.define('SpinningFactory.view.client.ClientMain', {
 
                 ]
             },
+            {
+                title: '我的订单',
+                iconCls: 'fa fa-tasks',
+                styleHtmlContent: true,
+                scrollable: false,
+                layout: 'fit',
+
+                items: [
+
+                    {
+                        xtype: 'navigationview',
+                        autoDestroy: false,
+                        scrollable: false,
+                        //fullscreen: true,
+                        itemId: 'ordernavigationview',
+                        //inside this first item we are going to add a button
+                        items: [
+                            {
+                                xtype: 'clientordersviewlist',
+                                title: '我的订单'
+                            }
+                        ]
+
+
+                    }
+
+                ]
+            },
 
             {
                 title: '我的消息',

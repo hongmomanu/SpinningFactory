@@ -116,7 +116,7 @@ Ext.define('SpinningFactory.controller.WorkShop', {
             //define the parameters of the store:
             params:{
                 factoryid : Globle_Variable.user.factoryid,
-                status:'0,1,2,3'
+                status:'0,1,2,3,5'
             },
             scope: this,
             callback : function(records, operation, success) {

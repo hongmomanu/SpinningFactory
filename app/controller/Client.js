@@ -8,18 +8,22 @@ Ext.define('SpinningFactory.controller.Client', {
         views: [
 
             'client.ClientMain',
+            'client.ClientOrdersViewList',
             'client.GoodsOrder',
             'client.GoodsDetail',
+            'client.OrderDetailForm',
             'client.GoodsPicsView',
             'menu.MainMenu',
             'client.GoodsViewList'
 
         ],
         models: [
-            'client.ClientGoodView'
+            'client.ClientGoodView',
+            'client.ClientOrderView'
         ],
         stores: [
-            'client.ClientGoodViews'
+            'client.ClientGoodViews',
+            'client.ClientOrderViews'
 
         ],
         control: {
@@ -45,6 +49,9 @@ Ext.define('SpinningFactory.controller.Client', {
             goodsordersendbtn:{
                 tap:'sendorder'
             },
+            sendtofactorybtn:{
+                tap:'sendtofactory'
+            },
             goodsordercancelbtn:{
                 tap:'cancelorder'
             },
@@ -55,17 +62,24 @@ Ext.define('SpinningFactory.controller.Client', {
 
                 viewshow:'viewinit',
                 itemtap: 'onGoodsSelect'
+            },
+            clientordersviewlistview:{
+
+                viewshow:'orderviewinit',
+                itemtap: 'onOrdersSelect'
             }
 
         },
         refs: {
             clientmainview: 'clientmain',
             clientgoodsviewlistview: 'clientgoodsviewlist',
+            clientordersviewlistview: 'clientordersviewlist',
             clientgoodssearchbtn: 'clientgoodsviewlist #search',
 
             goodsdetailview:'goodsdetail',
             goodsdetailchatbtn:'goodsdetail #chat',
             goodsordersendbtn:'goodsorder #ordersend',
+            sendtofactorybtn:'clientorderdetailform #sendtofactory',
             goodsordercancelbtn:'goodsorder #ordercancel',
             goodsdetailorderbtn:'goodsdetail #ordergood',
             managerpicbtn: 'clientmain #managerpic',
@@ -93,6 +107,42 @@ Ext.define('SpinningFactory.controller.Client', {
         //alert(1);
         var viewlist=btn.up('clientgoodsviewlist');
         this.viewinit(viewlist);
+    },
+
+    sendtofactory:function(btn){
+
+        var form=btn.up('formpanel');
+        var formvalues=form.getValues();
+        var me=this;
+        formvalues.fromid=Globle_Variable.user._id;
+        formvalues.oid=formvalues._id;
+        var nav=btn.up('navigationview');
+        var successFunc = function (response, action) {
+
+            var res=JSON.parse(response.responseText);
+            if(res.success){
+
+                Ext.Msg.alert('提示', "修改订单成功", Ext.emptyFn);
+
+                nav.pop();
+
+            }else{
+                Ext.Msg.alert('提示', res.message, Ext.emptyFn);
+            }
+
+        };
+        var failFunc=function(response, action){
+            Ext.Msg.alert('失败', '服务器连接异常，请稍后再试', Ext.emptyFn);
+            //Ext.Msg.alert('test', 'test', Ext.emptyFn);
+        }
+        var url="customer/alterorderbyid";
+
+        var params=formvalues;
+        CommonUtil.ajaxSend(params,url,successFunc,failFunc,'POST');
+
+
+
+
     },
     sendorder:function(btn){
         var form=btn.up('formpanel');
@@ -336,7 +386,38 @@ Ext.define('SpinningFactory.controller.Client', {
         });
         factoryController.getMessagecontent().setValue('');
     },
+    onOrdersSelect:function(list,index,node,record){
+        if(record.get('status')==5){
 
+            var nav=list.up('navigationview');
+            var me=this;
+
+            //console.log(record.data);
+
+            if(!me.orderdetailView){
+                me.orderdetailView=Ext.create('SpinningFactory.view.client.OrderDetailForm');
+            }
+            //this.altergoodlView.setTitle(record.get('name'));
+
+            var formdata=record.data;
+            formdata.gid=record.data.goodinfo._id;
+            formdata.goodsname=record.data.goodinfo.goodsname;
+            formdata.price=record.data.goodinfo.price;
+            //console.log("formdata")
+            //formdata.gid=record.data.goodinfo._id;
+
+            me.orderdetailView.setValues(formdata);
+            nav.push(me.orderdetailView);
+
+
+
+
+
+        }
+
+
+
+    },
     onGoodsSelect:function(list, index, node, record){
 
         var nav=this.getNavView();
@@ -411,6 +492,22 @@ Ext.define('SpinningFactory.controller.Client', {
 
 
 
+    orderviewinit:function(view){
+
+
+        var store=view.getStore();
+        store.load({
+            //define the parameters of the store:
+            params:{
+                clientid : Globle_Variable.user._id,
+                status:'0,1,2,3,4,5'
+            },
+            scope: this,
+            callback : function(records, operation, success) {
+
+            }});
+
+    },
 
     viewinit:function(view){
         var store=view.getStore();

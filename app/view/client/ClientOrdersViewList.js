@@ -1,15 +1,14 @@
-Ext.define('SpinningFactory.view.workshop.OrdersStatueViewList', {
+Ext.define('SpinningFactory.view.client.ClientOrdersViewList', {
     extend: 'Ext.List',
     //alias: 'widget.doctors',
-    xtype:'ordersstatueviewlist',
+    xtype:'clientordersviewlist',
     //cls: 'x-contacts',
     config: {
         //cls: 'x-contacts',
-        emptyText:'暂无订单任务',
+        emptyText:'无相关内容',
         variableHeights: true,
-        title:'订单状态',
         scrollable: 'vertical',
-        itemId:'ordersstatueviewlist',
+        itemId:'clientordersviewlist',
         /*onItemDisclosure : {//若配置该项，list每一项的右侧都会出现一个小图标。其他功能请查看api
             handler : function(record, btn, index) {
 
@@ -19,28 +18,32 @@ Ext.define('SpinningFactory.view.workshop.OrdersStatueViewList', {
         //refreshHeightOnUpdate :false,
         scrollToTopOnRefresh :true,
 
-        store: 'OrderStatueViews',
+        store: 'ClientOrderViews',
 
         listeners: {
             painted: function(){
                 this.fireEvent('viewshow', this);
             }
         },
-        /*items: [{
+        items: [
+
+            /*{
             xtype: 'toolbar',
             docked: 'bottom',
             align:'right',
             items: [
 
                 {
-                    text:'新增',
+                    text:'新建订单',
                     iconCls:'fa fa-plus-circle',
-                    itemId:'newgoods'
+                    itemId:'neworders'
                 }
 
 
             ]
-        }],*/
+        }*/
+
+        ],
         itemTpl:new Ext.XTemplate(
             [
                 '<table width="100%" height="100%"><tr>',
@@ -56,10 +59,9 @@ Ext.define('SpinningFactory.view.workshop.OrdersStatueViewList', {
 
                 '<td width="50%">',
                 '<div style="text-align: center;color: #0946a2">',
-                '<div style="text-align: left">数量:{num}/库存已有:{hasnum}<br></div>',
+                '<div style="text-align: left">数量:{num}<br></div>',
                 '<div style="text-align: left"> 单位:{goodinfo.unit}<br></div>',
                 '<div style="text-align: left">颜色:{colors}<br></div>',
-                '<div style="text-align: left">客户:{clientinfo.realname}({[this.timeform(values)]})<br></div>',
                 '<div style="text-align: left"><tpl if="status == 0">',
                 '<p style="color: red;">状态:新订单</p>',
                 '<tpl elseif="status == 1">',
@@ -72,7 +74,7 @@ Ext.define('SpinningFactory.view.workshop.OrdersStatueViewList', {
                 '<p style="color:darkmagenta;">状态:订单退回</p>',
                 '<tpl else>',
                 '<p style="color: green;">状态:订单完成</p>',
-                '</tpl></div>',
+                '</tpl>({[this.timeform(values)]})</div>',
                 '</div></td>',
 
 

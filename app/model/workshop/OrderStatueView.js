@@ -8,6 +8,8 @@ Ext.define('SpinningFactory.model.workshop.OrderStatueView', {
             'num',
             'hasnum',
             'goodinfo',
+            'clientinfo',
+            'time',
             'price',
             'status',
             'colors',
