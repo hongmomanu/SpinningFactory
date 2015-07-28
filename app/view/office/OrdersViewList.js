@@ -88,7 +88,7 @@ Ext.define('SpinningFactory.view.office.OrdersViewList', {
                     return values.goodinfo.imgs.split(",")[0];
                 },
                 timeform:function(values){
-                    return Ext.Date.format(new Date(values.time),'Y-m-d h:i');
+                    return Ext.Date.format(new Date(values.time),'Y-m-d H:i');
                 }
             }
         )

@@ -317,6 +317,7 @@ Ext.define('SpinningFactory.controller.Client', {
 
         this.socket.onmessage = function(event) {
             var data=JSON.parse(event.data);
+            console.log(data);
             var factoryController=me.getApplication().getController('Factory');
             var customerController=me.getApplication().getController('Cutomer');
             if(data.type=='factorychat'){
@@ -351,6 +352,20 @@ Ext.define('SpinningFactory.controller.Client', {
                 me.hideloadingimg(data.data)
 
             }else if(data.type=='refresh'){
+
+                var clientview=me.getClientmainview();
+                var clientordersviewlist=clientview.down('#clientordersviewlist');
+
+                if(clientordersviewlist)clientordersviewlist.getStore().load({
+                    //define the parameters of the store:
+                    params:{
+                        clientid : Globle_Variable.user._id,
+                        status:'0,1,2,3,4,5'
+                    },
+                    scope: me,
+                    callback : function(records, operation, success) {
+
+                    }})
 
 
             }

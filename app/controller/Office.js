@@ -106,6 +106,7 @@ Ext.define('SpinningFactory.controller.Office', {
     initFunc:function (item,e){
 
 
+        this.websocketInit();
         item.getTabBar().add({
             //xtype: 'button',
             xtype:'mainmenu',
@@ -674,13 +675,14 @@ Ext.define('SpinningFactory.controller.Office', {
 
     websocketInit:function(){
         var url=Globle_Variable.serverurl;
-        url=url.replace(/(:\d+)/g,":3001");
+        url=url.replace(/(:\d+)/g,":3003");
         url=url.replace("http","ws");
         this.socket = new WebSocket(url);
         var me=this;
 
         this.socket.onmessage = function(event) {
             var data=JSON.parse(event.data);
+            console.log(data);
             var factoryController=me.getApplication().getController('Factory');
             var customerController=me.getApplication().getController('Cutomer');
             if(data.type=='factorychat'){
@@ -716,6 +718,20 @@ Ext.define('SpinningFactory.controller.Office', {
 
             }else if(data.type=='refresh'){
 
+                var officeview=me.getOfficemainview();
+                var ordersviewlist=officeview.down('#ordersviewlist');
+
+                if(ordersviewlist)ordersviewlist.getStore().load({
+                    //define the parameters of the store:
+                    params:{
+                        factoryid : Globle_Variable.user.factoryid,
+                        status:'0,1,2,3,4,5'
+                    },
+                    scope: me,
+                    callback : function(records, operation, success) {
+
+                    }})
+
 
             }
 
@@ -724,12 +740,14 @@ Ext.define('SpinningFactory.controller.Office', {
 
         this.socket.onclose = function(event) {
 
+            //alert('connect closed');
             var d = new Ext.util.DelayedTask(function(){
                 me.websocketInit();
             });
             d.delay(5000);
         };
         this.socket.onopen = function() {
+            console.log("sendid : "+Globle_Variable.user._id)
             me.socket.send(JSON.stringify({
                 type:"factoryconnect",
                 content: Globle_Variable.user._id

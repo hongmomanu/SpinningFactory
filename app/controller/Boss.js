@@ -548,8 +548,13 @@ Ext.define('SpinningFactory.controller.Boss', {
         this.socket = new WebSocket(url);
         var me=this;
 
+
+
         this.socket.onmessage = function(event) {
+
+
             var data=JSON.parse(event.data);
+            console.log(data)
             var factoryController=me.getApplication().getController('Factory');
             var customerController=me.getApplication().getController('Cutomer');
             if(data.type=='factorychat'){
@@ -584,6 +589,32 @@ Ext.define('SpinningFactory.controller.Boss', {
                 me.hideloadingimg(data.data)
 
             }else if(data.type=='refresh'){
+
+
+
+                var mainview=me.getBossmainview();
+                var ordersstatueviewlist=mainview.down('#ordersstatueviewlist');
+                var ordersfinishviewlist=mainview.down('#ordersfinishviewlist');
+                if(ordersstatueviewlist)ordersstatueviewlist.getStore().load({
+                    //define the parameters of the store:
+                    params:{
+                        factoryid : Globle_Variable.user.factoryid,
+                        status:'0,1,2,3,5'
+                    },
+                    scope: me,
+                    callback : function(records, operation, success) {
+
+                    }})
+                if(ordersfinishviewlist)ordersfinishviewlist.getStore().load({
+                    //define the parameters of the store:
+                    params:{
+                        factoryid : Globle_Variable.user.factoryid,
+                        status:'4'
+                    },
+                    scope: me,
+                    callback : function(records, operation, success) {
+
+                    }})
 
 
             }
