@@ -215,7 +215,7 @@ Ext.define('SpinningFactory.controller.Client', {
 
             var res=JSON.parse(response.responseText);
             if(res.success){
-                me.getClientmainview().setActiveItem(2);
+                me.getClientmainview().setActiveItem(3);
                 var messagelist=me.getMessagelist();
                 var store=messagelist.getStore();
 

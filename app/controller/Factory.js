@@ -50,7 +50,7 @@ Ext.define('SpinningFactory.controller.Factory', {
             },
             factorysview: {
                 itemtap: 'onfactorySelect',
-                itemtaphold:'onfactoryHold',
+                //itemtaphold:'onfactoryHold',
                 viewshow:'listShow'
             },
             messagelistview: {
@@ -841,7 +841,7 @@ Ext.define('SpinningFactory.controller.Factory', {
 
         var me=this;
 
-        me.getClientmainview().setActiveItem(2);
+        me.getClientmainview().setActiveItem(3);
         var messagelist=me.getMessagelistview();
         var store=messagelist.getStore();
 
@@ -1021,7 +1021,7 @@ Ext.define('SpinningFactory.controller.Factory', {
 
 
             }else if(me.getClientmainview()){
-                me.getClientmainview().setActiveItem(2);
+                me.getClientmainview().setActiveItem(3);
 
 
 

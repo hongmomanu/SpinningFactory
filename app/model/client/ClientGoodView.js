@@ -6,6 +6,7 @@ Ext.define('SpinningFactory.model.client.ClientGoodView', {
             'factoryid',
             'goodsname',
             'price',
+            'factoryinfo',
             'colors',
             'imgs',
             'unit'

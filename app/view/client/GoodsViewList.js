@@ -107,6 +107,8 @@ Ext.define('SpinningFactory.view.client.GoodsViewList', {
                 '</div>',
                 '<div class="headshot" style="text-align: center;">{goodsname}',
                 '</div>',
+                '<div class="headshot" style="text-align: center;color: #8009a2">{[this.fanctoryinfo(values)]}',
+                '</div>',
                 '</td>',
 
                 '<td width="50%">',
@@ -131,6 +133,10 @@ Ext.define('SpinningFactory.view.client.GoodsViewList', {
             {
                 shorterimg: function(values) {
                     return values.imgs.split(",")[0];
+                },
+                fanctoryinfo:function(values){
+                    return values.factoryinfo?('('+values.factoryinfo.factoryname+")"):"";
+
                 }
             }
         )

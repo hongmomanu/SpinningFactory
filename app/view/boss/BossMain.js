@@ -151,7 +151,7 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
                                             iconCls : "fa fa-users fa-color-blue" ,
                                             handler : function() {
                                             }
-                                        }, {
+                                        }, /*{
                                             xtype : 'button',
                                             text : '成交额',
                                             iconAlign : 'top',
@@ -159,7 +159,16 @@ Ext.define('SpinningFactory.view.boss.BossMain', {
                                             iconCls : "fa fa-jpy fa-color-blue",
                                             handler : function() {
                                             }
-                                        }, {
+                                        },*/
+                                            {
+                                                xtype : 'button',
+                                                text : '我的产品',
+                                                iconAlign : 'top',
+                                                itemId:'mygoods',
+                                                //icon : "resources/icons/weinai.png",
+                                                iconCls : "fa fa-cubes fa-color-blue"
+                                            },
+                                            {
                                             xtype : 'button',
                                             text : '业务统计',
                                             itemId:'healthwiki',

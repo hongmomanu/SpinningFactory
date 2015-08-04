@@ -62,6 +62,10 @@ Ext.define('SpinningFactory.controller.Boss', {
                 tap:'showusers'
 
             },
+            mygoodsbtn:{
+                tap:'showmygoods'
+
+            },
             mymessagesbtn:{
                 tap:'showmymessages'
 
@@ -96,6 +100,7 @@ Ext.define('SpinningFactory.controller.Boss', {
             workingstatusbtn: 'bossmain #workingstatus',
             historystatusbtn: 'bossmain #historystatus',
             usersmanagerbtn: 'bossmain #usersmanager',
+            mygoodsbtn: 'bossmain #mygoods',
             altermemberbtn: 'editmemberform #alter',
             delmemberbtn: 'editmemberform #del',
             newuserbtn: 'bossmain #newuser',
@@ -324,6 +329,24 @@ Ext.define('SpinningFactory.controller.Boss', {
 
     },
 
+    showmygoods:function(btn){
+
+        if(!this.mygoodsView){
+            //this.reserveView=Ext.create('AffiliatedHospital.view.outpatient.ReserveView');
+            this.mygoodsView=Ext.create('SpinningFactory.view.boss.GoodsViewList');
+
+        }
+        var store=this.mygoodsView.getStore();
+        store.load({
+            params:{
+                factoryid : Globle_Variable.user.factoryid
+            }
+        });
+
+        this.getBossmainview().push(this.mygoodsView);
+
+
+    },
     showusers:function(btn){
 
         if(!this.mermbersView){
